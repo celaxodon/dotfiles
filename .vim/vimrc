@@ -1,0 +1,35 @@
+" a vim resource file to change settings
+
+" set tabs to 4 spaces
+set ts=4
+
+" enter spaces when tab is pressed
+set expandtab
+
+" turn on syntax highlighting by default
+syntax on
+
+" 256 colors
+set t_Co=256
+" colorscheme grb4 <- garybernhardt's  custom profile check out on github
+
+" automatically show matching brackets
+set showmatch
+
+" create mapping for quick switch between invisibles and visibles. Enable with `\l`
+nmap <leader>l :set list!<CR>
+
+" changes tab and return chars, when visible, to triangle and return symbol, respectively
+set listchars=tab:▸\ ,eol:¬
+
+" PLUGINS
+
+" pathogen mod allows control over runtime paths and any plugins can be extracted to a subdirectory
+" under `~/.vim/bundle`, and they will be added to the `'runtimepath'`.
+execute pathogen#infect()
+
+" This may cause automatic indenting
+filetype plugin indent on
+
+" Nerdtree plugin allows mapping of filesystems
+"Plugin 'scrooloose/nerdtree'
