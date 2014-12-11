@@ -11,6 +11,8 @@ alias mova='~/Scripts/mova.sh'
 alias stroke='/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke'
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias timer='~/Scripts/timer.sh'
+alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
+#alias grep='grep --color=auto' # Enable grep colored output (Linux)
 
 #------------------------------------
 # Paths:
