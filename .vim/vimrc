@@ -15,6 +15,9 @@ set hidden
 " Highlight matches when searching
 set hlsearch
 
+" Show what column the cursor is currently on
+set ruler
+
 " Show search matches as you type
 " set incsearch
 
