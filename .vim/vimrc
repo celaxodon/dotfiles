@@ -10,7 +10,7 @@ set hidden
 " set nowrap
 
 " Show line numbers by default
-" set numbers
+set nu
 
 " Highlight matches when searching
 set hlsearch
