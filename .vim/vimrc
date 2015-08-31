@@ -61,17 +61,17 @@ filetype plugin indent on
 
 " Enable solarized colorscheme
 syntax enable
-"set background=dark
-set background=light
+set background=dark
+"set background=light
 colorscheme solarized
 "colorscheme base16-3024
 "colorscheme base16-brewer
 "colorscheme base16-bright
 "colorscheme base16-colors
 "colorscheme base16-default
-"colorscheme base16-google
-"colorscheme base16-harmonic16
-"colorscheme base16-pop
+"colorscheme base16-google " -- Don't like this one. Yellow sucks
+"colorscheme base16-harmonic16 " -- Don't like this one either now.
+"colorscheme base16-pop "-- too much purple/yellow
 
 
 " ALIASES
