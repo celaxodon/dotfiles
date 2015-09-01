@@ -16,6 +16,7 @@ session_list=($(tmux ls -F "#S" 2&>/dev/null) "New Session")
 
 PS3="Select a session to attach to: "
 
+echo " ";
 echo "Available sessions:"
 echo "-------------------"
 echo " ";
@@ -23,7 +24,7 @@ select i in "${session_list[@]}"; do
     case $i in 
             "New Session") 
                     read -p "Enter a new session name: " session_name;
-                    tmux new -f ~/.tmux/tmux.conf -s "$session_name";
+                    tmux new -s "$session_name";
                     # Case needs extra semicolons at ends of case statements; see help case
                     break;;
             *)
