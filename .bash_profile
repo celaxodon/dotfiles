@@ -1,7 +1,7 @@
 
-#------------------------------------
-# Aliases:
-#------------------------------------
+#----------#
+# Aliases: #
+#----------#
 
 #alias rm='rm -i'
 alias lf='ls -F'
@@ -16,13 +16,15 @@ alias gdb='cgdb'
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 
-#------------------------------------
-# Paths:
-#------------------------------------
+export PS1='\u@\h:[\W]$ '
 
 SHELL=/bin/bash
 EDITOR=/usr/bin/vim
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
+
+#----------------------#
+# Paths and Variables: #
+#----------------------#
 
 # fixing manpath issue
 export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
