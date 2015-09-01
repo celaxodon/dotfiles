@@ -24,7 +24,7 @@ select i in "${session_list[@]}"; do
     case $i in 
             "New Session") 
                     read -p "Enter a new session name: " session_name;
-                    tmux new -s "$session_name";
+                    tmux -f ~/.tmux/tmux.conf new -s "$session_name" 
                     # Case needs extra semicolons at ends of case statements; see help case
                     break;;
             *)
