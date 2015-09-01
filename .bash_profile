@@ -1,33 +1,33 @@
+#
+# ~/.bash_profile
+#     Linux
+#
 
-#------------------------------------
-# Aliases:
-#------------------------------------
+#------------------------#
+#         Aliases        #
+#------------------------#
 
-#alias rm='rm -i'
 alias lf='ls -F'
 alias py='cd ~/Programming/Python'
 alias mv='mv -i'
-alias mova='~/Scripts/mova.sh'
-alias stroke='/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke'
-alias timer='~/Scripts/timer.sh'
-alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
-#alias grep='grep --color=auto' # Enable grep colored output (Linux)
-alias gdb='cgdb'
+alias vi='vim'
+alias ls='ls --color=auto'     # Enable ls colored output (Linux)
+alias grep='grep --color=auto' # Enable grep colored output (Linux)
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 
-#------------------------------------
-# Paths:
-#------------------------------------
+# '[r]emove [o]rphans' - recursively remove ALL orphaned packages
+alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rns \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;\$!ba:s/\n/ /g')"
 
-SHELL=/bin/bash
-EDITOR=/usr/bin/vim
-# export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
+# Starts X11 on login
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 }} && exec startx
 
-# fixing manpath issue
-export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
+# Attempting to enable colemak by default in X window system
+setxkbmap us -variant colemak
 
-# Setting PATH for Python 3.4
-# The orginal saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}:/Applications/Xcode.app/Contents/Developer/usr/bin"
+#-------------------#
+#       Paths:      #
+#-------------------#
 
-export PATH
+export SHELL=/bin/bash
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
