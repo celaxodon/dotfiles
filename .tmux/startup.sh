@@ -12,7 +12,7 @@
 #session_nums=$(tmux ls | wc -l)
 
 # Get list of sessions:
-session_list=($(tmux ls -F "#S") "New Session")
+session_list=("$(tmux ls -F "#S")" "New Session")
 
 PS3="Select a session to attach to: "
 
