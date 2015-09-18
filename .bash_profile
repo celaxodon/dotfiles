@@ -19,7 +19,7 @@ alias tm='~/.tmux/startup.sh'
 export PS1='\u@\h:[\W]$ '
 
 SHELL=/bin/bash
-EDITOR=/usr/bin/vim
+EDITOR=/usr/local/bin/vim
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 
 #----------------------#
@@ -31,6 +31,5 @@ export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/lo
 
 # Setting PATH for Python 3.4
 # The orginal saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}:/Applications/Xcode.app/Contents/Developer/usr/bin"
-
-export PATH
+# Now saved in /etc/paths
+#PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
