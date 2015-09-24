@@ -1,4 +1,31 @@
-" a vim resource file to change settings
+" A vim resource file to change settings
+
+" For Vundle plugin manager:
+set nocompatible   " Required for Vundle
+filetype off       " Required for Vundle -- why?
+
+" Set runtime path to include Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"---------------------------------------"
+" PLUGINS - keep between vundle#begin/end
+"---------------------------------------"
+
+" Let Vundle manage Vundle; required
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end()
+
+"--------------"
+" VIM SETTINGS "
+"--------------"
+
+" This may cause automatic indenting
+" If this doesn't format indentions correctly, try the setting 'cindent' and
+" 'autoindent'
+filetype plugin indent on  " Required for Vundle
+
 " Fix backspace not working unless text is entered right before
 set backspace=indent,eol,start
 
@@ -48,21 +75,18 @@ set showmatch
 nmap <leader>l :set list!<CR>
 
 " changes tab and return chars, when visible, to triangle and return symbol, respectively
-set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:▸\ ,eol:¬
 
-" PLUGINS
-
-" pathogen mod allows control over runtime paths and any plugins can be extracted to a subdirectory
-" under `~/.vim/bundle`, and they will be added to the `'runtimepath'`.
-execute pathogen#infect()
-
-" This may cause automatic indenting
-filetype plugin indent on
+"---------------"
+" COLOR SCHEMES "
+"---------------"
 
 " Enable solarized colorscheme
 syntax enable
+
 set background=dark
 "set background=light
+
 colorscheme solarized
 "colorscheme base16-3024
 "colorscheme base16-brewer
@@ -73,8 +97,9 @@ colorscheme solarized
 "colorscheme base16-harmonic16 " -- Don't like this one either now.
 "colorscheme base16-pop "-- too much purple/yellow
 
-
-" ALIASES
+"---------"
+" ALIASES "
+"---------"
 
 " MAPPINGS
 :nmap <F2> :NERDTree
