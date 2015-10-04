@@ -28,8 +28,3 @@ EDITOR=/usr/local/bin/vim
 
 # fixing manpath issue
 export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
-
-# Setting PATH for Python 3.4
-# The orginal saved in .bash_profile.pysave
-# Now saved in /etc/paths
-#PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
