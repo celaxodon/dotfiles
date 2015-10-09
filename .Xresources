@@ -133,12 +133,24 @@ URxvt*color15:                        #fdf6e3
 !-------------------------
 ! Basic font resources. Desktop environ or fonts.conf will override
 
-Xft.dpi:                              96
-URxvt*font:                   xft:Anonymous Pro:pixelsize=13:antialias=true
-URxvt*boldFont:               xft:Anonymous Pro B:pixelsize=13:antialias=true
-URxvt*italicFont:             xft:Anonymous Pro I:pixelsize=13:antialias=true
-URxvt*boldItalicFont:         xft:Anonymous Pro BI:pixelsize=13:antialias=true
-! URxvt*intensityStyles:                boolean
+!-- Xft settings -- !
+!Xft.dpi:                              56
+Xft.antialias:                        false
+Xft.rgba:                             rgb
+Xft.hinting:                          true
+Xft.hintstyple:                       hintfull
+
+! See dpi.lv site for help with dpi settings
+Xft.dpi:                              56
+URxvt*font                      Terminus:styple=Regular:size=12:antialias=true
+URxvt*boldFont:                 Terminus:style=Bold:size=12
+URxvt*italicFont:               Terminus:style=Italic:size=12
+URxvt*intensityStyles:          false 
+!!URxvt*font:                   xft:Anonymous Pro:pixelsize=12:antialias=false
+!!URxvt*boldFont:               xft:Anonymous Pro B:pixelsize=12:antialias=false
+!!URxvt*italicFont:             xft:Anonymous Pro I:pixelsize=12:antialias=false
+!!URxvt*boldItalicFont:         xft:Anonymous Pro BI:pixelsize=12:antialias=false
+!!URxvt*intensityStyles:                false
 ! URxvt*inputMethod:                    name
 ! URxvt*preeditType:                    style
 ! URxvt*imLocale:                       string
