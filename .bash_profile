@@ -14,6 +14,7 @@ alias vi='vim'
 alias ls='ls --color=auto'     # Enable ls colored output (Linux)
 alias grep='grep --color=auto' # Enable grep colored output (Linux)
 alias tmux='tmux -f ~/.tmux/tmux.conf'
+alias tm='~/.tmux/startup.sh'
 
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rns \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;\$!ba:s/\n/ /g')"
