@@ -18,6 +18,12 @@ alias tm='~/.tmux/startup.sh'
 
 export PS1='\u@\h:[\W]$ '
 
+# Powerline set up
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+/usr/local/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+
 SHELL=/bin/bash
 EDITOR=/usr/local/bin/vim
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin

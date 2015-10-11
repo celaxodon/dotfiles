@@ -1,5 +1,9 @@
 " A vim resource file to change settings
 
+set modelines=0		" CVE-2007-2438
+
+set rtp+="/usr/local/lib/python3.5/site-packages/powerline/bindings/vim"
+
 " For Vundle plugin manager:
 set nocompatible   " Required for Vundle
 filetype off       " Required for Vundle -- why?
@@ -13,9 +17,25 @@ call vundle#begin()
 "---------------------------------------"
 
 " Let Vundle manage Vundle; required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
+Plugin 'scrooloose/nerdtree'     " Directory structure from vim
+Plugin 'chriskempson/base16-vim' " Color schemes 
+Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
+
+"PluginInstall
+"PluginUpdate
 
 call vundle#end()
+
+"""""""""""""""""""""""""""""""""
+" Activate Powerline status bar "
+"""""""""""""""""""""""""""""""""
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+" Set for Powerline-status
+set laststatus=2
 
 "--------------"
 " VIM SETTINGS "
@@ -49,6 +69,10 @@ set ruler
 
 " Show search matches as you type
 " set incsearch
+
+" Set spellcheck on
+" Change with `:set spell` or `:set nospell`
+"set spell spelllang=en_us
 
 " Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
 set pastetoggle=<F3>
@@ -84,15 +108,15 @@ nmap <leader>l :set list!<CR>
 " Enable solarized colorscheme
 syntax enable
 
-set background=dark
+"set background=dark
 "set background=light
 
-colorscheme solarized
+"colorscheme solarized
 "colorscheme base16-3024
 "colorscheme base16-brewer
 "colorscheme base16-bright
 "colorscheme base16-colors
-"colorscheme base16-default
+colorscheme base16-default
 "colorscheme base16-google " -- Don't like this one. Yellow sucks
 "colorscheme base16-harmonic16 " -- Don't like this one either now.
 "colorscheme base16-pop "-- too much purple/yellow
