@@ -27,9 +27,6 @@ Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 
 call vundle#end()
 
-"""""""""""""""""""""""""""""""""
-" Activate Powerline status bar "
-"""""""""""""""""""""""""""""""""
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
@@ -41,9 +38,12 @@ set laststatus=2
 " VIM SETTINGS "
 "--------------"
 
+"""""""""""""""""""""
+""" Syntax and setup
+"""""""""""""""""""""
 " This may cause automatic indenting
-" If this doesn't format indentions correctly, try the setting 'cindent' and
-" 'autoindent'
+" If this doesn't format indentions correctly, try setting 'cindent' and
+" 'autoindent'.
 filetype plugin indent on  " Required for Vundle
 
 " Fix backspace not working unless text is entered right before
@@ -67,8 +67,8 @@ set hlsearch
 " Show what column the cursor is currently on
 set ruler
 
-" Show search matches as you type
-" set incsearch
+" C-style indentation, according to the C indentation standard.
+"set cindent
 
 " Set spellcheck on
 " Change with `:set spell` or `:set nospell`
@@ -77,14 +77,26 @@ set ruler
 " Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
 set pastetoggle=<F3>
 
+
+""""""""""""""""""""
+""" Search behavior
+""""""""""""""""""""
 " ignore case when searching (/ or ?)
-set ic
+set incsearch
+
+" automatically show matching brackets
+set showmatch
 
 " use case-sensitivity when you search w/ upper-case chars
 set smartcase
 
+" Ignore case when searchign for text
+set ignorecase
+
 " enter spaces when tab is pressed
 set expandtab
+
+""""""""""""""""""""
 
 " turn on syntax highlighting by default
 syntax on
@@ -92,18 +104,15 @@ syntax on
 " 256 colors
 set t_Co=256
 
-" automatically show matching brackets
-set showmatch
-
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<CR>
 
 " changes tab and return chars, when visible, to triangle and return symbol, respectively
 "set listchars=tab:▸\ ,eol:¬
 
-"---------------"
-" COLOR SCHEMES "
-"---------------"
+""""""""""""""""""
+""" Color Schemes
+""""""""""""""""""
 
 " Enable solarized colorscheme
 syntax enable
