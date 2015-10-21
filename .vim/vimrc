@@ -3,6 +3,7 @@
 set modelines=0		" CVE-2007-2438
 
 set rtp+="/usr/local/lib/python3.5/site-packages/powerline/bindings/vim"
+"set rtp+="/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/powerline/bindings/vim"
 
 " For Vundle plugin manager:
 set nocompatible   " Required for Vundle
