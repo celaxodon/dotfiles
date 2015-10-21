@@ -33,6 +33,12 @@ python3 del powerline_setup
 
 " Set for Powerline-status
 set laststatus=2
+" Alwyas display tabline, even if only one tab
+"set showtabline=2
+" Hide default insert comment below status bar
+set noshowmode
+" Set width of non-ascii characters
+set ambiwidth=single
 
 "--------------"
 " VIM SETTINGS "
