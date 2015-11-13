@@ -21,7 +21,7 @@ echo "Available sessions:"
 echo "-------------------"
 echo " ";
 select i in "${session_list[@]}"; do
-    case $i in 
+    case "$i" in 
             "New Session") 
                     read -p "Enter a new session name: " session_name;
                     tmux -f ~/.tmux/tmux.conf new -s "$session_name";
