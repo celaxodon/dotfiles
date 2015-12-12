@@ -18,6 +18,9 @@ alias tm='~/.tmux/startup.sh'
 
 export PS1='\u@\h:[\W]$ '
 
+# Enable appending to history file instead of overwriting
+shopt -s histappend
+
 # Powerline set up
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
