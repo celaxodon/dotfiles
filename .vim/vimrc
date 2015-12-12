@@ -22,7 +22,16 @@ Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
+"Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
+"Plugin 'plasticboy/vim-markdown'
 
+" Autocompletion in vim by providing bindings
+" to the autocompletion library 'Jedi' for Python.
+"Plugin 'davidhalter/jedi-vim' 
+
+"--------------------"
+" Vundle interaction "
+"--------------------"
 "PluginInstall
 "PluginUpdate
 
@@ -60,8 +69,20 @@ set backspace=indent,eol,start
 " set tabs to 4 spaces
 set ts=4
 
+" enter spaces when tab is pressed
+set expandtab
+
 " Hide buffers instead of closing them when you close the file.
 set hidden
+
+" Re-read an open file that has changed outside of vim
+set autoread
+
+" Use a menu for command-line completion
+set wildmenu
+
+" Use the filename for window title
+set title
 
 " Don't wrap lines
 " set nowrap
@@ -69,11 +90,11 @@ set hidden
 " Show line numbers by default
 set nu
 
-" Highlight matches when searching
-set hlsearch
-
 " Show what column the cursor is currently on
 set ruler
+
+" Highlight matches when searching
+set hlsearch
 
 " C-style indentation, according to the C indentation standard.
 "set cindent
@@ -101,13 +122,7 @@ set smartcase
 " Ignore case when searchign for text
 set ignorecase
 
-" enter spaces when tab is pressed
-set expandtab
-
 """"""""""""""""""""
-
-" turn on syntax highlighting by default
-syntax on
 
 " 256 colors
 set t_Co=256
@@ -122,18 +137,23 @@ nmap <leader>l :set list!<CR>
 """ Color Schemes
 """"""""""""""""""
 
-" Enable solarized colorscheme
+" Start syntax highlighting, but overrule your colors with defaults.
+"syntax on
+
+" syntax enable -- keep your current color settings and turn on syntax
+" highlighting. 
+" This enables solarized colorscheme
 syntax enable
 
-"set background=dark
+set background=dark
 "set background=light
 
-"colorscheme solarized
+colorscheme solarized
 "colorscheme base16-3024
 "colorscheme base16-brewer
 "colorscheme base16-bright
 "colorscheme base16-colors
-colorscheme base16-default
+"colorscheme base16-default
 "colorscheme base16-google " -- Don't like this one. Yellow sucks
 "colorscheme base16-harmonic16 " -- Don't like this one either now.
 "colorscheme base16-pop "-- too much purple/yellow
