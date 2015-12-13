@@ -15,6 +15,7 @@ alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
 alias gdb='cgdb'
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
+alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
 
 export PS1='\u@\h:[\W]$ '
 
