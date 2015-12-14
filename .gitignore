@@ -12,7 +12,6 @@
 .bash_profile.pysave 
 .cache 
 .cim_install_log 
-.config 
 .cups 
 .dropbox 
 .dropbox-master 
@@ -107,3 +106,4 @@ VirtualBox VMs/
 md5
 notes.txt
 Google Drive/
+.keepassx/
