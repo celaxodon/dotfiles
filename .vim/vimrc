@@ -1,9 +1,66 @@
-" A vim resource file to change settings
+"--------------"
+" VIM SETTINGS "
+"--------------"
 
 set modelines=0		" CVE-2007-2438
 
-set rtp+="/usr/local/lib/python3.5/site-packages/powerline/bindings/vim"
-"set rtp+="/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/powerline/bindings/vim"
+"""""""""""""""""""
+""" General and UI
+"""""""""""""""""""
+
+" 256 colors
+set t_Co=256
+" Fix backspace not working unless text is entered right before
+set backspace=indent,eol,start
+" Re-read an open file that has changed outside of vim
+set autoread
+" Hide buffers instead of closing them when you close the file.
+set hidden
+" Use a menu for command-line completion
+set wildmenu
+" Use the filename for window title
+set title
+" changes tab and return chars, when visible, to triangle and return symbol, respectively
+"set listchars=tab:▸\ ,eol:¬
+" Don't wrap lines
+"set nowrap
+" Show line numbers by default
+set nu
+" Show what column the cursor is currently on
+set ruler
+" Set spellcheck on
+" Change with `:set spell` or `:set nospell`
+"set spell spelllang=en_us
+" Faster redrawing
+set ttyfast
+" Have a vertical buffer around the cursor when scrolling
+set scrolloff=3
+" Turn off bell sound for errors
+"set noerrorbells
+" Turn on screen flash for errors
+set visualbell
+
+
+"""""""""""""""""
+""" Code folding
+"""""""""""""""""
+" Fold based on indent level
+set foldmethod=indent
+" Deepest fold is 10 levels
+set foldnestmax=10
+" Don't fold by default
+set nofoldenable
+" ???
+set foldlevel=1
+
+""""""""""""
+""" Plugins
+""""""""""""
+" Keep Plugins in between vundle#begin/end
+"
+" This may cause automatic indenting... If this doesn't format indentions
+" correctly, try setting 'cindent' and 'autoindent'.
+filetype plugin indent on  " Required for Vundle
 
 " For Vundle plugin manager:
 set nocompatible   " Required for Vundle
@@ -12,10 +69,6 @@ filetype off       " Required for Vundle -- why?
 " Set runtime path to include Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-"---------------------------------------"
-" PLUGINS - keep between vundle#begin/end
-"---------------------------------------"
 
 " Let Vundle manage Vundle; required
 Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
@@ -37,6 +90,13 @@ Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 
 call vundle#end()
 
+
+"""""""""""""""""""""
+""" Powerline tweaks
+"""""""""""""""""""""
+" Run-time path addition for powerline
+set rtp+="/usr/local/lib/python3.5/site-packages/powerline/bindings/vim"
+
 " Note: If installing through brew, $ brew install vim --with-python3
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
@@ -51,60 +111,29 @@ set noshowmode
 " Set width of non-ascii characters
 set ambiwidth=single
 
-"--------------"
-" VIM SETTINGS "
-"--------------"
 
-"""""""""""""""""""""
-""" Syntax and setup
-"""""""""""""""""""""
-" This may cause automatic indenting
-" If this doesn't format indentions correctly, try setting 'cindent' and
-" 'autoindent'.
-filetype plugin indent on  " Required for Vundle
-
-" Fix backspace not working unless text is entered right before
-set backspace=indent,eol,start
-
+"""""""""""""""""
+""" Tab behavior
+"""""""""""""""""
+" Respect 'tabstop', 'shiftwidth' and 'softtabstop'
+set smarttab
 " set tabs to 4 spaces
-set ts=4
-
+set tabstop=4
 " enter spaces when tab is pressed
 set expandtab
+" The number of spaces to use for indentation
+set shiftwidth=4
+" Indent to a multiple of 'shiftwidth'
+set shiftround
 
-" Hide buffers instead of closing them when you close the file.
-set hidden
 
-" Re-read an open file that has changed outside of vim
-set autoread
-
-" Use a menu for command-line completion
-set wildmenu
-
-" Use the filename for window title
-set title
-
-" Don't wrap lines
-" set nowrap
-
-" Show line numbers by default
-set nu
-
-" Show what column the cursor is currently on
-set ruler
-
-" Highlight matches when searching
-set hlsearch
-
+"""""""""""""""""""""""""""""""
+""" Filetype specific settings
+"""""""""""""""""""""""""""""""
 " C-style indentation, according to the C indentation standard.
 "set cindent
 
-" Set spellcheck on
-" Change with `:set spell` or `:set nospell`
-"set spell spelllang=en_us
 
-" Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
-set pastetoggle=<F3>
 
 
 """"""""""""""""""""
@@ -112,43 +141,39 @@ set pastetoggle=<F3>
 """"""""""""""""""""
 " ignore case when searching (/ or ?)
 set incsearch
-
 " automatically show matching brackets
 set showmatch
-
 " use case-sensitivity when you search w/ upper-case chars
 set smartcase
-
 " Ignore case when searchign for text
 set ignorecase
+" Highlight matches when searching
+set hlsearch
+" Start syntax highlighting, but overrule your colors with defaults.
+"syntax on
 
-""""""""""""""""""""
 
-" 256 colors
-set t_Co=256
-
+"""""""""""""
+""" Bindings
+"""""""""""""
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<CR>
+" Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
+set pastetoggle=<F3>
+:nmap <F2> :NERDTree
 
-" changes tab and return chars, when visible, to triangle and return symbol, respectively
-"set listchars=tab:▸\ ,eol:¬
 
 """"""""""""""""""
 """ Color Schemes
 """"""""""""""""""
-
-" Start syntax highlighting, but overrule your colors with defaults.
-"syntax on
-
 " syntax enable -- keep your current color settings and turn on syntax
-" highlighting. 
-" This enables solarized colorscheme
+" highlighting. This enables solarized colorscheme
 syntax enable
 
 set background=dark
 "set background=light
 
-colorscheme solarized
+"colorscheme solarized
 "colorscheme base16-3024
 "colorscheme base16-brewer
 "colorscheme base16-bright
@@ -157,10 +182,4 @@ colorscheme solarized
 "colorscheme base16-google " -- Don't like this one. Yellow sucks
 "colorscheme base16-harmonic16 " -- Don't like this one either now.
 "colorscheme base16-pop "-- too much purple/yellow
-
-"---------"
-" ALIASES "
-"---------"
-
-" MAPPINGS
-:nmap <F2> :NERDTree
+colorscheme base16-ocean
