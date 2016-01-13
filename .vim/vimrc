@@ -1,80 +1,249 @@
-" a vim resource file to change settings
-" Fix backspace not working unless text is entered right before
-set backspace=indent,eol,start
+"--------------"
+" VIM SETTINGS "
+"--------------"
 
-" set tabs to 4 spaces
-set ts=4
+set modelines=0     " CVE-2007-2438
 
-" Hide buffers instead of closing them when you close the file.
+
+"""""""""""""""""""
+""" General and UI
+"""""""""""""""""""
+" 256 colors
+set t_Co=256
+" Re-read an open file that has changed outside of vim
+set autoread
+" Hide buffers instead of closing them when you close the file
 set hidden
+" Visual auto-complete for command menu
+set wildmenu
+" Use the file name for window title
+set title
+" Show line numbers by default (number = nu)
+set number
+" Show what column the cursor is currently on
+set ruler
+" Set spellcheck on
+" Change with `:set spell` or `:set nospell`
+"set spell spelllang=en_us
+" Faster redrawing
+set ttyfast
+" Have a vertical buffer around cursor when scrolling
+set scrolloff=2
+" Wrap lines
+set wrap
+" Change tab and return chars, when visible, to triangle and return symbol,
+"set listchars=tab:▸\ ,eol:¬
 
-" Don't wrap lines
-" set nowrap
 
-" Show line numbers by default
-set nu
+""""""""""
+""" Bells
+""""""""""
+" Turn off bell sounds for errors
+"set noerrorbells
+" Turn on screen flash for errors
+set visualbell
+
+
+"""""""""""""""""
+""" Code folding
+"""""""""""""""""
+" Fold based on indent level
+set foldmethod=indent
+" Deepest fold is 20 levels
+set foldnestmax=2
+" Don't fold by default
+set nofoldenable
+" ???
+set foldlevel=1
+
+
+""""""""""""""""""""""""""""""""""""""""""""
+""" PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""
+" Keep plugins between vundle#begin/end
+"
+" PluginInstall <name.vim>
+" PluginUpdate   " Update plugins
+" PluginSearch   " Search plugins on vim scripts
+" (http://vim-scripts/org/vim/scripts.html)
+" PluginList     " Display list of installed bundles
+" :h vundle      " help
+" Install plugins: launch vim and run :PluginInstall or on CLI use
+" `vim +PluginInstall +qall`
+"
+" If this doesn't format indentions correctly, try setting 'cindent' and
+" 'autoindent'.
+"Automatic indenting
+filetype plugin indent on  " Required for Vundle
+
+" For Vundle plugin manager:
+set nocompatible   " Required for Vundle
+filetype off       " Required for Vundle -- why?
+
+" Set runtime path to include Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage Vundle; required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized' " Solarized color scheme
+Plugin 'scrooloose/nerdtree'              " Directory browser from vim
+Plugin 'chriskempson/base16-vim'          " Color schemes
+"Plugin 'godlygeek/tabular'     " Dependency for vim-markdown. keep above!
+"Plugin 'plasticboy/vim-markdown'
+Plugin 'rust-lang/rust.vim'
+
+" Autocompletion in vim by providing bindings to the 'Jedi' autocompletion
+" library:
+"Plugin 'davidhalter/jedi-vim'
+
+call vundle#end()
+
+
+"""""""""""""""""""""
+""" Powerline tweaks
+"""""""""""""""""""""
+" NOTE: Using Powerline from fedora repos (tmux-powerline,
+" vim-plugin-powerline).
+
+set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+" The below may be unnecessary with Fedora's powerline pkg
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+
+let g:Powerline_symbols = 'fancy'
+
+" Set width of foreign lang chars and other misc symbols. Mainly for powerline
+set ambiwidth=single
+" Always have a status line
+set laststatus=2
+"Hide default mode text (e.g. -- INSERT __ below the statusline
+set noshowmode
+
+
+"""""""""""""""""
+""" Tab behavior
+"""""""""""""""""
+" Respect 'tabstop', 'shiftwidth' and 'softtabstop'
+set smarttab
+" Set tabstop to 4 spaces (tabstop = ts)
+set tabstop=4
+" Enter spaces when tab is pressed
+set expandtab
+" When indenting with `>` set indentation to 4 spaces
+set shiftwidth=4
+" Indent to a multiple of 'shiftwidth'
+set shiftround
+" Set number of spaces in tab when editing
+"set softtabstop=4
+" Always display the tabline, even if there is only one tab
+"set showtabline=2
+
+
+"""""""""""""""""""""""""""""""
+""" Filetype specific settings
+"""""""""""""""""""""""""""""""
+" C-style indentation, according to the C indentation standard
+" Should NOT be used with file-based indentation. May cause problems.
+"set cindent
+
+" Encoding
+set encoding=utf-8
+
+" Disable statusline fillchars
+set fillchars+=stl:\ ,stlnc:\
+
+
+""""""""""""""""""""
+""" Search behavior
+""""""""""""""""""""
 
 " Highlight matches when searching
 set hlsearch
 
-" Show what column the cursor is currently on
-set ruler
 
+
+
+"""""""""""""""""""""""
+""" Search behavior 
+"""""""""""""""""""""""
 " Show search matches as you type
-" set incsearch
-
-" Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
-set pastetoggle=<F3>
-
-" ignore case when searching (/ or ?)
-set ic
-
-" use case-sensitivity when you search w/ upper-case chars
+set incsearch
+" Automatically show matching brackets -- [{()}]
+set showmatch
+" Ignore case during searches _except_ when you type capitals
 set smartcase
-
-" enter spaces when tab is pressed
-set expandtab
-
-" turn on syntax highlighting by default
+" Ignore case when searching for text
+set ignorecase
+" Highlight matches when searching
+set hlsearch
+" Searches wrap around the beginning and end of file
+set wrapscan
+" Start syntax highlighting, but overrules your colors with defaults
 syntax on
 
-" 256 colors
-set t_Co=256
 
-" automatically show matching brackets
-set showmatch
-
-" create mapping for quick switch between invisibles and visibles. Enable with `\l`
+"""""""""""""
+""" Bindings
+"""""""""""""
+" Create mapping for quick switch between invisibles and visibles.
+" Enable with `\l`
 nmap <leader>l :set list!<CR>
+:nmap <F2> :NERDTree
 
-" changes tab and return chars, when visible, to triangle and return symbol, respectively
-set listchars=tab:▸\ ,eol:¬
+" Set the paste toggle with <F3> key. No smart indenting, just pastes as
+" normal.
+set pastetoggle=<F3>
 
-" PLUGINS
 
-" pathogen mod allows control over runtime paths and any plugins can be extracted to a subdirectory
-" under `~/.vim/bundle`, and they will be added to the `'runtimepath'`.
-execute pathogen#infect()
-
-" This may cause automatic indenting
-filetype plugin indent on
+"""""""""""""""""
+""" Color Schemes
+"""""""""""""""""
+" Access colors in 256 colorspace
+let base16colorspace=256
+" Enable solarized color scheme -- turns on syntax highlighting and respects
+" your colors
+syntax enable
 
 " Enable solarized colorscheme
-syntax enable
 set background=dark
 "set background=light
-colorscheme solarized
-"colorscheme base16-3024
-"colorscheme base16-brewer
-"colorscheme base16-bright
-"colorscheme base16-colors
-"colorscheme base16-default
-"colorscheme base16-google " -- Don't like this one. Yellow sucks
-"colorscheme base16-harmonic16 " -- Don't like this one either now.
-"colorscheme base16-pop "-- too much purple/yellow
 
+colorscheme base16-default
+"colorscheme solarized
+"""""""""""""""""""""""""""""""""""""""""
+" Advanced solarized colorscheme options:
+"
+" Set to *16* by default. Not sure if 256 is desirable or not from docs...
+"g:solarized_termcolors=256
+" Set to 1 for solarized to use the default, transparent background, if 
+" enabled. Urxvt requires this.
+"g:solarized_termtrans=0
+" For test purposes only. 1 enables. Forces solarized to use the 256 degraded 
+" color mode only. 
+"g:solarized_degrade=0
+" Stop solarized from displaying bold, underlined or italicized typefaces.
+"g:solarized_bold=1
+"g:solarized_italic=1
+"g:solarized_underline=1
+" High/low settings use same palette, but shifts values up/down
+"g:solarized_contrast="normal"
+" Special chars visibility. Can be 'high'|'low'|'normal'
+"g:solarized_visibility="normal"
+" Note that by default, Solarized comes with a plugin to map <F5> to change
+" background. 
 
-" ALIASES
+" Set background for light/dark changeover at 6am and 5pm
+"let hour = strftime("%H")
+"if 6 <= hour && hour < 18
+"  set background=light
+"else
+"  set background=dark
+"endif
+""""""""""""""""""""""""""""""""""""""""
 
-" MAPPINGS
-:nmap <F2> :NERDTree
+""""""""""""""
+""" Aliases 
+""""""""""""""
+
