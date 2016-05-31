@@ -25,9 +25,8 @@ export POWERLINE_CONFIG_COMMAND="/usr/bin/powerline-config"
 
 
 export EDITOR=vim
-export LC_ALL="C"
+# Changed from "C" to fix gnome-terminal issue: "Non UTF-8 locale
+# (ANSI_X3.4-1968) is not supported", which caused gnome-terminal to crash
+# on opening.
+export LANG="en_US.UTF-8"
 export TERM=xterm-256color
-
-if [[ -e /etc/bashrc ]]; then
-   . /etc/bashrc
-fi
