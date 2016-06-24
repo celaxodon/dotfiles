@@ -34,12 +34,11 @@ set ruler
 " Faster redrawing
 set ttyfast
 " Have a vertical buffer around the cursor when scrolling
-set scrolloff=3
+set scrolloff=2
 " Turn off bell sound for errors
 "set noerrorbells
 " Turn on screen flash for errors
 set visualbell
-
 
 """""""""""""""""
 """ Code folding
@@ -47,11 +46,16 @@ set visualbell
 " Fold based on indent level
 set foldmethod=indent
 " Deepest fold is 10 levels
-set foldnestmax=10
+set foldnestmax=2
 " Don't fold by default
 set nofoldenable
 " ???
-set foldlevel=1
+set foldlevel=0
+" Set the starting fold level when editing another buffer in a window
+" 0 = all folds closed
+" 1 = some folds closed
+" 99 = no folds closed
+set foldlevelstart=0
 
 """"""""""""
 """ Plugins
@@ -75,6 +79,9 @@ Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
+Plugin 'rust-lang/rust.vim'      " Rust plugin
+Plugin 'Valloric/YouCompleteMe'   " Auto-completion
+"Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 "Plugin 'plasticboy/vim-markdown'
 
@@ -174,12 +181,14 @@ set background=dark
 "set background=light
 
 "colorscheme solarized
+colorscheme base16-twilight
+"colorscheme base16-default
 "colorscheme base16-3024
 "colorscheme base16-brewer
 "colorscheme base16-bright
 "colorscheme base16-colors
-"colorscheme base16-default
+"colorscheme base16-ocean " Background too washed out for my taste
 "colorscheme base16-google " -- Don't like this one. Yellow sucks
 "colorscheme base16-harmonic16 " -- Don't like this one either now.
 "colorscheme base16-pop "-- too much purple/yellow
-colorscheme base16-ocean
+"colorscheme base16-ocean
