@@ -118,6 +118,13 @@ set noshowmode
 " Set width of non-ascii characters
 set ambiwidth=single
 
+"""""""""""""""""""""""""""
+""" YouCompleteMe Settings 
+"""""""""""""""""""""""""""
+" :YcmRestartServer -> Restart YCM server if you need to for whatever reason
+let g:ycm_rust_src_path = '/usr/local/rust/rust-1.9.0/src'  " For racer and Rust autocompletion of stdlib
+let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
+
 
 """""""""""""""""
 """ Tab behavior

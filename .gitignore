@@ -107,3 +107,8 @@ md5
 notes.txt
 Google Drive/
 .keepassx/
+.vim/bundle/**
+.jupyter/**
+.ipython/**
+.swo
+.swp
