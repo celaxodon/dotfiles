@@ -8,6 +8,8 @@ set modelines=0		" CVE-2007-2438
 """ General and UI
 """""""""""""""""""
 
+" UTF-8 by default
+set encoding=utf-8
 " 256 colors
 set t_Co=256
 " Fix backspace not working unless text is entered right before
@@ -57,6 +59,7 @@ set foldlevel=0
 " 99 = no folds closed
 set foldlevelstart=0
 
+
 """"""""""""
 """ Plugins
 """"""""""""
@@ -79,8 +82,9 @@ Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
-Plugin 'rust-lang/rust.vim'      " Rust plugin
+Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plugin 'Valloric/YouCompleteMe'   " Auto-completion
+Plugin 'nvie/vim-flake8'        " PEP8 checking
 "Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 "Plugin 'plasticboy/vim-markdown'
@@ -94,6 +98,7 @@ Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 "--------------------"
 "PluginInstall
 "PluginUpdate
+
 
 call vundle#end()
 
@@ -118,17 +123,29 @@ set noshowmode
 " Set width of non-ascii characters
 set ambiwidth=single
 
+
 """""""""""""""""""""""""""
 """ YouCompleteMe Settings 
 """""""""""""""""""""""""""
 " :YcmRestartServer -> Restart YCM server if you need to for whatever reason
-let g:ycm_rust_src_path = '/usr/local/rust/rust-1.9.0/src'  " For racer and Rust autocompletion of stdlib
+" :YcmDebugInfo --> Provides debugging information:wq
+let g:ycm_rust_src_path = '/usr/local/rust/rustc-1.9.0/src/'  " For racer and Rust autocompletion of stdlib
+let $RUST_SRC_PATH = '/usr/local/rust/rustc-1.9.0/src/'
+"let g:racer_cmd = '
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
+""" To rebuild YCM:
+" $ cd ~/src/ycm_build
+" $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+" $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
+" $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
+" $ cargo build [--verbose] --release
+"""
 
-"""""""""""""""""
-""" Tab behavior
-"""""""""""""""""
+
+"""""""""""""""""""""""""
+""" Default Tab behavior
+"""""""""""""""""""""""""
 " Respect 'tabstop', 'shiftwidth' and 'softtabstop'
 set smarttab
 " set tabs to 4 spaces
@@ -145,9 +162,32 @@ set shiftround
 """ Filetype specific settings
 """""""""""""""""""""""""""""""
 " C-style indentation, according to the C indentation standard.
-"set cindent
+au BufNewFile,BufRead *.c
+    \ set cindent
 
+" Python
+"au BufNewFile,BufRead *.py
+"    \ set tabstop=4
+"    \ set softtabstop=4
+"    \ set shiftwidth=4
+"    \ set textwidth=79
+"    \ set expandtab
+"    \ set autoindent
+"    \ set fileformat=unix
 
+" JavaScript, HTML, CSS
+"au BufNewFile,BufRead *.js, *.html, *.css
+"    \ set tabstop=2
+"    \ set softtabstop=2
+"    \ set shiftwidth=2
+
+" Highlight group for trailing whitespace (but only at ends of lines with
+" text):
+:highlight BadWhitespace ctermbg=darkgreen guibg=darkgreen
+
+" Flag bad trailing whitespace
+"au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.rs
+"    \ match BadWhitespace /\S\zs\s\+$
 
 
 """"""""""""""""""""
@@ -187,8 +227,8 @@ syntax enable
 set background=dark
 "set background=light
 
-"colorscheme solarized
-colorscheme base16-twilight
+colorscheme solarized
+"colorscheme base16-twilight
 "colorscheme base16-default
 "colorscheme base16-3024
 "colorscheme base16-brewer
