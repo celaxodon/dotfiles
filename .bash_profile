@@ -3,7 +3,6 @@
 # Aliases: #
 #----------#
 
-#alias rm='rm -i'
 alias lf='ls -F'
 alias py='cd ~/Programming/Python'
 alias mv='mv -i'
@@ -16,6 +15,7 @@ alias gdb='cgdb'
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
+alias myip='~/Scripts/IP_check/ip_check.py'
 
 export PS1='\u@\h:[\W]$ '
 
@@ -27,6 +27,8 @@ powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 /usr/local/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+
+export RUST_SRC_PATH='/usr/local/rust/rustc-1.9.0/src'
 
 SHELL=/bin/bash
 EDITOR=/usr/local/bin/vim
