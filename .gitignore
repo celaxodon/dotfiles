@@ -32,6 +32,7 @@
 .jhbuildrc-custom 
 .jhbuildrc-fw-10.4 
 .jhbuildrc-fw-10.4-test 
+.keepassx
 .lesshst 
 .lilypond-fonts.cache-2 
 .local 
@@ -50,6 +51,11 @@
 .subversion 
 .thumbnails 
 .viminfo 
+.vim/bundle/**
+.jupyter/**
+.ipython/**
+.swo
+.swp
 .wapi 
 .wireshark 
 .wireshark-etc 
@@ -106,9 +112,3 @@ VirtualBox VMs/
 md5
 notes.txt
 Google Drive/
-.keepassx/
-.vim/bundle/**
-.jupyter/**
-.ipython/**
-.swo
-.swp
