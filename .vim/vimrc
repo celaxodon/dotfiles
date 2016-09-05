@@ -176,10 +176,10 @@ au BufNewFile,BufRead *.c
 "    \ set fileformat=unix
 
 " JavaScript, HTML, CSS
-"au BufNewFile,BufRead *.js, *.html, *.css
-"    \ set tabstop=2
-"    \ set softtabstop=2
-"    \ set shiftwidth=2
+au BufNewFile,BufRead *.html,*.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
 
 " Highlight group for trailing whitespace (but only at ends of lines with
 " text):
