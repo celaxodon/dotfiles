@@ -62,7 +62,6 @@
 1a 
 AT.postflight.22430 
 Applications 
-BTSync 
 Blark 
 Calibre 
 Library 
@@ -112,3 +111,5 @@ VirtualBox VMs/
 md5
 notes.txt
 Google Drive/
+.docker/**
+.cargo/**
