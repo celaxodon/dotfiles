@@ -12,7 +12,7 @@ alias ls='ls --color=auto'
 PS1='[\u \W]\$ '
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+#BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 #/usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh

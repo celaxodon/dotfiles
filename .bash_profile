@@ -16,6 +16,8 @@ alias grep='grep --color=auto' # Enable grep colored output (Linux)
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
+alias myip='/home/icarus/scripts/IP_check/ip_check.py'
+alias cdd='pushd'
 
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 #alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rns \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;\$!ba:s/\n/ /g')"
