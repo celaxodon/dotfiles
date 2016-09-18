@@ -88,10 +88,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized' " Solarized color scheme
 Plugin 'scrooloose/nerdtree'              " Directory browser from vim
+"Plugin 'scrooloose/syntastic'             " Syntax checker for wide variety of langs
 Plugin 'chriskempson/base16-vim'          " Color schemes
 "Plugin 'godlygeek/tabular'     " Dependency for vim-markdown. keep above!
 "Plugin 'plasticboy/vim-markdown'
 Plugin 'rust-lang/rust.vim'
+Plugin 'Valloric/YouCompleteMe' " Auto-completion plugin
 
 " Autocompletion in vim by providing bindings to the 'Jedi' autocompletion
 " library:
@@ -106,13 +108,15 @@ call vundle#end()
 " NOTE: Using Powerline from fedora repos (tmux-powerline,
 " vim-plugin-powerline).
 
-set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
-" The below may be unnecessary with Fedora's powerline pkg
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+"set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+set rtp+=/usr/lib/python3.5/site-packages/powerline/bindings/vim/
+
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 
 let g:Powerline_symbols = 'fancy'
+
 
 " Set width of foreign lang chars and other misc symbols. Mainly for powerline
 set ambiwidth=single
@@ -121,6 +125,23 @@ set laststatus=2
 "Hide default mode text (e.g. -- INSERT __ below the statusline
 set noshowmode
 
+""""""""""""""""""""""""""
+""" YouCompleteMe Configs
+""""""""""""""""""""""""""
+":YcmRestartServer
+":YcmDebugInfo
+let g:ycm_rust_src_path = '/usr/local/src/rustc-1.9.0/src/'
+let $RUST_SRC_PATH = '/usr/local/src/rustc-1.9.0/src/'
+let g:ycm_python_binary_path = '/usr/bin/python3'
+
+""" To rebuild YCM:
+" $ cd ~/src/ycm_build
+" $ cmake -G 'Unix Makefiles' . \
+"     ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+" $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
+" $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
+" $ cargo build [--verbose] --release
+"""
 
 """""""""""""""""
 """ Tab behavior
@@ -146,23 +167,22 @@ set shiftround
 """""""""""""""""""""""""""""""
 " C-style indentation, according to the C indentation standard
 " Should NOT be used with file-based indentation. May cause problems.
-"set cindent
+au BufNewFile,BufRead *.c,*.h
+    \ set cindent
+
+" JS, HTML, CSS
+au BufNewFile,BufRead *.html,*.css
+    \ set tabstop=2 softtabstop=2 shiftwidth=2
+
+au BufNewFile,BufRead *.md,*.rst
+    \ set textwidth=120
+
 
 " Encoding
 set encoding=utf-8
 
 " Disable statusline fillchars
 set fillchars+=stl:\ ,stlnc:\
-
-
-""""""""""""""""""""
-""" Search behavior
-""""""""""""""""""""
-
-" Highlight matches when searching
-set hlsearch
-
-
 
 
 """""""""""""""""""""""
@@ -210,8 +230,8 @@ syntax enable
 set background=dark
 "set background=light
 
-colorscheme base16-default
-"colorscheme solarized
+"colorscheme base16-default
+colorscheme solarized
 """""""""""""""""""""""""""""""""""""""""
 " Advanced solarized colorscheme options:
 "
