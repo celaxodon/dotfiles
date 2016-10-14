@@ -83,9 +83,9 @@ Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
-Plugin 'Valloric/YouCompleteMe'   " Auto-completion
+"Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'nvie/vim-flake8'        " PEP8 checking
-"Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
+Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 "Plugin 'plasticboy/vim-markdown'
 
@@ -109,7 +109,8 @@ call vundle#end()
 " Run-time path addition for powerline
 set rtp+="/usr/local/lib/python3.5/site-packages/powerline/bindings/vim"
 
-" Note: If installing through brew, $ brew install vim --with-python3
+" Note: If installing through brew, `$ brew install vim --with-python3` - make
+" sure you're pointing at the RIGHT VIM. May need to change PATH.
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
@@ -227,7 +228,8 @@ syntax enable
 set background=dark
 "set background=light
 
-colorscheme solarized
+colorscheme glacier
+"colorscheme solarized
 "colorscheme base16-twilight
 "colorscheme base16-default
 "colorscheme base16-3024
