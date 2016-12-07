@@ -83,7 +83,7 @@ Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
-"Plugin 'Valloric/YouCompleteMe'   " Auto-completion
+Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'nvie/vim-flake8'        " PEP8 checking
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
@@ -129,16 +129,20 @@ set ambiwidth=single
 """ YouCompleteMe Settings 
 """""""""""""""""""""""""""
 " :YcmRestartServer -> Restart YCM server if you need to for whatever reason
-" :YcmDebugInfo --> Provides debugging information:wq
-let g:ycm_rust_src_path = '/usr/local/rust/rustc-1.9.0/src/'  " For racer and Rust autocompletion of stdlib
-let $RUST_SRC_PATH = '/usr/local/rust/rustc-1.9.0/src/'
-"let g:racer_cmd = '
+" :YcmDebugInfo --> Provides debugging information for each server instance
+" :YcmDiag --> Check if errors or warnings
+" ctrl-space -> auto-complete, even top-level
+let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/rust-lang/src'  " For racer and Rust autocompletion of stdlib
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
 " $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 " $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
+" (maybe?) cd ~/.vim/bundle/YouCompleteMe && \
+" python3 (may need to edit first line in install.py!) install.py --racer-completer
+"     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
+"     to be present and the src files available.
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
 " $ cargo build [--verbose] --release
 """
@@ -178,8 +182,8 @@ au BufNewFile,BufRead *.c
 
 " JavaScript, HTML, CSS
 au BufNewFile,BufRead *.html,*.css
-    \ set tabstop=2
-    \ set softtabstop=2
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
     \ set shiftwidth=2
 
 " Highlight group for trailing whitespace (but only at ends of lines with
