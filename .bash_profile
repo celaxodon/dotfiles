@@ -18,6 +18,10 @@ alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
 alias myip='~/Scripts/IP_check/ip_check.py'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 # Enable appending to history file instead of overwriting
 shopt -s histappend
@@ -33,6 +37,7 @@ export RUST_SRC_PATH='/usr/local/rust/rustc-1.9.0/src'
 SHELL=/bin/bash
 EDITOR=/usr/local/bin/vim
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
+export PATH=$PATH:~/.cargo/bin
 
 #----------------------#
 # Paths and Variables: #
@@ -50,3 +55,6 @@ set_prompt() {
     fi
 }
 set_prompt
+
+# In .bash_rc?
+#sh -c ssh-agent
