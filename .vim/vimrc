@@ -45,19 +45,20 @@ set visualbell
 """""""""""""""""
 """ Code folding
 """""""""""""""""
+" Don't fold by default
+set nofoldenable
 " Fold based on indent level
 set foldmethod=indent
 " Deepest fold is 10 levels
 set foldnestmax=2
-" Don't fold by default
-set nofoldenable
 " ???
 set foldlevel=0
+
 " Set the starting fold level when editing another buffer in a window
-" 0 = all folds closed
-" 1 = some folds closed
-" 99 = no folds closed
-set foldlevelstart=0
+"   0 = all folds closed
+"   1 = some folds closed
+"   99 = no folds closed
+set foldlevelstart=1
 
 
 """"""""""""
@@ -107,7 +108,7 @@ call vundle#end()
 """ Powerline tweaks
 """""""""""""""""""""
 " Run-time path addition for powerline
-set rtp+="/usr/local/lib/python3.5/site-packages/powerline/bindings/vim"
+set rtp+="/usr/local/lib/python3.6/site-packages/powerline/bindings/vim"
 
 " Note: If installing through brew, `$ brew install vim --with-python3` - make
 " sure you're pointing at the RIGHT VIM. May need to change PATH.
@@ -234,6 +235,7 @@ set background=dark
 
 colorscheme glacier
 "colorscheme solarized
+"colorscheme molokai
 "colorscheme base16-twilight
 "colorscheme base16-default
 "colorscheme base16-3024
