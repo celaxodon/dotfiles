@@ -133,9 +133,10 @@ set ambiwidth=single
 " :YcmDebugInfo --> Provides debugging information for each server instance
 " :YcmDiag --> Check if errors or warnings
 " ctrl-space -> auto-complete, even top-level
-" NOTE: Complete paths are required (no '~')
-let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/rust-lang/src'  " For racer and Rust autocompletion of stdlib
+" NOTE: complete paths are required
+let g:ycm_rust_src_path = '/Users/grahamleva/Programming/Rust/src/rust-lang/src'  " For racer and Rust autocompletion of stdlib
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
@@ -218,7 +219,9 @@ set hlsearch
 """ Bindings
 """""""""""""
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list!<cr>
+" Highlight trailing whitespace
+map <leader>w /\s\+$<cr>
 " Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
 set pastetoggle=<F3>
 :nmap <F2> :NERDTree
@@ -234,8 +237,8 @@ syntax enable
 set background=dark
 "set background=light
 
-colorscheme glacier
-"colorscheme solarized
+"colorscheme glacier
+colorscheme solarized
 "colorscheme molokai
 "colorscheme base16-twilight
 "colorscheme base16-default
