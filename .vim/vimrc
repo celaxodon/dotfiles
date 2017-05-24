@@ -81,10 +81,12 @@ call vundle#begin()
 " Let Vundle manage Vundle; required
 Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
+Plugin 'Valloric/YouCompleteMe'   " Auto-completion
+Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
+Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
-Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'nvie/vim-flake8'        " PEP8 checking
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
