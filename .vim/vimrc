@@ -2,6 +2,9 @@
 " VIM SETTINGS "
 "--------------"
 
+" remove all existing autocmds
+" autocmd!
+
 set modelines=0		" CVE-2007-2438
 
 """""""""""""""""""
@@ -89,12 +92,13 @@ Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plugin 'nvie/vim-flake8'        " PEP8 checking
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
+Plugin 'wincent/command-t'       " A fuzzy file/command finder
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 "Plugin 'plasticboy/vim-markdown'
 
 " Autocompletion in vim by providing bindings
 " to the autocompletion library 'Jedi' for Python.
-"Plugin 'davidhalter/jedi-vim' 
+"Plugin 'davidhalter/jedi-vim'
 
 "--------------------"
 " Vundle interaction "
@@ -129,16 +133,16 @@ set ambiwidth=single
 
 
 """""""""""""""""""""""""""
-""" YouCompleteMe Settings 
+""" YouCompleteMe Settings
 """""""""""""""""""""""""""
 " :YcmRestartServer -> Restart YCM server if you need to for whatever reason
 " :YcmDebugInfo --> Provides debugging information for each server instance
 " :YcmDiag --> Check if errors or warnings
 " ctrl-space -> auto-complete, even top-level
-" NOTE: complete paths are required
-let g:ycm_rust_src_path = '/Users/grahamleva/Programming/Rust/src/rust-lang/src'  " For racer and Rust autocompletion of stdlib
+
+" For racer and Rust autocompletion of stdlib
+let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/src/rust-lang/src'
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
-let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
@@ -152,6 +156,12 @@ let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 " $ cargo build [--verbose] --release
 """
 
+""""""""""""""""""""""""""
+""" Command-T compilation
+""""""""""""""""""""""""""
+" $ cd ~/.vim/bundle/command-t/ruby/command-t
+" $ ruby extconf.rb
+" $ make
 
 """""""""""""""""""""""""
 """ Default Tab behavior
@@ -218,15 +228,23 @@ set hlsearch
 
 
 """""""""""""
-""" Bindings
+""" Mappings
 """""""""""""
+" NOTE: `nmap` is for normal-mode mappings; `map` for normal, visual, select, and operator pending;
+" :map! for insert and command modes
+
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
-nmap <leader>l :set list!<cr>
+nmap <leader>l :set list!<CR>
 " Highlight trailing whitespace
 map <leader>w /\s\+$<cr>
 " Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
 set pastetoggle=<F3>
-:nmap <F2> :NERDTree
+":nmap <F2> :NERDTree
+" Set up command-T with F2
+nmap <F2> :CommandT<cr>
+" Beginning of the test mapping - fill in the rest
+map <F9> <leader>t :w\|:!
+
 
 
 """"""""""""""""""

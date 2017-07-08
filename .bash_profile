@@ -6,9 +6,8 @@
 #----------#
 
 alias lf='ls -F'
-alias py='cd ~/Programming/Python'
 alias mv='mv -i'
-alias mova='~/Scripts/mova.sh'
+alias mova='~/Scripts/mova.py'
 alias stroke='/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke'
 alias timer='~/Scripts/timer.sh'
 alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
@@ -17,7 +16,7 @@ alias gdb='cgdb'
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
-alias myip='~/Scripts/IP_check/ip_check.py'
+alias myip='~/Scripts/iptools/iptools/ip_check.py'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -37,7 +36,7 @@ export RUST_SRC_PATH='/usr/local/rust/rustc-1.9.0/src'
 SHELL=/bin/bash
 EDITOR=/usr/local/bin/vim
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
-export PATH=$PATH:~/.cargo/bin
+PATH=$PATH:~/.cargo/bin
 
 #----------------------#
 # Paths and Variables: #
