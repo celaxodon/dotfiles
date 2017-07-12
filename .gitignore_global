@@ -1,0 +1,5 @@
+# git config --blobal core.excludesfile ~/.gitignore_global
+pyvenv.cfg
+**/*.swp
+**/*.swo
+**/*.pyc
