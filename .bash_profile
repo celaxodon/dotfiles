@@ -21,6 +21,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias sobin="source bin/activate"
+alias deac="deactivate"
 
 # Enable appending to history file instead of overwriting
 shopt -s histappend
