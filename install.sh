@@ -53,6 +53,11 @@ git() {
     return 0
 }
 
+bash() {
+    cp "$SCRIPT_LOC"/.bash_profile ~/.bash_profile
+    return 0
+}
+
 #
 # - #
 # --- #
@@ -82,6 +87,7 @@ main() {
     vim && echo "vimrc installed"
     tmux && echo "tmux files installed"
     git && echo "git files installed"
+    bash && echo "Bash files installed"
     exit 0
 }
 
