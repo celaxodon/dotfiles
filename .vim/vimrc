@@ -233,8 +233,12 @@ set hlsearch
 " NOTE: `nmap` is for normal-mode mappings; `map` for normal, visual, select, and operator pending;
 " :map! for insert and command modes
 
+" Test Runners
+:map <leader>t :w\|:call SingleTestRunner()<cr>
+:map <leader>T :w\|:call MultiTestRunner()<cr>
+
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list!<cr>
 " Highlight trailing whitespace
 map <leader>w /\s\+$<cr>
 " Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
@@ -242,9 +246,48 @@ set pastetoggle=<F3>
 ":nmap <F2> :NERDTree
 " Set up command-T with F2
 nmap <F2> :CommandT<cr>
-" Beginning of the test mapping - fill in the rest
-map <F9> <leader>t :w\|:!
 
+""""""""""""""
+""" Functions
+""""""""""""""
+
+" :call <fn()>
+" :h current-file
+" :so -> :source
+" Copied from Gary Bernhardt
+function! SingleTestRunner()
+    " Are we in a test file?
+    let in_test_file = match(expand("%"), '\(test_.*\.py\|.*_test\.py\|.*_test\.exs\|test_.*\.exs\)$') != -1
+
+    if in_test_file
+        echo "A test file with suffix: "
+        " %:e -- just the suffix, no punctuation
+        " %:p -- full path
+        " %:t -- filename + suffix
+        echo "File suffix is" expand("%:e")
+        let suffix = expand("%:e")
+        if match(suffix, "py") != -1
+            echo "A Python file"
+        elseif match(suffix, "exs") != -1
+            echo "An Elixir file"
+        elseif match(suffix, "rs") != -1
+            echo "A Rust file"
+        else
+            echo "Not a Python, Rust or Elixir file"
+        end
+    else
+        echo "Not a test file"
+    end
+endfunction
+
+function! MultiTestRunner()
+
+    " Check if in a test file, if not, exit
+    " if in test file
+      " in test/ or tests/ dir?
+        "if yes, run test suite based on file type (mix, cargo, pytest)
+      " If no, exit
+endfunction
 
 
 """"""""""""""""""
