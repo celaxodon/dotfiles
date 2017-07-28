@@ -8,6 +8,9 @@ set modelines=0     " CVE-2007-2438
 """""""""""""""""""
 """ General and UI
 """""""""""""""""""
+
+" UTF-8 by default
+set encoding=utf-8
 " 256 colors
 set t_Co=256
 " Re-read an open file that has changed outside of vim
@@ -85,15 +88,23 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Let Vundle manage Vundle; required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
+Plugin 'Valloric/YouCompleteMe' " Auto-completion plugin
+Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
 Plugin 'altercation/vim-colors-solarized' " Solarized color scheme
 Plugin 'scrooloose/nerdtree'              " Directory browser from vim
 "Plugin 'scrooloose/syntastic'             " Syntax checker for wide variety of langs
 Plugin 'chriskempson/base16-vim'          " Color schemes
 "Plugin 'godlygeek/tabular'     " Dependency for vim-markdown. keep above!
 "Plugin 'plasticboy/vim-markdown'
-Plugin 'rust-lang/rust.vim'
-Plugin 'Valloric/YouCompleteMe' " Auto-completion plugin
+Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
+Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
+Plugin 'nvie/vim-flake8'        " PEP8 checking
+Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
+Plugin 'wincent/command-t'       " A fuzzy file/command finder
+
+"Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
+"Plugin 'plasticboy/vim-markdown'
 
 " Autocompletion in vim by providing bindings to the 'Jedi' autocompletion
 " library:
@@ -130,8 +141,8 @@ set noshowmode
 """"""""""""""""""""""""""
 ":YcmRestartServer
 ":YcmDebugInfo
-let g:ycm_rust_src_path = '/usr/local/src/rustc-1.9.0/src/'
-let $RUST_SRC_PATH = '/usr/local/src/rustc-1.9.0/src/'
+let g:ycm_rust_src_path = '/usr/local/src/rust/src/'
+let $RUST_SRC_PATH = '/usr/local/src/rust/src/'
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
 """ To rebuild YCM:

@@ -18,6 +18,7 @@ check_requirements() {
 
 brew_check() {
     # Install homebrew if it doesn\'t exist
+    # FIXME: This doesn't work properly!
     brew --version >&/dev/null || {
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
         return 0; }
