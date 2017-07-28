@@ -21,6 +21,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias sobin="source bin/activate"
+alias deac="deactivate"
 
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 #alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rns \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;\$!ba:s/\n/ /g')"
@@ -37,6 +39,15 @@ shopt -s histappend
 export SHELL=/bin/bash
 export EDITOR=/usr/bin/vim
 export PATH=$PATH:~/.cargo/bin
+
+set_prompt() {
+    if [[ "$(hostname)" == "" ]]; then
+        export PS1='\u:[\W]$ '
+    else
+        export PS1='\u@\h[\W]$ '
+    fi
+}
+set_prompt
 
 
 if [[ -e .bashrc ]]; then
