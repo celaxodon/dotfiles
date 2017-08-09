@@ -7,7 +7,9 @@ set -o pipefail
 # Show debug output
 #set -x
 
+
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 
 check_requirements() {
     git --version >&/dev/null || { echo >&2 "git required but not installed."; exit 1; }
@@ -58,6 +60,11 @@ bash() {
     return 0
 }
 
+zsh() {
+    cp "$SCRIPT_LOC"/.zprofile ~/.zprofile
+    cp "$SCRIPT_LOC"/.zshrc ~/.zshrc
+}
+
 #
 # - #
 # --- #
@@ -88,6 +95,7 @@ main() {
     tmux && echo "tmux files installed"
     git && echo "git files installed"
     bash && echo "Bash files installed"
+    zsh && echo "Zsh files installed"
     exit 0
 }
 
