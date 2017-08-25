@@ -96,6 +96,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias sobin="source bin/activate"
+alias deac="deactivate"
 
 # Powerline set up
 powerline-daemon -q

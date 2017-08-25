@@ -260,33 +260,47 @@ function! SingleTestRunner()
     let in_test_file = match(expand("%"), '\(test_.*\.py\|.*_test\.py\|.*_test\.exs\|test_.*\.exs\)$') != -1
 
     if in_test_file
-        echo "A test file with suffix: "
+        let suffix = expand("%:e")
+        """ echo 'A test file with suffix:' suffix
         " %:e -- just the suffix, no punctuation
         " %:p -- full path
         " %:t -- filename + suffix
-        echo "File suffix is" expand("%:e")
-        let suffix = expand("%:e")
         if match(suffix, "py") != -1
-            echo "A Python file"
+            let cmd = ':!pytest %'
+            exec cmd
         elseif match(suffix, "exs") != -1
-            echo "An Elixir file"
+            let cmd = ':!mix test %'
+            exec cmd
         elseif match(suffix, "rs") != -1
-            echo "A Rust file"
+            let cmd = ':!cargo test %'
+            exec cmd
         else
             echo "Not a Python, Rust or Elixir file"
         end
     else
-        echo "Not a test file"
+        echo "Can't run single test runner on this file"
     end
 endfunction
 
 function! MultiTestRunner()
-
     " Check if in a test file, if not, exit
-    " if in test file
-      " in test/ or tests/ dir?
-        "if yes, run test suite based on file type (mix, cargo, pytest)
-      " If no, exit
+    let in_applicable_file = match(expand("%"), '\(.*\.py\|.*\.exs\|.*\.ex\|.*\.rs\)$') != -1
+
+    if in_applicable_file
+        let suffix = expand("%:e")
+        if match(suffix, "py") != -1
+            let cmd = ':!pytest tests'
+            exec cmd
+        elseif match(suffix, '\(ex\|exs\)') != -1
+            let cmd = ':!mix test'
+            exec cmd
+        elseif match(suffix, "rs") != -1
+            let cmd = ':!cargo test'
+            exec cmd
+        else
+            echo "Not a project that can be run with the test runner"
+        end
+    end
 endfunction
 
 
