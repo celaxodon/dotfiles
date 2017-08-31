@@ -2,8 +2,10 @@
 " VIM SETTINGS "
 "--------------"
 
-set modelines=0     " CVE-2007-2438
+" remove all existing autocmds
+" autocmd!
 
+set modelines=0		" CVE-2007-2438
 
 """""""""""""""""""
 """ General and UI
@@ -13,16 +15,22 @@ set modelines=0     " CVE-2007-2438
 set encoding=utf-8
 " 256 colors
 set t_Co=256
+" Fix backspace not working unless text is entered right before
+set backspace=indent,eol,start
 " Re-read an open file that has changed outside of vim
 set autoread
-" Hide buffers instead of closing them when you close the file
+" Hide buffers instead of closing them when you close the file.
 set hidden
-" Visual auto-complete for command menu
+" Use a menu for command-line completion
 set wildmenu
-" Use the file name for window title
+" Use the filename for window title
 set title
-" Show line numbers by default (number = nu)
-set number
+" changes tab and return chars, when visible, to triangle and return symbol, respectively
+"set listchars=tab:▸\ ,eol:¬
+" Don't wrap lines
+"set nowrap
+" Show line numbers by default
+set nu
 " Show what column the cursor is currently on
 set ruler
 " Set spellcheck on
@@ -30,53 +38,39 @@ set ruler
 "set spell spelllang=en_us
 " Faster redrawing
 set ttyfast
-" Have a vertical buffer around cursor when scrolling
+" Have a vertical buffer around the cursor when scrolling
 set scrolloff=2
-" Wrap lines
-set wrap
-" Change tab and return chars, when visible, to triangle and return symbol,
-"set listchars=tab:▸\ ,eol:¬
-
-
-""""""""""
-""" Bells
-""""""""""
-" Turn off bell sounds for errors
+" Turn off bell sound for errors
 "set noerrorbells
 " Turn on screen flash for errors
 set visualbell
 
-
 """""""""""""""""
 """ Code folding
 """""""""""""""""
-" Fold based on indent level
-set foldmethod=indent
-" Deepest fold is 20 levels
-set foldnestmax=2
 " Don't fold by default
 set nofoldenable
+" Fold based on indent level
+set foldmethod=indent
+" Deepest fold is 10 levels
+set foldnestmax=2
 " ???
-set foldlevel=1
+set foldlevel=0
+
+" Set the starting fold level when editing another buffer in a window
+"   0 = all folds closed
+"   1 = some folds closed
+"   99 = no folds closed
+set foldlevelstart=1
 
 
-""""""""""""""""""""""""""""""""""""""""""""
-""" PLUGINS
-""""""""""""""""""""""""""""""""""""""""""""
-" Keep plugins between vundle#begin/end
+""""""""""""
+""" Plugins
+""""""""""""
+" Keep Plugins in between vundle#begin/end
 "
-" PluginInstall <name.vim>
-" PluginUpdate   " Update plugins
-" PluginSearch   " Search plugins on vim scripts
-" (http://vim-scripts/org/vim/scripts.html)
-" PluginList     " Display list of installed bundles
-" :h vundle      " help
-" Install plugins: launch vim and run :PluginInstall or on CLI use
-" `vim +PluginInstall +qall`
-"
-" If this doesn't format indentions correctly, try setting 'cindent' and
-" 'autoindent'.
-"Automatic indenting
+" This may cause automatic indenting... If this doesn't format indentions
+" correctly, try setting 'cindent' and 'autoindent'.
 filetype plugin indent on  " Required for Vundle
 
 " For Vundle plugin manager:
@@ -89,26 +83,29 @@ call vundle#begin()
 
 " Let Vundle manage Vundle; required
 Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
-Plugin 'Valloric/YouCompleteMe' " Auto-completion plugin
+Plugin 'scrooloose/nerdtree'     " Directory structure from vim
+Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
-Plugin 'altercation/vim-colors-solarized' " Solarized color scheme
-Plugin 'scrooloose/nerdtree'              " Directory browser from vim
-"Plugin 'scrooloose/syntastic'             " Syntax checker for wide variety of langs
-Plugin 'chriskempson/base16-vim'          " Color schemes
-"Plugin 'godlygeek/tabular'     " Dependency for vim-markdown. keep above!
-"Plugin 'plasticboy/vim-markdown'
-Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
+Plugin 'chriskempson/base16-vim' " Color schemes 
+Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
+Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plugin 'nvie/vim-flake8'        " PEP8 checking
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 Plugin 'wincent/command-t'       " A fuzzy file/command finder
-
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 "Plugin 'plasticboy/vim-markdown'
 
-" Autocompletion in vim by providing bindings to the 'Jedi' autocompletion
-" library:
+" Autocompletion in vim by providing bindings
+" to the autocompletion library 'Jedi' for Python.
 "Plugin 'davidhalter/jedi-vim'
+
+"--------------------"
+" Vundle interaction "
+"--------------------"
+"PluginInstall
+"PluginUpdate
+
 
 call vundle#end()
 
@@ -116,165 +113,218 @@ call vundle#end()
 """""""""""""""""""""
 """ Powerline tweaks
 """""""""""""""""""""
-" NOTE: Using Powerline from fedora repos (tmux-powerline,
-" vim-plugin-powerline).
+" Run-time path addition for powerline
+set rtp+="/usr/local/lib/python3.6/site-packages/powerline/bindings/vim"
 
-"set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
-set rtp+=/usr/lib/python3.5/site-packages/powerline/bindings/vim/
-
+" Note: If installing through brew, `$ brew install vim --with-python3` - make
+" sure you're pointing at the RIGHT VIM. May need to change PATH.
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
 
-let g:Powerline_symbols = 'fancy'
-
-
-" Set width of foreign lang chars and other misc symbols. Mainly for powerline
-set ambiwidth=single
-" Always have a status line
+" Set for Powerline-status
 set laststatus=2
-"Hide default mode text (e.g. -- INSERT __ below the statusline
+" Alwyas display tabline, even if only one tab
+"set showtabline=2
+" Hide default insert comment below status bar
 set noshowmode
+" Set width of non-ascii characters
+set ambiwidth=single
 
-""""""""""""""""""""""""""
-""" YouCompleteMe Configs
-""""""""""""""""""""""""""
-":YcmRestartServer
-":YcmDebugInfo
-let g:ycm_rust_src_path = '/usr/local/src/rust/src/'
-let $RUST_SRC_PATH = '/usr/local/src/rust/src/'
-let g:ycm_python_binary_path = '/usr/bin/python3'
+
+"""""""""""""""""""""""""""
+""" YouCompleteMe Settings
+"""""""""""""""""""""""""""
+" :YcmRestartServer -> Restart YCM server if you need to for whatever reason
+" :YcmDebugInfo --> Provides debugging information for each server instance
+" :YcmDiag --> Check if errors or warnings
+" ctrl-space -> auto-complete, even top-level
+
+" For racer and Rust autocompletion of stdlib
+let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/src/rust-lang/src'
+let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
-" $ cmake -G 'Unix Makefiles' . \
-"     ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+" $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 " $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
+" (maybe?) cd ~/.vim/bundle/YouCompleteMe && \
+" python3 (may need to edit first line in install.py!) install.py --racer-completer
+"     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
+"     to be present and the src files available.
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
 " $ cargo build [--verbose] --release
 """
 
-"""""""""""""""""
-""" Tab behavior
-"""""""""""""""""
+""""""""""""""""""""""""""
+""" Command-T compilation
+""""""""""""""""""""""""""
+" $ cd ~/.vim/bundle/command-t/ruby/command-t
+" $ ruby extconf.rb
+" $ make
+
+"""""""""""""""""""""""""
+""" Default Tab behavior
+"""""""""""""""""""""""""
 " Respect 'tabstop', 'shiftwidth' and 'softtabstop'
 set smarttab
-" Set tabstop to 4 spaces (tabstop = ts)
+" set tabs to 4 spaces
 set tabstop=4
-" Enter spaces when tab is pressed
+" enter spaces when tab is pressed
 set expandtab
-" When indenting with `>` set indentation to 4 spaces
+" The number of spaces to use for indentation
 set shiftwidth=4
 " Indent to a multiple of 'shiftwidth'
 set shiftround
-" Set number of spaces in tab when editing
-"set softtabstop=4
-" Always display the tabline, even if there is only one tab
-"set showtabline=2
 
 
 """""""""""""""""""""""""""""""
 """ Filetype specific settings
 """""""""""""""""""""""""""""""
-" C-style indentation, according to the C indentation standard
-" Should NOT be used with file-based indentation. May cause problems.
-au BufNewFile,BufRead *.c,*.h
+" C-style indentation, according to the C indentation standard.
+au BufNewFile,BufRead *.c
     \ set cindent
 
-" JS, HTML, CSS
+" Python
+"au BufNewFile,BufRead *.py
+"    \ set tabstop=4
+"    \ set softtabstop=4
+"    \ set shiftwidth=4
+"    \ set textwidth=79
+"    \ set expandtab
+"    \ set autoindent
+"    \ set fileformat=unix
+
+" JavaScript, HTML, CSS
 au BufNewFile,BufRead *.html,*.css
-    \ set tabstop=2 softtabstop=2 shiftwidth=2
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
 
-au BufNewFile,BufRead *.md,*.rst
-    \ set textwidth=120
+" Highlight group for trailing whitespace (but only at ends of lines with
+" text):
+:highlight BadWhitespace ctermbg=darkgreen guibg=darkgreen
+
+" Flag bad trailing whitespace
+"au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.rs
+"    \ match BadWhitespace /\S\zs\s\+$
 
 
-" Encoding
-set encoding=utf-8
-
-" Disable statusline fillchars
-set fillchars+=stl:\ ,stlnc:\
-
-
-"""""""""""""""""""""""
-""" Search behavior 
-"""""""""""""""""""""""
-" Show search matches as you type
+""""""""""""""""""""
+""" Search behavior
+""""""""""""""""""""
+" ignore case when searching (/ or ?)
 set incsearch
-" Automatically show matching brackets -- [{()}]
+" automatically show matching brackets
 set showmatch
-" Ignore case during searches _except_ when you type capitals
+" use case-sensitivity when you search w/ upper-case chars
 set smartcase
-" Ignore case when searching for text
+" Ignore case when searchign for text
 set ignorecase
 " Highlight matches when searching
 set hlsearch
-" Searches wrap around the beginning and end of file
-set wrapscan
-" Start syntax highlighting, but overrules your colors with defaults
-syntax on
+" Start syntax highlighting, but overrule your colors with defaults.
+"syntax on
 
 
 """""""""""""
-""" Bindings
+""" Mappings
 """""""""""""
-" Create mapping for quick switch between invisibles and visibles.
-" Enable with `\l`
-nmap <leader>l :set list!<CR>
-:nmap <F2> :NERDTree
+" NOTE: `nmap` is for normal-mode mappings; `map` for normal, visual, select, and operator pending;
+" :map! for insert and command modes
 
-" Set the paste toggle with <F3> key. No smart indenting, just pastes as
-" normal.
+" Test Runners
+:map <leader>t :w\|:call SingleTestRunner()<cr>
+:map <leader>T :w\|:call MultiTestRunner()<cr>
+
+" create mapping for quick switch between invisibles and visibles. Enable with `\l`
+nmap <leader>l :set list!<cr>
+" Highlight trailing whitespace
+map <leader>w /\s\+$<cr>
+" Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
 set pastetoggle=<F3>
+":nmap <F2> :NERDTree
+" Set up command-T with F2
+nmap <F2> :CommandT<cr>
+
+""""""""""""""
+""" Functions
+""""""""""""""
+
+" :call <fn()>
+" :h current-file
+" :so -> :source
+" Copied from Gary Bernhardt
+function! SingleTestRunner()
+    " Are we in a test file?
+    let in_test_file = match(expand("%"), '\(test_.*\.py\|.*_test\.py\|.*_test\.exs\|test_.*\.exs\)$') != -1
+
+    if in_test_file
+        let suffix = expand("%:e")
+        """ echo 'A test file with suffix:' suffix
+        " %:e -- just the suffix, no punctuation
+        " %:p -- full path
+        " %:t -- filename + suffix
+        if match(suffix, "py") != -1
+            let cmd = ':!pytest %'
+            exec cmd
+        elseif match(suffix, "exs") != -1
+            let cmd = ':!mix test %'
+            exec cmd
+        elseif match(suffix, "rs") != -1
+            let cmd = ':!cargo test %'
+            exec cmd
+        else
+            echo "Not a Python, Rust or Elixir file"
+        end
+    else
+        echo "Can't run single test runner on this file"
+    end
+endfunction
+
+function! MultiTestRunner()
+    " Check if in a test file, if not, exit
+    let in_applicable_file = match(expand("%"), '\(.*\.py\|.*\.exs\|.*\.ex\|.*\.rs\)$') != -1
+
+    if in_applicable_file
+        let suffix = expand("%:e")
+        if match(suffix, "py") != -1
+            let cmd = ':!pytest tests'
+            exec cmd
+        elseif match(suffix, '\(ex\|exs\)') != -1
+            let cmd = ':!mix test'
+            exec cmd
+        elseif match(suffix, "rs") != -1
+            let cmd = ':!cargo test'
+            exec cmd
+        else
+            echo "Not a project that can be run with the test runner"
+        end
+    end
+endfunction
 
 
-"""""""""""""""""
+""""""""""""""""""
 """ Color Schemes
-"""""""""""""""""
-" Access colors in 256 colorspace
-let base16colorspace=256
-" Enable solarized color scheme -- turns on syntax highlighting and respects
-" your colors
+""""""""""""""""""
+" syntax enable -- keep your current color settings and turn on syntax
+" highlighting. This enables solarized colorscheme
 syntax enable
 
-" Enable solarized colorscheme
 set background=dark
 "set background=light
 
-"colorscheme base16-default
+"colorscheme glacier
 colorscheme solarized
-"""""""""""""""""""""""""""""""""""""""""
-" Advanced solarized colorscheme options:
-"
-" Set to *16* by default. Not sure if 256 is desirable or not from docs...
-"g:solarized_termcolors=256
-" Set to 1 for solarized to use the default, transparent background, if 
-" enabled. Urxvt requires this.
-"g:solarized_termtrans=0
-" For test purposes only. 1 enables. Forces solarized to use the 256 degraded 
-" color mode only. 
-"g:solarized_degrade=0
-" Stop solarized from displaying bold, underlined or italicized typefaces.
-"g:solarized_bold=1
-"g:solarized_italic=1
-"g:solarized_underline=1
-" High/low settings use same palette, but shifts values up/down
-"g:solarized_contrast="normal"
-" Special chars visibility. Can be 'high'|'low'|'normal'
-"g:solarized_visibility="normal"
-" Note that by default, Solarized comes with a plugin to map <F5> to change
-" background. 
-
-" Set background for light/dark changeover at 6am and 5pm
-"let hour = strftime("%H")
-"if 6 <= hour && hour < 18
-"  set background=light
-"else
-"  set background=dark
-"endif
-""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""
-""" Aliases 
-""""""""""""""
-
+"colorscheme molokai
+"colorscheme base16-twilight
+"colorscheme base16-default
+"colorscheme base16-3024
+"colorscheme base16-brewer
+"colorscheme base16-bright
+"colorscheme base16-colors
+"colorscheme base16-ocean " Background too washed out for my taste
+"colorscheme base16-google " -- Don't like this one. Yellow sucks
+"colorscheme base16-harmonic16 " -- Don't like this one either now.
+"colorscheme base16-pop "-- too much purple/yellow
+"colorscheme base16-ocean
