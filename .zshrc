@@ -106,6 +106,8 @@ POWERLINE_BASH_SELECT=1
 /usr/local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 
 export RUST_SRC_PATH='/usr/local/rust/rustc-1.9.0/src'
+# Enable ctrl-p ctrl-n for history
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=$PATH:~/.cargo/bin
