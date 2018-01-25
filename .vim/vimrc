@@ -91,6 +91,8 @@ Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plugin 'nvie/vim-flake8'        " PEP8 checking
+" F7 to run flake8, then return for each violation
+" To remap to F3: `autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 Plugin 'wincent/command-t'       " A fuzzy file/command finder
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
