@@ -236,6 +236,7 @@ set hlsearch
 " Test Runners
 :map <leader>t :w\|:call SingleTestRunner()<cr>
 :map <leader>T :w\|:call MultiTestRunner()<cr>
+:map <leader>c :w\|:call CargoCheck()<cr>
 
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<cr>
@@ -303,6 +304,13 @@ function! MultiTestRunner()
     end
 endfunction
 
+function! CargoCheck()
+    let in_applicable_file = match(expand("%"), '\(.*\.rs\)$') != -1
+
+    if in_applicable_file
+        exec ':!cargo check'
+    end
+endfunction
 
 """"""""""""""""""
 """ Color Schemes
