@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/klurl/.oh-my-zsh
+export ZSH=/Users/graham/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -68,12 +68,38 @@ unsetopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/klurl/.zshrc'
+zstyle :compinstall filename '/Users/graham/.zshrc'
 
 # Initialize completion
 autoload -Uz compinit
 compinit
+
 # End of lines added by compinstall
+
+#----------------------#
+# Function definitions #
+#----------------------#
+
+function sobin_fn()
+{
+    if [[ -f ./env/bin/activate ]]; then
+        source ./env/bin/activate
+    elif [[ -f ./bin/activate ]]; then
+        source ./bin/activate
+    else
+        echo "No virtual environment found"
+    fi
+}
+
+# Set prompt based on current system
+function set_prompt()
+{
+    if [[ "$(hostname)" == "" ]]; then
+        export PS1='\u:[\W]$ '
+    else
+        export PS1='\u@\h[\W]$ '
+    fi
+}
 
 #----------#
 # Aliases: #
@@ -96,7 +122,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias sobin="source bin/activate"
+alias sobin=sobin_fn
 alias deac="deactivate"
 
 # Powerline set up
@@ -121,13 +147,5 @@ EDITOR=/usr/local/bin/vim
 
 # fixing manpath issue
 export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
-
-# Set prompt based on current system
-set_prompt() {
-    if [[ "$(hostname)" == "" ]]; then
-        export PS1='\u:[\W]$ '
-    else
-        export PS1='\u@\h[\W]$ '
-    fi
-}
 # set_prompt
+
