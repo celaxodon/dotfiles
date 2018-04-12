@@ -158,6 +158,16 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib au
 " $ cargo build [--verbose] --release
 """
 
+""" To compile Command-T
+" Need to have the right version of ruby - the one you installed with vim
+" (2.5.1 right now). Select with rvm tool
+"
+" $ cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
+" $ make clean
+" $ ruby extconf.rb
+" $ make
+"""
+
 """"""""""""""""""""""""""
 """ Command-T compilation
 """"""""""""""""""""""""""
@@ -248,7 +258,7 @@ map <leader>w /\s\+$<cr>
 set pastetoggle=<F3>
 ":nmap <F2> :NERDTree
 " Set up command-T with F2
-nmap <F2> :CommandT<cr>
+nmap <leader>f :CommandT<cr>
 
 """"""""""""""
 """ Functions
