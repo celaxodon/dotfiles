@@ -166,6 +166,9 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib au
 " $ make clean
 " $ ruby extconf.rb
 " $ make
+"
+" Alternatively -
+" $ cd ~.vim/bundle/command-t && rake make
 """
 
 """"""""""""""""""""""""""
