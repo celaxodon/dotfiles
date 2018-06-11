@@ -91,6 +91,8 @@ Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plugin 'nvie/vim-flake8'        " PEP8 checking
+" F7 to run flake8, then return for each violation
+" To remap to F3: `autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 Plugin 'wincent/command-t'       " A fuzzy file/command finder
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
@@ -154,6 +156,19 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib au
 "     to be present and the src files available.
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
 " $ cargo build [--verbose] --release
+"""
+
+""" To compile Command-T
+" Need to have the right version of ruby - the one you installed with vim
+" (2.5.1 right now). Select with rvm tool
+"
+" $ cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
+" $ make clean
+" $ ruby extconf.rb
+" $ make
+"
+" Alternatively -
+" $ cd ~.vim/bundle/command-t && rake make
 """
 
 """"""""""""""""""""""""""
@@ -236,6 +251,7 @@ set hlsearch
 " Test Runners
 :map <leader>t :w\|:call SingleTestRunner()<cr>
 :map <leader>T :w\|:call MultiTestRunner()<cr>
+:map <leader>c :w\|:call CargoCheck()<cr>
 
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<cr>
@@ -245,7 +261,7 @@ map <leader>w /\s\+$<cr>
 set pastetoggle=<F3>
 ":nmap <F2> :NERDTree
 " Set up command-T with F2
-nmap <F2> :CommandT<cr>
+nmap <leader>f :CommandT<cr>
 
 """"""""""""""
 """ Functions
@@ -303,6 +319,13 @@ function! MultiTestRunner()
     end
 endfunction
 
+function! CargoCheck()
+    let in_applicable_file = match(expand("%"), '\(.*\.rs\)$') != -1
+
+    if in_applicable_file
+        exec ':!cargo check'
+    end
+endfunction
 
 """"""""""""""""""
 """ Color Schemes
