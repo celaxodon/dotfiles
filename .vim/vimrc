@@ -139,7 +139,7 @@ set ambiwidth=single
 """"""""""""""""""
 
 " For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = "/Users/$(whoami)/Programming/Rust/src/rust-lang/src"
+let g:ycm_rust_src_path = "/Users/graham/Programming/Rust/src/rust-lang/src"
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
 """ YCM Interactions/Commands
@@ -159,6 +159,7 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib au
 " python3 install.py --racer-completer
 "     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
 "     to be present and the src files available.
+" NOTE: I think this is unnecessary...
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
 " $ cargo build [--verbose] --release
 
