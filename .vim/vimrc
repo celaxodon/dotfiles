@@ -143,7 +143,7 @@ set ambiwidth=single
 " ctrl-space -> auto-complete, even top-level
 
 " For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/src/rust-lang/src'
+let g:ycm_rust_src_path = "/Users/$(whoami)/Programming/Rust/src/rust-lang/src"
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
