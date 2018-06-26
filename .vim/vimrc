@@ -86,17 +86,15 @@ Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
-Plugin 'chriskempson/base16-vim' " Color schemes 
-Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
+Plugin 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
+Plugin 'Chiel92/vim-autoformat'   " Cross-language formatting support
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plugin 'nvie/vim-flake8'        " PEP8 checking
-" F7 to run flake8, then return for each violation
-" To remap to F3: `autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+Plugin 'chriskempson/base16-vim' " Color schemes 
+Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
-Plugin 'wincent/command-t'       " A fuzzy file/command finder
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
-"Plugin 'plasticboy/vim-markdown'
 
 " Autocompletion in vim by providing bindings
 " to the autocompletion library 'Jedi' for Python.
@@ -126,7 +124,7 @@ python3 del powerline_setup
 
 " Set for Powerline-status
 set laststatus=2
-" Alwyas display tabline, even if only one tab
+" Always display tabline, even if only one tab
 "set showtabline=2
 " Hide default insert comment below status bar
 set noshowmode
@@ -137,50 +135,50 @@ set ambiwidth=single
 """"""""""""""""""
 """ YouCompleteMe
 """"""""""""""""""
-
-" For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = "/Users/graham/Programming/Rust/src/rust-lang/src"
-let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
-
-""" YCM Interactions/Commands
-
 " :YcmRestartServer -> Restart YCM server if you need to for whatever reason
 " :YcmDebugInfo --> Provides debugging information for each server instance
 " :YcmDiag --> Check if errors or warnings
 " ctrl-space -> auto-complete, even top-level
 
-""" To rebuild YCM:
+" For racer and Rust autocompletion of stdlib
+let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/src/rust-lang/src'
+let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
+""" To rebuild YCM:
 " $ cd ~/src/ycm_build
 " $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-" NOTE: If windows, use the bracketed code
-" $ cmake --build . --target ycm_core [--config Release]
-" cd ~/.vim/bundle/YouCompleteMe && \
-" python3 install.py --racer-completer
+" $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
+" (maybe?) cd ~/.vim/bundle/YouCompleteMe && \
+" python3 (may need to edit first line in install.py!) install.py --racer-completer
 "     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
 "     to be present and the src files available.
-" NOTE: I think this is unnecessary...
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
 " $ cargo build [--verbose] --release
+"""
 
-
-""""""""""""""""""""""""""
-""" Command-T compilation
-""""""""""""""""""""""""""
-" $ cd ~/.vim/bundle/command-t/ruby/command-t
-" $ ruby extconf.rb
-" $ make
-
-""" Compiling Command-T:
-
-" Need to have the right version of ruby - the one you installed with vim
-" (2.5.1 right now). Select with rvm tool
+"""""""""""
+""" Ctrl-p 
+"""""""""""
+" help: 
+" * :help ctrlp.txt
+" * :help ctrlp-commands
+" * :help ctrlp-extensions
+" * :help ctrlp-mappings
 "
-" $ cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
-" $ make clean
-" $ ruby extconf.rb
-" $ make
+" F5 to purge cache for current dir to get new files, remove deleted, apply opts
 
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
+
+" Use Ripgrep for file finder
+if executable('rg')
+    set grepprg=rg\ --color=never
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+    let g:ctrlp_use_caching = 0
+endif
+
+set wildignore+=*/.git/*,*/tmp/*,*.swp,*.swo
 
 """""""""""""""""""""""""
 """ Default Tab behavior
@@ -215,7 +213,7 @@ au BufNewFile,BufRead *.c
 "    \ set fileformat=unix
 
 " JavaScript, HTML, CSS
-au BufNewFile,BufRead *.html,*.css
+au BufNewFile,BufRead *.html,*.css,*.js
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
@@ -255,7 +253,6 @@ set hlsearch
 " Test Runners
 :map <leader>t :w\|:call SingleTestRunner()<cr>
 :map <leader>T :w\|:call MultiTestRunner()<cr>
-:map <leader>c :w\|:call CargoCheck()<cr>
 
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<cr>
@@ -265,7 +262,7 @@ map <leader>w /\s\+$<cr>
 set pastetoggle=<F3>
 ":nmap <F2> :NERDTree
 " Set up command-T with F2
-nmap <leader>f :CommandT<cr>
+nmap <F2> :CommandT<cr>
 
 """"""""""""""
 """ Functions
@@ -323,14 +320,6 @@ function! MultiTestRunner()
     end
 endfunction
 
-function! CargoCheck()
-    let in_applicable_file = match(expand("%"), '\(.*\.rs\)$') != -1
-
-    if in_applicable_file
-        exec ':!cargo check'
-    end
-endfunction
-
 """"""""""""""""""
 """ Color Schemes
 """"""""""""""""""
@@ -341,8 +330,9 @@ syntax enable
 set background=dark
 "set background=light
 
+"colorscheme glacier
 colorscheme solarized
-" colorscheme molokai
+"colorscheme molokai
 "colorscheme base16-twilight
 "colorscheme base16-default
 "colorscheme base16-3024
