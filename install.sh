@@ -65,6 +65,13 @@ zsh() {
     cp "$SCRIPT_LOC"/.zshrc ~/.zshrc
 }
 
+powerline() {
+    python3 -m venv venv
+    source venv/bin/activate
+    pip3 install -r requirements.txt
+    deactivate
+}
+
 #
 # - #
 # --- #
@@ -102,6 +109,7 @@ main() {
     git && echo "git files installed"
     bash && echo "Bash files installed"
     zsh && echo "Zsh files installed"
+    powerline && echo "Powerline package installed to ~/src/dotfiles/venv"
     exit 0;
 }
 
