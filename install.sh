@@ -80,11 +80,13 @@ zsh() {
 #               v
 
 main() {
-    if [[ "$(uname)" -eq "Darwin" ]]; then
+    if [[ "$(uname)" == "Darwin" ]]; then
         echo "Operating system detected: MacOS"
         echo "Performing MacOS-specific checks:"
         # TODO: colorize results of commands
         brew_check && echo "    ...homebrew OK"
+    else if [[ "$(uname)" == "Linux" ]]; then
+        echo "Operating system detected: Linux"
     fi
 
     echo
