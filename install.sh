@@ -15,6 +15,9 @@ check_requirements() {
     git --version >&/dev/null || { echo >&2 "git required but not installed."; exit 1; }
     vim --version >/dev/null 2>&1 || { echo >&2 "vim required but not installed."; exit 1; }
     tmux -V >/dev/null 2>&1 || { echo "tmux required but not installed."; exit 1; }
+    # TODO: python3
+    # TODO: rust
+    # TODO: elixir (asdf)
 }
 
 
