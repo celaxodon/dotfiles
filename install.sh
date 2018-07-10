@@ -85,8 +85,12 @@ main() {
         echo "Performing MacOS-specific checks:"
         # TODO: colorize results of commands
         brew_check && echo "    ...homebrew OK"
-    else if [[ "$(uname)" == "Linux" ]]; then
+    elif [[ "$(uname)" == "Linux" ]]; then
         echo "Operating system detected: Linux"
+    else
+        echo "System detection failed!"
+        echo "Halting"
+        exit 1
     fi
 
     echo
@@ -98,7 +102,7 @@ main() {
     git && echo "git files installed"
     bash && echo "Bash files installed"
     zsh && echo "Zsh files installed"
-    exit 0
+    exit 0;
 }
 
 main
