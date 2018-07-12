@@ -218,6 +218,8 @@ au BufNewFile,BufRead *.html,*.css,*.js
     \ set softtabstop=2 |
     \ set shiftwidth=2
 
+au BufWrite *.exs,*.ex :Autoformat
+
 " Highlight group for trailing whitespace (but only at ends of lines with
 " text):
 :highlight BadWhitespace ctermbg=darkgreen guibg=darkgreen
