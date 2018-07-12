@@ -7,9 +7,8 @@ set -o pipefail
 # Show debug output
 #set -x
 
-
+# TODO: Make installs and messages location agnostic
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 
 check_requirements() {
     git --version >&/dev/null || { echo >&2 "git required but not installed."; exit 1; }
