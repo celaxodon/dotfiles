@@ -68,7 +68,7 @@ unsetopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/graham/.zshrc'
+zstyle :compinstall filename '/Users/klurl/.zshrc'
 
 # Initialize completion
 autoload -Uz compinit
@@ -130,16 +130,16 @@ alias deac="deactivate"
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-/usr/local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+/usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
-export RUST_SRC_PATH='/usr/local/rust/rustc-1.9.0/src'
+export RUST_SRC_PATH="$HOME/Programming/Rust/src/rust-lang/src"
 # Enable ctrl-p ctrl-n for history
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=$PATH:~/.cargo/bin
 
-SHELL=/bin/bash
+SHELL=$(which zsh)
 EDITOR=/usr/local/bin/vim
 
 #----------------------#
@@ -147,6 +147,5 @@ EDITOR=/usr/local/bin/vim
 #----------------------#
 
 # fixing manpath issue
-export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
+# export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
 # set_prompt
-

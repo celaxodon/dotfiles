@@ -86,6 +86,7 @@ Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
+Plugin 'tpope/vim-commentary'     " comment out blocks of text
 Plugin 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
 Plugin 'Chiel92/vim-autoformat'   " Cross-language formatting support
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
@@ -114,7 +115,7 @@ call vundle#end()
 """ Powerline tweaks
 """""""""""""""""""""
 " Run-time path addition for powerline
-set rtp+="/usr/local/lib/python3.6/site-packages/powerline/bindings/vim"
+set rtp+="/usr/local/lib/python3.7/site-packages/powerline/bindings/vim"
 
 " Note: If installing through brew, `$ brew install vim --with-python3` - make
 " sure you're pointing at the RIGHT VIM. May need to change PATH.
@@ -212,13 +213,13 @@ au BufNewFile,BufRead *.c
 "    \ set autoindent
 "    \ set fileformat=unix
 
-" JavaScript, HTML, CSS
-au BufNewFile,BufRead *.html,*.css,*.js
+" JavaScript, HTML, CSS, XML, YML
+au BufNewFile,BufRead *.html,*.css,*.js,*.xml,*.yml
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
 
-au BufWrite *.exs,*.ex :Autoformat
+" au BufWrite *.exs,*.ex :Autoformat
 
 " Highlight group for trailing whitespace (but only at ends of lines with
 " text):
