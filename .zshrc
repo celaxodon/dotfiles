@@ -130,11 +130,16 @@ alias deac="deactivate"
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-/usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+/usr/local/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
 
 export RUST_SRC_PATH="$HOME/Programming/Rust/src/rust-lang/src"
 # Enable ctrl-p ctrl-n for history
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# homebrew asdf hack
+if [[ "$(uname)" == "Darwin" ]]; then
+    export ASDF_DIR=$(brew --prefix asdf)
+fi
 
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=$PATH:~/.cargo/bin
@@ -146,6 +151,3 @@ EDITOR=/usr/local/bin/vim
 # Paths and Variables: #
 #----------------------#
 
-# fixing manpath issue
-# export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/local/man:/usr/X11R6/man:/usr/share/man:
-# set_prompt
