@@ -68,7 +68,7 @@ unsetopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename "$HOME/.zshrc"
+zstyle :compinstall filename '/Users/graham/.zshrc'
 
 # Initialize completion
 autoload -Uz compinit
@@ -106,7 +106,18 @@ function set_prompt()
 #----------#
 
 alias lf='ls -FG'
-alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
+
+# MacOS aliases
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
+    alias mova='~/Scripts/mova.py'
+    alias stroke='/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke'
+    alias timer='~/Scripts/timer.sh'
+# Linux aliases
+else
+    alias ls='ls --color=auto'
+fi
+
 alias ll='ls -lG'
 alias la='ls -laG'
 alias mv='mv -i'
