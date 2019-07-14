@@ -51,6 +51,7 @@ tmux() {
 
 git() {
     cp "$SCRIPT_LOC"/.gitignore_global ~/.gitignore_global
+    git config --global core.excludesfile ~/.gitignore_global
     return 0
 }
 

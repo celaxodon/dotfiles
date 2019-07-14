@@ -5,6 +5,9 @@
 " remove all existing autocmds
 " autocmd!
 
+" to treat all numbers as decimal, including leading '0' nums (007)
+" set nrformats= 
+
 set modelines=0		" CVE-2007-2438
 
 """""""""""""""""""
