@@ -91,6 +91,13 @@ Plugin 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
 Plugin 'Chiel92/vim-autoformat'   " Cross-language formatting support
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
+Plugin 'fatih/vim-go'           " Vim  support for Golang
+" :GoBuild to build; :GoInstall to install; :GoTest for full tests;
+" :GoTestFunc for single test
+" :GoRun - execute current file
+" :GoDef - go to symbol/declaration
+" :GoInstallBinaries - install deps with 'go get'
+" See docs with :help vim-go
 Plugin 'nvie/vim-flake8'        " PEP8 checking
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
