@@ -5,9 +5,6 @@
 " remove all existing autocmds
 " autocmd!
 
-" to treat all numbers as decimal, including leading '0' nums (007)
-" set nrformats= 
-
 set modelines=0		" CVE-2007-2438
 
 """""""""""""""""""
@@ -89,12 +86,20 @@ Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
+Plugin 'tpope/vim-commentary'     " comment out blocks of text
 Plugin 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
 Plugin 'Chiel92/vim-autoformat'   " Cross-language formatting support
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
 Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
+Plugin 'fatih/vim-go'           " Vim  support for Golang
+" :GoBuild to build; :GoInstall to install; :GoTest for full tests;
+" :GoTestFunc for single test
+" :GoRun - execute current file
+" :GoDef - go to symbol/declaration
+" :GoInstallBinaries - install deps with 'go get'
+" See docs with :help vim-go
 Plugin 'nvie/vim-flake8'        " PEP8 checking
-Plugin 'chriskempson/base16-vim' " Color schemes
+Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
@@ -117,7 +122,7 @@ call vundle#end()
 """ Powerline tweaks
 """""""""""""""""""""
 " Run-time path addition for powerline
-set rtp+="/usr/lib/python3.7/site-packages/powerline/bindings/vim"
+set rtp+="/usr/local/lib/python3.7/site-packages/powerline/bindings/vim"
 
 " Note: If installing through brew, `$ brew install vim --with-python3` - make
 " sure you're pointing at the RIGHT VIM. May need to change PATH.
@@ -144,13 +149,15 @@ set ambiwidth=single
 " ctrl-space -> auto-complete, even top-level
 
 " For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = '/home/icarus/Programming/Rust/src/rust-lang/src'
+let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/src/rust-lang/src'
 let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
+" $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+" $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
 " (maybe?) cd ~/.vim/bundle/YouCompleteMe && \
-" python3 install.py --racer-completer
+" python3 (may need to edit first line in install.py!) install.py --racer-completer
 "     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
 "     to be present and the src files available.
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
@@ -158,9 +165,9 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib au
 """
 
 """""""""""
-""" Ctrl-p
+""" Ctrl-p 
 """""""""""
-" help:
+" help: 
 " * :help ctrlp.txt
 " * :help ctrlp-commands
 " * :help ctrlp-extensions
@@ -213,11 +220,13 @@ au BufNewFile,BufRead *.c
 "    \ set autoindent
 "    \ set fileformat=unix
 
-" JavaScript, HTML, CSS
-au BufNewFile,BufRead *.html,*.css,*.js
+" JavaScript, HTML, CSS, XML, YML
+au BufNewFile,BufRead *.html,*.css,*.js,*.xml,*.yml
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
+
+" au BufWrite *.exs,*.ex :Autoformat
 
 " Highlight group for trailing whitespace (but only at ends of lines with
 " text):
