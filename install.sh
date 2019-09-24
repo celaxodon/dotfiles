@@ -5,14 +5,24 @@
 set -e
 set -o pipefail
 # Show debug output
-#set -x
+set -x
 
+# FIXME? - doesn't work with zsh? Seemed to loop when used
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 check_requirements() {
+    printf "Checking for git... "
+    # FIXME: This is broken
     git --version >&/dev/null || { echo >&2 "git required but not installed."; exit 1; }
+    printf "found"
+
+    printf "Checking for vim... "
     vim --version >/dev/null 2>&1 || { echo >&2 "vim required but not installed."; exit 1; }
+    printf "found"
+
+    printf "Checking for tmux..."
     tmux -V >/dev/null 2>&1 || { echo "tmux required but not installed."; exit 1; }
+    printf "found"
 }
 
 
@@ -75,7 +85,7 @@ bash() {
 #               v
 
 main() {
-    if [[ "$(uname)" -eq "Darwin" ]]; then
+    if [[ "$(uname)" == "Darwin" ]]; then
         echo "Operating system detected: MacOS"
         echo "Performing MacOS-specific checks:"
         # TODO: colorize results of commands
@@ -83,8 +93,8 @@ main() {
     fi
 
     echo
-    echo "Performing standard checks:"
-    check_requirements && echo "    ...git, vim, tmux OK"
+    # echo "Performing standard checks:"
+    # check_requirements && echo "    ...git, vim, tmux OK"
     echo
     vim && echo "vimrc installed"
     tmux && echo "tmux files installed"
