@@ -64,7 +64,7 @@ set foldlevel=0
 "   0 = all folds closed
 "   1 = some folds closed
 "   99 = no folds closed
-set foldlevelstart=0
+set foldlevelstart=1
 
 
 """"""""""""
@@ -109,13 +109,15 @@ Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
 "PluginInstall
 "PluginUpdate
 
+
 call vundle#end()
+
 
 """""""""""""""""""""
 """ Powerline tweaks
 """""""""""""""""""""
 " Run-time path addition for powerline
-set rtp+="/home/icarus/.local/lib/python3.6/site-packages/powerline/bindings/vim"
+set rtp+="/usr/lib/python3.7/site-packages/powerline/bindings/vim"
 
 " Note: If installing through brew, `$ brew install vim --with-python3` - make
 " sure you're pointing at the RIGHT VIM. May need to change PATH.
@@ -147,10 +149,8 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib au
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
-" $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-" $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
 " (maybe?) cd ~/.vim/bundle/YouCompleteMe && \
-" python3 (may need to edit first line in install.py!) install.py --racer-completer
+" python3 install.py --racer-completer
 "     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
 "     to be present and the src files available.
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
