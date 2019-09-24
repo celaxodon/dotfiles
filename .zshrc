@@ -101,9 +101,22 @@ function set_prompt()
     fi
 }
 
+function detach_tm_clients()
+{
+    clients=$(tmux list-clients | sed 's/:.*//')
+    for c in "$clients"; do
+        tmux detach-client -t "$c"
+    done
+}
+
 #----------#
 # Aliases: #
 #----------#
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 alias lf='ls -FG'
 alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
@@ -114,15 +127,14 @@ alias gs='git status'
 #alias grep='grep --color=auto' # Enable grep colored output (Linux)
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
+alias tmdc=detach_tm_clients
+
+# Python
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
-alias myip='~/Scripts/iptools/iptools/ip_check.py'
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
 alias sobin=sobin_fn
 alias deac="deactivate"
 
+alias myip='~/Scripts/iptools/iptools/ip_check.py'
 # Powerline set up
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
