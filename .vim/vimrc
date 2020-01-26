@@ -87,6 +87,7 @@ Plugin 'scrooloose/nerdtree'     " Directory structure from vim
 Plugin 'Valloric/YouCompleteMe'   " Auto-completion
 Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
 Plugin 'tpope/vim-commentary'     " comment out blocks of text
+Plugin 'tpope/vim-endwise'        " 'end' insertion for elixir/haskell, etc.
 Plugin 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
 Plugin 'Chiel92/vim-autoformat'   " Cross-language formatting support
 Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
@@ -102,6 +103,7 @@ Plugin 'nvie/vim-flake8'        " PEP8 checking
 Plugin 'chriskempson/base16-vim' " Color schemes 
 Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
+Plugin 'plasticboy/vim-markdown'    " github-flavored markdown highlighting
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 
 " Autocompletion in vim by providing bindings
@@ -149,15 +151,15 @@ set ambiwidth=single
 " ctrl-space -> auto-complete, even top-level
 
 " For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = '/Users/klurl/Programming/Rust/src/rust-lang/src'
-let g:ycm_python_binary_path = '/usr/local/bin/python3' " For Python 3 stdlib autocompletion
+let g:ycm_rust_src_path = '/home/icarus/Programming/Rust/src/rust-lang/src'
+let g:ycm_python_binary_path = '/usr/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
 " $ cd ~/src/ycm_build
 " $ cmake -G 'Unix Makefiles' . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 " $ cmake --build . --target ycm_core [--config Release] # [...] if Windows
 " (maybe?) cd ~/.vim/bundle/YouCompleteMe && \
-" python3 (may need to edit first line in install.py!) install.py --racer-completer
+"   python3 (may need to edit first line in install.py!) install.py --racer-completer
 "     NOTE: that this step may require the above `let g:ycm_rust_src_path` line
 "     to be present and the src files available.
 " $ cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/racerd/
