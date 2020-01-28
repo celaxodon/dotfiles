@@ -68,7 +68,7 @@ unsetopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/graham/.zshrc'
+zstyle :compinstall filename '/home/gleva/.zshrc'
 
 # Initialize completion
 autoload -Uz compinit
@@ -145,7 +145,14 @@ alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 instal
 alias sobin=sobin_fn
 alias deac="deactivate"
 
-alias myip='~/Scripts/iptools/iptools/ip_check.py'
+# Golang
+alias gopath="export GOPATH=$(pwd)"
+
+alias lsa='source ~/Scripts/load_stage_admin_profile.sh'
+alias lsr='source ~/Scripts/load_stage_regular_profile.sh'
+alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
+alias lpr='source ~/Scripts/load_prod_regular_profile.sh'
+
 # Powerline set up
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
@@ -163,7 +170,7 @@ export RUST_SRC_PATH='/usr/local/rust/rustc-1.27.0/src'
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
-export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:~/.cargo/bin:~/.asdf/bin:~/.asdf/shims
 
 SHELL=/usr/bin/zsh
 EDITOR=/usr/local/bin/vim
