@@ -146,7 +146,7 @@ alias sobin=sobin_fn
 alias deac="deactivate"
 
 # Golang
-alias gopath="export GOPATH=$(pwd)"
+alias gopath='export GOPATH=$(pwd)'
 
 alias lsa='source ~/Scripts/load_stage_admin_profile.sh'
 alias lsr='source ~/Scripts/load_stage_regular_profile.sh'
