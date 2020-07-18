@@ -142,7 +142,7 @@ alias myip='~/Scripts/iptools/iptools/ip_check.py'
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-/usr/local/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
+/usr/local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
 
 export RUST_SRC_PATH="$HOME/Programming/Rust/src/rust-lang/src"
 # Enable ctrl-p ctrl-n for history
@@ -153,8 +153,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     export ASDF_DIR=$(brew --prefix asdf)
 fi
 
-# export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=$PATH:~/.cargo/bin
+export PATH=~/.asdf/shims:$PATH
 
 SHELL=$(which zsh)
 EDITOR=/usr/local/bin/vim
