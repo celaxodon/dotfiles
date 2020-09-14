@@ -67,55 +67,40 @@ set foldlevelstart=1
 """"""""""""
 """ Plugins
 """"""""""""
-" Keep Plugins in between vundle#begin/end
-"
-" This may cause automatic indenting... If this doesn't format indentions
-" correctly, try setting 'cindent' and 'autoindent'.
-filetype plugin indent on  " Required for Vundle
 
-" For Vundle plugin manager:
-set nocompatible   " Required for Vundle
-filetype off       " Required for Vundle -- why?
-
-" Set runtime path to include Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Manage plugs with :PlugInstall  | :PlugUpdate | :PlugClean | :PlugStatus
+call plug#begin('~/.vim/plugged')
 
 " Let Vundle manage Vundle; required
-Plugin 'VundleVim/Vundle.vim'    " V-v-v-vundle
-Plugin 'scrooloose/nerdtree'     " Directory structure from vim
-Plugin 'Valloric/YouCompleteMe'   " Auto-completion
-Plugin 'tpope/vim-surround'      " change surrounding (cs) elements
-Plugin 'tpope/vim-commentary'     " comment out blocks of text
-Plugin 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
-Plugin 'Chiel92/vim-autoformat'   " Cross-language formatting support
-Plugin 'elixir-lang/vim-elixir' " Elixir indentation + syntax highlighting
-Plugin 'rust-lang/rust.vim'      " Rust syntax highlighting
-Plugin 'fatih/vim-go'           " Vim  support for Golang
+Plug 'VundleVim/Vundle.vim'    " V-v-v-vundle
+Plug 'scrooloose/nerdtree'     " Directory structure from vim
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer --java-completer' }   " Auto-completion
+Plug 'tpope/vim-surround'      " change surrounding (cs) elements
+Plug 'tpope/vim-commentary'     " comment out blocks of text
+Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }                     " Fill in 'end' for Elixir/Ruby
+Plug 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
+Plug 'Chiel92/vim-autoformat'   " Cross-language formatting support
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' } " Elixir indentation + syntax highlighting
+Plug 'rust-lang/rust.vim'      " Rust syntax highlighting
+Plug 'fatih/vim-go', { 'for': 'golang' }           " Vim  support for Golang
 " :GoBuild to build; :GoInstall to install; :GoTest for full tests;
 " :GoTestFunc for single test
 " :GoRun - execute current file
 " :GoDef - go to symbol/declaration
 " :GoInstallBinaries - install deps with 'go get'
 " See docs with :help vim-go
-Plugin 'nvie/vim-flake8'        " PEP8 checking
-Plugin 'chriskempson/base16-vim' " Color schemes 
-Plugin 'altercation/vim-colors-solarized'  " Solarized color scheme
-Plugin 'flazz/vim-colorschemes'   " A TON of colorschemes
+
+Plug 'nvie/vim-flake8'        " PEP8 checking
+Plug 'chriskempson/base16-vim' " Color schemes
+Plug 'altercation/vim-colors-solarized'  " Solarized color scheme
+Plug 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 
 " Autocompletion in vim by providing bindings
 " to the autocompletion library 'Jedi' for Python.
 "Plugin 'davidhalter/jedi-vim'
 
-"--------------------"
-" Vundle interaction "
-"--------------------"
-"PluginInstall
-"PluginUpdate
-
-
-call vundle#end()
+call plug#end()
 
 
 """""""""""""""""""""
