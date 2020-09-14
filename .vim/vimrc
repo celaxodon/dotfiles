@@ -303,6 +303,9 @@ function! SingleTestRunner()
         elseif match(suffix, "rs") != -1
             let cmd = ':!cargo test %'
             exec cmd
+        elseif match(suffix, "java") != -1
+            let cmd = ':!mvn clean % test'
+            exec cmd
         else
             echo "Not a Python, Rust or Elixir file"
         end
@@ -325,6 +328,9 @@ function! MultiTestRunner()
             exec cmd
         elseif match(suffix, "rs") != -1
             let cmd = ':!cargo test'
+            exec cmd
+        elseif match(suffix, "java") != -1
+            let cmd = ':!mvn clean test'
             exec cmd
         else
             echo "Not a project that can be run with the test runner"
