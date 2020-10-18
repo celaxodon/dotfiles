@@ -195,6 +195,11 @@ set shiftround
 au BufNewFile,BufRead *.c
     \ set cindent
 
+au BufNewFile,BufRead *.mk,Config.in
+    \ set tabstop=8 |
+    \ set shiftwidth=0 |
+    \ set noexpandtab
+
 " Python
 "au BufNewFile,BufRead *.py
 "    \ set tabstop=4
