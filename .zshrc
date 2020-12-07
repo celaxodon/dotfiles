@@ -153,10 +153,6 @@ alias lsr='source ~/Scripts/load_stage_regular_profile.sh'
 alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
 alias lpr='source ~/Scripts/load_prod_regular_profile.sh'
 
-# Powerline set up
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
 PYTHON3_VER=$(python3 -V | awk '{ print  tolower($1 $2) }' | sed 's/\.[0-9]$//')
 
 # powerline_script="$HOME"/src/dotfiles/venv/lib/"$PYTHON3_VER"/site-packages/powerline/bindings/bash/powerline.sh
@@ -170,10 +166,17 @@ export RUST_SRC_PATH='/usr/local/rust/rustc-1.27.0/src'
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
-export PATH=$PATH:~/.cargo/bin:~/.asdf/bin:~/.asdf/shims
+export PATH=$PATH:~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin
 
 SHELL=/usr/bin/zsh
 EDITOR=/usr/local/bin/vim
+
+#------------------#
+# Powerline set up #
+#------------------#
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
 
 #----------------------#
 # Paths and Variables: #
