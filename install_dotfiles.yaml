@@ -4,12 +4,6 @@
     connection: local
     tasks:
 
-    - name: "Execute ls -la command"
-      shell: "ls -la"
-      register: "output"
-
-    - debug: var=output.stdout_lines
-
     - name: "Install vim"
       ansible.builtin.package:
         name:
@@ -28,8 +22,18 @@
           - tmux
         state: latest
 
-    # - name: "Copy vim config files into place"
-    #   ansible.builtin.copy:
+    - name: "Copy vim config files into place"
+      ansible.builtin.copy:
+        src: .vim/vimrc
+        dest: ~/.vim/vimrc
+        mode: '0644'
 
-    # - name: "Copy tmux config files into place"
-    # - name: "Install vim plugins"
+    - name: "Copy tmux config files into place"
+      ansible.builtin.copy:
+        src: .tmux/tmux.conf
+        dest: ~/.tmux/tmux.conf
+        mode: '0644'
+
+    - name: "Install vim plugins"
+      ansible.builtin.shell: 'vim +PlugInstall +qall && vim +PlugUpdate +qall'
+    - debug: var=output.stdout_lines
