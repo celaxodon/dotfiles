@@ -88,6 +88,17 @@ python-versions = ">=3.6"
 pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
 
 [[package]]
+name = "powerline-status"
+version = "2.7"
+description = "The ultimate statusline/prompt utility."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+docs = ["sphinx", "sphinx-rtd-theme"]
+
+[[package]]
 name = "pycparser"
 version = "2.21"
 description = "C parser in Python"
@@ -131,7 +142,7 @@ test = ["commentjson", "packaging", "pytest"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f62d6f237905a922b37ddcdb87201c61f769a3599e7220c5561d2f4ead76a98e"
+content-hash = "8d19e91bdfe9ee0f2f1d4dcbbc19afc4a70d0bce66452f6447ddc3a1ed988355"
 
 [metadata.files]
 ansible = [
@@ -263,6 +274,9 @@ markupsafe = [
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
     {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
+]
+powerline-status = [
+    {file = "powerline-status-2.7.tar.gz", hash = "sha256:8c7e7da45beb2332bc8226b166b732ef70db2cb0a1f3f0fdc3c539115522ecb6"},
 ]
 pycparser = [
     {file = "pycparser-2.21-py2.py3-none-any.whl", hash = "sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9"},

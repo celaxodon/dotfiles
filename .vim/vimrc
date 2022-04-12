@@ -74,15 +74,18 @@ call plug#begin('~/.vim/plugged')
 " Let Vundle manage Vundle; required
 Plug 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plug 'scrooloose/nerdtree'     " Directory structure from vim
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer --java-completer' }   " Auto-completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }   " Auto-completion
 Plug 'tpope/vim-surround'      " change surrounding (cs) elements
 Plug 'tpope/vim-commentary'     " comment out blocks of text
-Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }                     " Fill in 'end' for Elixir/Ruby
+Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }   " Fill in 'end' for Elixir/Ruby
 Plug 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
 Plug 'Chiel92/vim-autoformat'   " Cross-language formatting support
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' } " Elixir indentation + syntax highlighting
 Plug 'rust-lang/rust.vim'      " Rust syntax highlighting
 Plug 'fatih/vim-go', { 'for': 'golang' }           " Vim  support for Golang
+Plug 'slashmili/alchemist.vim'  " For Elixir auto-completion
+Plug 'rhysd/conflict-marker.vim'
+
 " :GoBuild to build; :GoInstall to install; :GoTest for full tests;
 " :GoTestFunc for single test
 " :GoRun - execute current file
@@ -133,8 +136,12 @@ set ambiwidth=single
 " :YcmDiag --> Check if errors or warnings
 " ctrl-space -> auto-complete, even top-level
 
+" Rust plugin settings
+let g:rustc_path = $HOME.'/.cargo/bin/rustc'
+let g:rust_fold = 1
+let g:ftplugin_rust_source_path = $HOME.'/Programming/Rust/src/rust-lang'
 " For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = '/home/icarus/Programming/Rust/src/rust-lang/src'
+let g:ycm_rust_src_path = '/home/celaxodon/Programming/Rust/src/rust-lang/src'
 let g:ycm_python_binary_path = '/usr/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
@@ -336,9 +343,9 @@ syntax enable
 set background=dark
 "set background=light
 
-"colorscheme glacier
-colorscheme solarized
-"colorscheme molokai
+" colorscheme glacier
+" colorscheme solarized
+colorscheme molokai
 "colorscheme base16-twilight
 "colorscheme base16-default
 "colorscheme base16-3024
