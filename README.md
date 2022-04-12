@@ -1,6 +1,14 @@
 # Dotfiles #
 
+## Prerequisites
+
+Install [poetry](https://python-poetry.org/docs/).
+
+Run `poetry init`.
+
 ## Installation Steps ##
+
+$ ansible-playbook install-dotfiles.yaml
 
 `$ ./install.sh`
 
