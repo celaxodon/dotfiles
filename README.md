@@ -12,13 +12,20 @@ $ ansible-playbook install-dotfiles.yaml
 
 `$ ./install.sh`
 
+## Development
+
+Run `ansible-lint` before committing.
+
 ## TODO ##
 
-* automate copy and setup of minimal environment on machines ssh'ing into
+1. copy over vim config files
+    a. Install plugins
+    b. Template to pass in Python path or other paths? Requires `powerline-status`
+    c. Install Plug if it hasn't already been (see https://github.com/junegunn/vim-plug)
 
-(to automate with install script)
-1. copy `~/.gitignore_global` to home dir and run command on first line of file
-2. copy over vim stuff
-3. Copy over tmux stuff
-4. download necessary python packages (powerline-status and others)
-
+2. Copy over tmux stuff
+    - use template syntax to update `source` line for powerline's tmux config file
+        ```
+        powerline_loc=dirname $(python -c "import powerline; print(powerline.__file__)")
+        $powerline_loc/
+        ```

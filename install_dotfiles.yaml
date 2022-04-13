@@ -34,6 +34,11 @@
         dest: ~/.tmux/tmux.conf
         mode: '0644'
 
+    - name: "Copy global gitignore file"
+      ansible.builtin.copy:
+        src: .gitignore_global
+        dest: ~/.gitignore_global
+        mode: '0644'
+
     - name: "Install vim plugins"
       ansible.builtin.shell: 'vim +PlugInstall +qall && vim +PlugUpdate +qall'
-    - debug: var=output.stdout_lines
