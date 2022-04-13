@@ -24,19 +24,19 @@
 
     - name: "Copy vim config files into place"
       ansible.builtin.copy:
-        src: .vim/vimrc
+        src: vim/vimrc
         dest: ~/.vim/vimrc
         mode: '0644'
 
     - name: "Copy tmux config files into place"
       ansible.builtin.copy:
-        src: .tmux/tmux.conf
+        src: tmux/tmux.conf
         dest: ~/.tmux/tmux.conf
         mode: '0644'
 
     - name: "Copy global gitignore file"
       ansible.builtin.copy:
-        src: .gitignore_global
+        src: gitignore_global
         dest: ~/.gitignore_global
         mode: '0644'
 
