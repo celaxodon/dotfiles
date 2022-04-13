@@ -150,7 +150,7 @@ let g:rustc_path = $HOME.'/.cargo/bin/rustc'
 let g:rust_fold = 1
 let g:ftplugin_rust_source_path = $HOME.'/Programming/Rust/src/rust-lang'
 " For racer and Rust autocompletion of stdlib
-let g:ycm_rust_src_path = '/home/celaxodon/Programming/Rust/src/rust-lang/src'
+let g:ycm_rust_src_path = $HOME.'/Programming/Rust/src/rust-lang/src'
 let g:ycm_python_binary_path = '/usr/bin/python3' " For Python 3 stdlib autocompletion
 
 """ To rebuild YCM:
@@ -227,7 +227,7 @@ au BufNewFile,BufRead *.mk,Config.in
 "    \ set fileformat=unix
 
 " JavaScript, HTML, CSS, XML, YML
-au BufNewFile,BufRead *.html,*.css,*.js,*.xml,*.yml
+au BufNewFile,BufRead *.html,*.css,*.js,*.json,*.xml,*.yml
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
