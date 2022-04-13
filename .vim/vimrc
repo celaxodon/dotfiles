@@ -71,19 +71,27 @@ set foldlevelstart=1
 " Manage plugs with :PlugInstall  | :PlugUpdate | :PlugClean | :PlugStatus
 call plug#begin('~/.vim/plugged')
 
-" Let Vundle manage Vundle; required
-Plug 'VundleVim/Vundle.vim'    " V-v-v-vundle
 Plug 'scrooloose/nerdtree'     " Directory structure from vim
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }   " Auto-completion
-Plug 'tpope/vim-surround'      " change surrounding (cs) elements
-Plug 'tpope/vim-commentary'     " comment out blocks of text
-Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }   " Fill in 'end' for Elixir/Ruby
-Plug 'ctrlpvim/ctrlp.vim'       " A fuzzy file finder
-Plug 'Chiel92/vim-autoformat'   " Cross-language formatting support
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' } " Elixir indentation + syntax highlighting
-Plug 'rust-lang/rust.vim'      " Rust syntax highlighting
-Plug 'fatih/vim-go', { 'for': 'golang' }           " Vim  support for Golang
-Plug 'slashmili/alchemist.vim'  " For Elixir auto-completion
+" Auto-completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
+" surround sections of text
+Plug 'machakann/vim-sandwich'
+" comment out blocks of text
+Plug 'tpope/vim-commentary'
+" Fill in 'end' for Elixir/Ruby
+Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }
+" A fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'
+" Cross-language formatting support
+Plug 'Chiel92/vim-autoformat'
+" Elixir indentation + syntax highlighting
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+" Rust syntax highlighting
+Plug 'rust-lang/rust.vim'
+" Vim  support for Golang
+Plug 'fatih/vim-go', { 'for': 'golang' }
+" For Elixir auto-completion
+Plug 'slashmili/alchemist.vim'
 Plug 'rhysd/conflict-marker.vim'
 
 " :GoBuild to build; :GoInstall to install; :GoTest for full tests;
@@ -105,6 +113,7 @@ Plug 'flazz/vim-colorschemes'   " A TON of colorschemes
 
 call plug#end()
 
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 
 """""""""""""""""""""
 """ Powerline tweaks
@@ -157,9 +166,9 @@ let g:ycm_python_binary_path = '/usr/bin/python3' " For Python 3 stdlib autocomp
 """
 
 """""""""""
-""" Ctrl-p 
+""" Ctrl-p
 """""""""""
-" help: 
+" help:
 " * :help ctrlp.txt
 " * :help ctrlp-commands
 " * :help ctrlp-extensions
