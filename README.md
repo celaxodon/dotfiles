@@ -8,7 +8,7 @@ Run `poetry init`.
 
 ## Installation Steps ##
 
-$ ansible-playbook install-dotfiles.yaml
+$ ansible-playbook install-dotfiles.yaml --ask-become-pass
 
 `$ ./install.sh`
 
@@ -29,3 +29,8 @@ Run `ansible-lint` before committing.
         powerline_loc=dirname $(python -c "import powerline; print(powerline.__file__)")
         $powerline_loc/
         ```
+
+3. Migrate to nvim
+4. Investigate alternatives to powerline-status
+    - starship.rs
+    - Check https://github.com/sunaku/vim-modusline)

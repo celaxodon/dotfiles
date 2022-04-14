@@ -9,18 +9,21 @@
         name:
           - vim
         state: latest
+      become: yes
 
     - name: "Install git"
       ansible.builtin.package:
         name:
           - git
         state: latest
+      become: yes
 
     - name: "Install tmux"
       ansible.builtin.package:
         name:
           - tmux
         state: latest
+      become: yes
 
     - name: "Copy vim config files into place"
       ansible.builtin.copy:
