@@ -31,17 +31,39 @@
         dest: ~/.vim/vimrc
         mode: '0644'
 
+    - name: "Find powerline library location"
+      ansible.builtin.shell: "dirname $(python -c 'import powerline; print(powerline.__file__)')"
+      register: powerline_command
+
+    - debug: 
+        msg: "{{ powerline_command.stdout }}"
+
+    - name: "Build tmux powerline config file path"
+      set_fact:
+        powerline_python_loc: "{{ powerline_command.stdout }}/bindings/tmux/powerline.conf"
+
     - name: "Copy tmux config files into place"
-      ansible.builtin.copy:
-        src: tmux/tmux.conf
+      ansible.builtin.template:
+        src: tmux/tmux.j2
         dest: ~/.tmux/tmux.conf
         mode: '0644'
+
+    # - name: "Copy tmux config files into place"
+    #   ansible.builtin.copy:
+    #     src: tmux/tmux.conf
+    #     dest: ~/.tmux/tmux.conf
+    #     mode: '0644'
 
     - name: "Copy global gitignore file"
       ansible.builtin.copy:
         src: gitignore_global
         dest: ~/.gitignore_global
         mode: '0644'
+
+    - name: "Create neovim config directory"
+      ansible.builtin.file:
+        path: ~/.config/nvim
+        state: directory
 
     - name: "Install vim plugins"
       ansible.builtin.shell: 'vim +PlugInstall +qall && vim +PlugUpdate +qall'
