@@ -9,8 +9,11 @@
 #-----------------------#
 source {{ powerline_python_loc }}
 
+
 # Display in 256 color mode
 set -g default-terminal "screen-256color"
+# Display true colors on advice of nvim :checkhealth
+set-option -sa terminal-overrides ',screen-256color:RGB'
 
 # Status bar settings
 set -g status on
@@ -43,7 +46,7 @@ bind C-a send-prefix
 setw -g aggressive-resize on
 
 # make delay shorter
-#set -sg escape-time 0
+set -sg escape-time 10
 
 # Set history for scrollback to 5000
 set-option -g history-limit 5000

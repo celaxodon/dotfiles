@@ -1,0 +1,11 @@
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+
+let g:python3_host_prog = '{{ python3_venv_loc }}/bin/python3'
+
+set nocompatible            " disable compatibility with vi
+set mouse=v                 " paste with middle mouse buttom
+
+filetype plugin indent on   " allows auto-indenting based on file type
+
+source ~/.vim/vimrc
