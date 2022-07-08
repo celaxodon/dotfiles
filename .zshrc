@@ -119,18 +119,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 alias lf='ls -FG'
-
-# MacOS aliases
-if [[ "$(uname)" == "Darwin" ]]; then
-    alias ls='ls -G' # Enable color OS X. For linux, '--color=auto'
-    alias mova='~/Scripts/mova.py'
-    alias stroke='/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke'
-    alias timer='~/Scripts/timer.sh'
-# Linux aliases
-else
-    alias ls='ls --color=auto'
-fi
-
+alias ls='ls --color=auto'
 alias ll='ls -lG'
 alias la='ls -laG'
 alias mv='mv -i'
