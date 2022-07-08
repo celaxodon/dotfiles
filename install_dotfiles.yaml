@@ -4,30 +4,31 @@
     connection: local
     tasks:
 
-    - name: "Install vim, tmux, git"
+    - name: "Install vim, tmux, git, zsh"
       ansible.builtin.package:
         name:
           - vim
           - git
           - tmux
+          - zsh
         state: latest
       become: yes
 
-    - name: "Ensure vim config directory exists"
+    - name: "(legacy) Ensure vim config directory exists"
       ansible.builtin.file:
         path: ~/.vim
         state: directory
-
-    - name: "Copy vim config files into place"
-      ansible.builtin.copy:
-        src: vim/vimrc
-        dest: ~/.vim/vimrc
-        mode: '0644'
 
     - name: "Ensure nvim config directory exists"
       ansible.builtin.file:
         path: ~/.config/nvim
         state: directory
+
+    - name: "Copy zsh config files into place"
+      ansible.builtin.copy:
+        src: .zshrc
+        dest: ~/.zshrc
+        mode: 0744
 
     - name: "Get project's poetry venv location"
       ansible.builtin.shell: "poetry env list --full-path | grep 'Activated' | cut -d ' ' -f 1"
@@ -40,39 +41,10 @@
       set_fact:
         python3_venv_loc: "{{ poetry_venv_location.stdout }}/"
 
-    - name: "Copy nvim config file into place"
+    - name: "Copy vim config files into place"
       ansible.builtin.template:
-        src: .config/nvim/init.vim.j2
-        dest: ~/.config/nvim/init.vim
-        mode: '0644'
-
-    - name: "Find powerline library location"
-      ansible.builtin.shell: "dirname $(python -c 'import powerline; print(powerline.__file__)')"
-      register: powerline_command
-
-    - debug: 
-        msg: "{{ powerline_command.stdout }}"
-
-    - name: "Build tmux powerline config file path"
-      set_fact:
-        powerline_python_loc: "{{ powerline_command.stdout }}/bindings/tmux/powerline.conf"
-
-    - name: "Copy tmux config files into place"
-      ansible.builtin.template:
-        src: tmux/tmux.j2
-        dest: ~/.tmux/tmux.conf
-        mode: '0644'
-
-    # - name: "Copy tmux config files into place"
-    #   ansible.builtin.copy:
-    #     src: tmux/tmux.conf
-    #     dest: ~/.tmux/tmux.conf
-    #     mode: '0644'
-
-    - name: "Copy global gitignore file"
-      ansible.builtin.copy:
-        src: gitignore_global
-        dest: ~/.gitignore_global
+        src: vim/vimrc.j2
+        dest: ~/.vim/vimrc
         mode: '0644'
 
     - name: "Create neovim config directory"
@@ -80,5 +52,29 @@
         path: ~/.config/nvim
         state: directory
 
-    - name: "Install vim plugins"
-      ansible.builtin.shell: 'vim +PlugInstall +qall && vim +PlugUpdate +qall'
+    - name: "Copy nvim config file into place"
+      ansible.builtin.template:
+        src: .config/nvim/init.vim.j2
+        dest: ~/.config/nvim/init.vim
+        mode: '0644'
+
+    - name: "Copy tmux config files into place"
+      ansible.builtin.template:
+        src: tmux/tmux.j2
+        dest: ~/.tmux/tmux.conf
+        mode: '0644'
+
+    - name: "Copy tmux startup script into place"
+      ansible.builtin.copy:
+        src: tmux/startup.sh
+        dest: ~/.tmux/startup.sh
+        mode: '0755'
+
+    - name: "Copy global gitignore file"
+      ansible.builtin.copy:
+        src: gitignore_global
+        dest: ~/.gitignore_global
+        mode: '0644'
+
+    - name: "Install nvim plugins"
+      ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'

@@ -152,14 +152,10 @@ alias lsa='source ~/Scripts/load_stage_admin_profile.sh'
 alias lsr='source ~/Scripts/load_stage_regular_profile.sh'
 alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
 alias lpr='source ~/Scripts/load_prod_regular_profile.sh'
+alias vim='nvim'
 
 PYTHON3_VER=$(python3 -V | awk '{ print  tolower($1 $2) }' | sed 's/\.[0-9]$//')
 
-# powerline_script="$HOME"/src/dotfiles/venv/lib/"$PYTHON3_VER"/site-packages/powerline/bindings/bash/powerline.sh
-powerline_script="$HOME"/.local/lib/"$PYTHON3_VER"/site-packages/powerline/bindings/bash/powerline.sh
-# chmod u+x "$powerline_script"
-# source "$HOME"/src/dotfiles/venv/bin/activate && bash "$powerline_script" && deactivate
-# bash /usr/local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 
 export RUST_SRC_PATH='/usr/local/rust/rustc-1.27.0/src'
 # Enable ctrl-p ctrl-n for history
@@ -168,15 +164,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=$PATH:~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin
 
-SHELL=/usr/bin/zsh
-EDITOR=/usr/local/bin/vim
-
-#------------------#
-# Powerline set up #
-#------------------#
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
+export SHELL=/usr/bin/zsh
+export EDITOR=nvim
 
 #----------------------#
 # Paths and Variables: #

@@ -1,11 +1,340 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
-let g:python3_host_prog = '{{ python3_venv_loc }}/bin/python3'
+let g:python3_host_prog = '{{ python3_venv_loc }}bin/python3'
 
-set nocompatible            " disable compatibility with vi
 set mouse=v                 " paste with middle mouse buttom
 
 filetype plugin indent on   " allows auto-indenting based on file type
 
-source ~/.vim/vimrc
+"-----------"
+" Old VIMRC "
+"-----------"
+
+set modelines=0		" CVE-2007-2438
+
+"""""""""""""""""""
+""" General and UI
+"""""""""""""""""""
+
+" 256 colors
+set t_Co=256
+" Re-read an open file that has changed outside of vim
+set autoread
+" Use the filename for window title
+set title
+" changes tab and return chars, when visible, to triangle and return symbol, respectively
+"set listchars=tab:▸\ ,eol:¬
+" Don't wrap lines
+"set nowrap
+" Show line numbers by default
+set nu
+" Set spellcheck on
+" Change with `:set spell` or `:set nospell`
+"set spell spelllang=en_us
+" Have a vertical buffer around the cursor when scrolling
+set scrolloff=2
+" Turn on screen flash for errors
+set visualbell
+
+" Always display tabline, even if only one tab
+"set showtabline=2
+" Hide default insert comment below status bar
+set noshowmode
+" Set width of non-ascii characters
+set ambiwidth=single
+
+"""""""""""""""""
+""" Code folding
+"""""""""""""""""
+" Don't fold by default
+set nofoldenable
+" Fold based on indent level
+set foldmethod=indent
+" Deepest fold is 10 levels
+set foldnestmax=2
+" ???
+set foldlevel=0
+
+" Set the starting fold level when editing another buffer in a window
+"   0 = all folds closed
+"   1 = some folds closed
+"   99 = no folds closed
+set foldlevelstart=1
+
+
+""""""""""""
+""" Plugins
+""""""""""""
+
+" Manage plugs with :PlugInstall  | :PlugUpdate | :PlugClean | :PlugStatus
+call plug#begin('~/.config/nvim/plugged')
+
+" Directory structure from vim
+Plug 'scrooloose/nerdtree'
+
+" surround sections of text
+Plug 'machakann/vim-sandwich'
+
+" comment out blocks of text
+Plug 'tpope/vim-commentary'
+
+" Fill in 'end' for Elixir/Ruby
+Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }
+
+" A fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Cross-language formatting support
+Plug 'Chiel92/vim-autoformat'
+
+" Elixir indentation + syntax highlighting
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+
+" Rust syntax highlighting
+Plug 'rust-lang/rust.vim'
+
+" Vim  support for Golang
+" :GoBuild to build; :GoInstall to install; :GoTest for full tests;
+" :GoTestFunc for single test
+" :GoRun - execute current file
+" :GoDef - go to symbol/declaration
+" :GoInstallBinaries - install deps with 'go get'
+" See docs with :help vim-go
+" Plug 'fatih/vim-go', { 'for': 'golang' }
+
+Plug 'rhysd/conflict-marker.vim'
+
+" tmux status line. Integrates with lightline/airline
+Plug 'edkolev/tmuxline.vim'
+
+"""""""""""""""""""
+""" Neovim Plugins
+"""""""""""""""""""
+" Plug 'nvim-lualine/lualine.nvim'
+
+" :AirlineTheme <theme>
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" for icons in your statusline. Integrates with lualine.vim
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Neovim language server protocol configuration
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'nvie/vim-flake8'        " PEP8 checking
+Plug 'chriskempson/base16-vim' " Color schemes
+Plug 'altercation/vim-colors-solarized'  " Solarized color scheme
+Plug 'flazz/vim-colorschemes'   " A TON of colorschemes
+
+" Autocompletion in vim by providing bindings
+" to the autocompletion library 'Jedi' for Python.
+"Plugin 'davidhalter/jedi-vim'
+
+call plug#end()
+
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+
+
+" Rust plugin settings
+let g:rustc_path = $HOME.'/.cargo/bin/rustc'
+let g:rust_fold = 1
+let g:ftplugin_rust_source_path = $HOME.'/Programming/Rust/src/rust-lang'
+" For racer and Rust autocompletion of stdlib
+
+"""""""""""
+""" Ctrl-p
+"""""""""""
+" help:
+" * :help ctrlp.txt
+" * :help ctrlp-commands
+" * :help ctrlp-extensions
+" * :help ctrlp-mappings
+"
+" F5 to purge cache for current dir to get new files, remove deleted, apply opts
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
+
+" Use Ripgrep for file finder
+if executable('rg')
+    set grepprg=rg\ --color=never
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+    let g:ctrlp_use_caching = 0
+endif
+
+set wildignore+=*/.git/*,*/tmp/*,*.swp,*.swo
+
+"""""""""""""""""""""""""
+""" Default Tab behavior
+"""""""""""""""""""""""""
+" set tabs to 4 spaces
+set tabstop=4
+" enter spaces when tab is pressed
+set expandtab
+" The number of spaces to use for indentation
+set shiftwidth=4
+" Indent to a multiple of 'shiftwidth'
+set shiftround
+
+
+"""""""""""""""""""""""""""""""
+""" Filetype specific settings
+"""""""""""""""""""""""""""""""
+" C-style indentation, according to the C indentation standard.
+au BufNewFile,BufRead *.c
+    \ set cindent
+
+au BufNewFile,BufRead *.mk,Config.in
+    \ set tabstop=8 |
+    \ set shiftwidth=0 |
+    \ set noexpandtab
+
+" Python
+"au BufNewFile,BufRead *.py
+"    \ set tabstop=4
+"    \ set softtabstop=4
+"    \ set shiftwidth=4
+"    \ set textwidth=79
+"    \ set expandtab
+"    \ set autoindent
+"    \ set fileformat=unix
+
+" JavaScript, HTML, CSS, XML, YML
+au BufNewFile,BufRead *.html,*.css,*.js,*.json,*.xml,*.yml
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+
+" au BufWrite *.exs,*.ex :Autoformat
+
+" Highlight group for trailing whitespace (but only at ends of lines with
+" text):
+:highlight BadWhitespace ctermbg=darkgreen guibg=darkgreen
+
+" Flag bad trailing whitespace
+"au BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.rs
+"    \ match BadWhitespace /\S\zs\s\+$
+
+
+""""""""""""""""""""
+""" Search behavior
+""""""""""""""""""""
+" automatically show matching brackets
+set showmatch
+" use case-sensitivity when you search w/ upper-case chars
+set smartcase
+" Ignore case when searchign for text
+set ignorecase
+" Start syntax highlighting, but overrule your colors with defaults.
+"syntax on
+
+
+"""""""""""""
+""" Mappings
+"""""""""""""
+" NOTE: `nmap` is for normal-mode mappings; `map` for normal, visual, select, and operator pending;
+" :map! for insert and command modes
+
+" Test Runners
+:map <leader>t :w\|:call SingleTestRunner()<cr>
+:map <leader>T :w\|:call MultiTestRunner()<cr>
+
+" create mapping for quick switch between invisibles and visibles. Enable with `\l`
+nmap <leader>l :set list!<cr>
+" Highlight trailing whitespace
+map <leader>w /\s\+$<cr>
+" Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
+set pastetoggle=<F3>
+":nmap <F2> :NERDTree
+" Set up command-T with F2
+nmap <F2> :CommandT<cr>
+
+""""""""""""""
+""" Functions
+""""""""""""""
+
+" :call <fn()>
+" :h current-file
+" :so -> :source
+" Copied from Gary Bernhardt
+function! SingleTestRunner()
+    " Are we in a test file?
+    let in_test_file = match(expand("%"), '\(test_.*\.py\|.*_test\.py\|.*_test\.exs\|test_.*\.exs\)$') != -1
+
+    if in_test_file
+        let suffix = expand("%:e")
+        """ echo 'A test file with suffix:' suffix
+        " %:e -- just the suffix, no punctuation
+        " %:p -- full path
+        " %:t -- filename + suffix
+        if match(suffix, "py") != -1
+            let cmd = ':!pytest %'
+            exec cmd
+        elseif match(suffix, "exs") != -1
+            let cmd = ':!mix test %'
+            exec cmd
+        elseif match(suffix, "rs") != -1
+            let cmd = ':!cargo test %'
+            exec cmd
+        elseif match(suffix, "java") != -1
+            let cmd = ':!mvn clean % test'
+            exec cmd
+        else
+            echo "Not a Python, Rust or Elixir file"
+        end
+    else
+        echo "Can't run single test runner on this file"
+    end
+endfunction
+
+function! MultiTestRunner()
+    " Check if in a test file, if not, exit
+    let in_applicable_file = match(expand("%"), '\(.*\.py\|.*\.exs\|.*\.ex\|.*\.rs\)$') != -1
+
+    if in_applicable_file
+        let suffix = expand("%:e")
+        if match(suffix, "py") != -1
+            let cmd = ':!pytest tests'
+            exec cmd
+        elseif match(suffix, '\(ex\|exs\)') != -1
+            let cmd = ':!mix test'
+            exec cmd
+        elseif match(suffix, "rs") != -1
+            let cmd = ':!cargo test'
+            exec cmd
+        elseif match(suffix, "java") != -1
+            let cmd = ':!mvn clean test'
+            exec cmd
+        else
+            echo "Not a project that can be run with the test runner"
+        end
+    end
+endfunction
+
+""""""""""""""""""
+""" Color Schemes
+""""""""""""""""""
+" syntax enable -- keep your current color settings and turn on syntax
+" highlighting. This enables solarized colorscheme
+syntax enable
+
+"set background=light
+
+" colorscheme glacier
+" colorscheme solarized
+colorscheme base16-nord
+
+"base16-twilight
+"base16-default
+"base16-3024
+"base16-brewer
+"base16-bright
+"base16-colors
+"base16-ocean " Background too washed out for my taste
+"base16-google " -- Don't like this one. Yellow sucks
+"base16-harmonic16 " -- Don't like this one either now.
+"base16-pop "-- too much purple/yellow
+"base16-ocean

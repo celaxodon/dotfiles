@@ -90,9 +90,18 @@ Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'rust-lang/rust.vim'
 " Vim  support for Golang
 Plug 'fatih/vim-go', { 'for': 'golang' }
-" For Elixir auto-completion
-Plug 'slashmili/alchemist.vim'
 Plug 'rhysd/conflict-marker.vim'
+
+"""""""""""""""""""
+""" Neovim Plugins
+"""""""""""""""""""
+Plug 'nvim-lualine/lualine.nvim'
+
+" for icons in your statusline. Integrates with lualine.vim
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Neovim language server protocol configuration
+Plug 'neovim/nvim-lspconfig'
 
 " :GoBuild to build; :GoInstall to install; :GoTest for full tests;
 " :GoTestFunc for single test
@@ -107,6 +116,8 @@ Plug 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plug 'flazz/vim-colorschemes'   " A TON of colorschemes
 "Plugin 'godlygeek/tabular'    " Dependency for vim-markdown. Keep above!
 
+" Plug 'itchyny/lightline.vim'
+
 " Autocompletion in vim by providing bindings
 " to the autocompletion library 'Jedi' for Python.
 "Plugin 'davidhalter/jedi-vim'
@@ -115,19 +126,6 @@ call plug#end()
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 
-"""""""""""""""""""""
-""" Powerline tweaks
-"""""""""""""""""""""
-" Run-time path addition for powerline
-set rtp+="/usr/local/lib/python3.7/site-packages/powerline/bindings/vim"
-
-" Note: If installing through brew, `$ brew install vim --with-python3` - make
-" sure you're pointing at the RIGHT VIM. May need to change PATH.
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-
-" Set for Powerline-status
 set laststatus=2
 " Always display tabline, even if only one tab
 "set showtabline=2
