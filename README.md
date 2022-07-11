@@ -18,6 +18,8 @@ Run `ansible-lint` before committing.
 
 1. Install Plug if it hasn't already been (see https://github.com/junegunn/vim-plug)
 
+2. Install and deploy elixir-ls in ~/bin/elixir-ls
+
 2. Vim plugins to look at:
     * QF Replace
     * tpope's vim-fugitive

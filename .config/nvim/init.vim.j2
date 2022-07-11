@@ -123,6 +123,12 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Neovim language server protocol configuration
 Plug 'neovim/nvim-lspconfig'
 
+" coq-vim autocompletion with LSP
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" 9000+ Snippets
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+
 Plug 'nvie/vim-flake8'        " PEP8 checking
 Plug 'chriskempson/base16-vim' " Color schemes
 Plug 'altercation/vim-colors-solarized'  " Solarized color scheme
@@ -137,11 +143,49 @@ call plug#end()
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 
 
-" Rust plugin settings
-let g:rustc_path = $HOME.'/.cargo/bin/rustc'
-let g:rust_fold = 1
-let g:ftplugin_rust_source_path = $HOME.'/Programming/Rust/src/rust-lang'
-" For racer and Rust autocompletion of stdlib
+""""""""""""""""""""""
+""" LSP Config Servers
+""""""""""""""""""""""
+
+"LSPInfo for troubleshooting
+
+"""""""""""""""""
+" Elixir-LS setup
+"""""""""""""""""
+" TODO: This must be built+released each time.
+
+lua << EOF
+-- Replace the following with the path to your installation
+
+local lsp = require "lspconfig"
+local coq = require "coq"
+
+-- To enable: :COQnow [--shut-up]
+
+-- For enabling snippets
+-- lsp.<server>.setup(<stuff...>)                              -- before
+-- lsp.<server>.setup(coq.lsp_ensure_capabilities(<stuff...>)) -- after
+
+local path_to_elixirls = vim.fn.expand("~/bin/elixir-ls/language_server.sh")
+
+lsp.elixirls.setup({
+  cmd = { path_to_elixirls },
+  -- capabilities = capabilities,
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = true,
+      -- I also choose to turn off the auto dep fetching feature.
+      -- It often gets into a weird state that requires deleting
+      -- the .elixir_ls directory and restarting your editor.
+      fetchDeps = false
+    }
+  }
+})
+
+-- FIXME: Erroring out right now.
+-- lsp.elixirls.setup(coq.lsp_ensure_capabilities())
+
+EOF
 
 """""""""""
 """ Ctrl-p
