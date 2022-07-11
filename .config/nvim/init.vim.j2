@@ -362,23 +362,12 @@ endfunction
 """ Color Schemes
 """"""""""""""""""
 " syntax enable -- keep your current color settings and turn on syntax
-" highlighting. This enables solarized colorscheme
+" highlighting. Required for solarized colorschemes
+
 syntax enable
 
-"set background=light
+""" Airline theme (nvim/tmux)
+" To manually change: :AirlineTheme <tab-complete>
+let g:airline_theme='behelit'
 
-" colorscheme glacier
-" colorscheme solarized
-colorscheme base16-nord
-
-"base16-twilight
-"base16-default
-"base16-3024
-"base16-brewer
-"base16-bright
-"base16-colors
-"base16-ocean " Background too washed out for my taste
-"base16-google " -- Don't like this one. Yellow sucks
-"base16-harmonic16 " -- Don't like this one either now.
-"base16-pop "-- too much purple/yellow
-"base16-ocean
+colorscheme blackdust
