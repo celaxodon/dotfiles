@@ -8,7 +8,7 @@ Run `poetry init`.
 
 ## Installation Steps ##
 
-`$ ansible_playbook install-dotfiles.yaml --ask-become-pass`
+`$ ansible-playbook install_dotfiles.yaml --ask-become-pass`
 
 ## Development
 
