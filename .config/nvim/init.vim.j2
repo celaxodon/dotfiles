@@ -82,6 +82,8 @@ Plug 'tpope/vim-commentary'
 " Fill in 'end' for Elixir/Ruby
 Plug 'tpope/vim-endwise', { 'for': ['elixir', 'ruby'] }
 
+Plug 'tpope/vim-abolish'
+
 " A fuzzy file finder
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -292,9 +294,8 @@ nmap <leader>l :set list!<cr>
 map <leader>w /\s\+$<cr>
 " Set pastetoggle with <F3> key. No smart indenting, just pastes as normal.
 set pastetoggle=<F3>
-":nmap <F2> :NERDTree
-" Set up command-T with F2
-nmap <F2> :CommandT<cr>
+
+:nmap <F2> :NERDTree
 
 """"""""""""""
 """ Functions
