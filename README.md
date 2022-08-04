@@ -26,3 +26,6 @@ Run `ansible-lint` before committing.
     - Check https://github.com/sunaku/vim-modusline)
     - Ycm replacement
         - LSP
+
+3. [playbook] Substitute home directory in coc-settings.js file.
+[playbook] Install CoC dependencies (requires node?)

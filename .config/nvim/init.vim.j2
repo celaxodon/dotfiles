@@ -91,7 +91,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Chiel92/vim-autoformat'
 
 " Elixir indentation + syntax highlighting
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 
 " Rust syntax highlighting
 Plug 'rust-lang/rust.vim'
@@ -125,11 +125,10 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Neovim language server protocol configuration
 Plug 'neovim/nvim-lspconfig'
 
-" coq-vim autocompletion with LSP
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-" 9000+ Snippets
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-
+" Autocompletion
+" CoCInstall coc-json coc-tsserver
+" :help coc-nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'nvie/vim-flake8'        " PEP8 checking
 Plug 'chriskempson/base16-vim' " Color schemes
@@ -144,50 +143,50 @@ call plug#end()
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 
+"""""""""""""""""""""
+""" CoC Configurations
+"""""""""""""""""""""
 
-""""""""""""""""""""""
-""" LSP Config Servers
-""""""""""""""""""""""
+set hidden 
+set encoding=utf-8
 
-"LSPInfo for troubleshooting
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
-"""""""""""""""""
-" Elixir-LS setup
-"""""""""""""""""
-" TODO: This must be built+released each time.
+" Give more space for displaying messages.
+set cmdheight=2
 
-lua << EOF
--- Replace the following with the path to your installation
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 
-local lsp = require "lspconfig"
-local coq = require "coq"
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
--- To enable: :COQnow [--shut-up]
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
--- For enabling snippets
--- lsp.<server>.setup(<stuff...>)                              -- before
--- lsp.<server>.setup(coq.lsp_ensure_capabilities(<stuff...>)) -- after
+" Show docs on cursor hover with <leader>h
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 
-local path_to_elixirls = vim.fn.expand("~/bin/elixir-ls/language_server.sh")
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
-lsp.elixirls.setup({
-  cmd = { path_to_elixirls },
-  -- capabilities = capabilities,
-  settings = {
-    elixirLS = {
-      dialyzerEnabled = true,
-      -- I also choose to turn off the auto dep fetching feature.
-      -- It often gets into a weird state that requires deleting
-      -- the .elixir_ls directory and restarting your editor.
-      fetchDeps = false
-    }
-  }
-})
-
--- FIXME: Erroring out right now.
--- lsp.elixirls.setup(coq.lsp_ensure_capabilities())
-
-EOF
+" NOTE: LSPInfo for troubleshooting
 
 """""""""""
 """ Ctrl-p
