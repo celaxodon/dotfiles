@@ -128,6 +128,8 @@ alias gs='git status'
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
+alias vim='nvim'
+alias kubectl="minikube kubectl --"
 
 # Python
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
@@ -141,7 +143,6 @@ alias lsa='source ~/Scripts/load_stage_admin_profile.sh'
 alias lsr='source ~/Scripts/load_stage_regular_profile.sh'
 alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
 alias lpr='source ~/Scripts/load_prod_regular_profile.sh'
-alias vim='nvim'
 
 PYTHON3_VER=$(python3 -V | awk '{ print  tolower($1 $2) }' | sed 's/\.[0-9]$//')
 
