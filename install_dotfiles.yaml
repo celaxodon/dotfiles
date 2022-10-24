@@ -76,5 +76,6 @@
         dest: ~/.gitignore_global
         mode: '0644'
 
-    - name: "Install nvim plugins"
-      ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
+    # FIXME
+    # - name: "Install nvim plugins"
+    #   ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
