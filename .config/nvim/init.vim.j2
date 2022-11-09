@@ -337,6 +337,10 @@ set ignorecase
 " NOTE: `nmap` is for normal-mode mappings; `map` for normal, visual, select, and operator pending;
 " :map! for insert and command modes
 
+" Unicode bindings
+" Unicode ✓
+:inoremap <leader>c <c-v>u2713
+
 " Test Runners
 :map <leader>t :w\|:call SingleTestRunner()<cr>
 :map <leader>T :w\|:call MultiTestRunner()<cr>
