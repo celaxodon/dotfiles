@@ -29,3 +29,6 @@ Run `ansible-lint` before committing.
 
 3. [playbook] Substitute home directory in coc-settings.js file.
 [playbook] Install CoC dependencies (requires node?)
+
+4. Update tmux status bar to display *Z* in front of the window name when a pane is zoomed in the window.
+Maybe powerline-status had this set up?
