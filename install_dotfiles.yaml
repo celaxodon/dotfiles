@@ -43,7 +43,7 @@
 
     - name: "Copy vim config files into place"
       ansible.builtin.template:
-        src: vim/vimrc.j2
+        src: vim/vimrc
         dest: ~/.vim/vimrc
         mode: '0644'
 
@@ -60,7 +60,7 @@
 
     - name: "Copy tmux config files into place"
       ansible.builtin.template:
-        src: tmux/tmux.j2
+        src: tmux/tmux.conf
         dest: ~/.tmux/tmux.conf
         mode: '0644'
 
