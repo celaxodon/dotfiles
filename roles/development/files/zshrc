@@ -157,6 +157,10 @@ export PATH=$PATH:~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin
 export SHELL=/usr/bin/zsh
 export EDITOR=nvim
 
+if [[ -e ~/Scripts/load_nv_vars.sh ]]; then
+    source ~/Scripts/load_nv_vars.sh
+fi
+
 #----------------------#
 # Paths and Variables: #
 #----------------------#

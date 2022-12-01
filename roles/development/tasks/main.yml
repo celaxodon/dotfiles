@@ -26,7 +26,7 @@
 
     - name: "Copy zsh config files into place"
       ansible.builtin.copy:
-        src: .zshrc
+        src: ../files/zshrc
         dest: ~/.zshrc
         mode: 0744
 
@@ -41,9 +41,9 @@
       set_fact:
         python3_venv_loc: "{{ poetry_venv_location.stdout }}/"
 
-    - name: "Copy vim config files into place"
-      ansible.builtin.template:
-        src: vim/vimrc
+    - name: "(legacy) Copy vim config files into place"
+      ansible.builtin.copy:
+        src: ../files/vimrc
         dest: ~/.vim/vimrc
         mode: '0644'
 
@@ -54,25 +54,25 @@
 
     - name: "Copy nvim config file into place"
       ansible.builtin.template:
-        src: .config/nvim/init.vim.j2
+        src: ../templates/init.vim.j2
         dest: ~/.config/nvim/init.vim
         mode: '0644'
 
     - name: "Copy tmux config files into place"
-      ansible.builtin.template:
-        src: tmux/tmux.conf
+      ansible.builtin.copy:
+        src: ../files/tmux.conf
         dest: ~/.tmux/tmux.conf
         mode: '0644'
 
     - name: "Copy tmux startup script into place"
       ansible.builtin.copy:
-        src: tmux/startup.sh
+        src: ../files/tmux_startup.sh
         dest: ~/.tmux/startup.sh
         mode: '0755'
 
     - name: "Copy global gitignore file"
       ansible.builtin.copy:
-        src: gitignore_global
+        src: ../files/gitignore_global
         dest: ~/.gitignore_global
         mode: '0644'
 
