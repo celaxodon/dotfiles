@@ -274,6 +274,10 @@ set shiftround
 """""""""""""""""""""""""""""""
 """ Filetype specific settings
 """""""""""""""""""""""""""""""
+
+" Disable Coc completions for markdown files
+autocmd FileType markdown let b:coc_suggest_disable = 1
+
 " C-style indentation, according to the C indentation standard.
 au BufNewFile,BufRead *.c
     \ set cindent
@@ -336,6 +340,9 @@ set ignorecase
 " Test Runners
 :map <leader>t :w\|:call SingleTestRunner()<cr>
 :map <leader>T :w\|:call MultiTestRunner()<cr>
+
+" (Elixir) Formatting
+:noremap <leader>f :w\|:! mix format %<cr>
 
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<cr>
