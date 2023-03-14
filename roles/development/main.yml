@@ -76,6 +76,17 @@
         dest: ~/.gitignore_global
         mode: '0644'
 
+    - name: "Ensure ~/.ctags directory is present"
+      ansible.builtin.file:
+        path: ~/.ctags
+        state: directory
+
+    - name: "Copy elixir ctags file into place"
+      ansible.builtin.copy:
+        src: files/elixir.ctags
+        dest: ~/.ctags/elixir.ctags
+        mode: '0644'
+
     # FIXME
     # - name: "Install nvim plugins"
     #   ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
