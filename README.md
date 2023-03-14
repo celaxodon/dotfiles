@@ -4,11 +4,11 @@
 
 Install [poetry](https://python-poetry.org/docs/).
 
-Run `poetry init`.
+Run `poetry init` for package installation
 
-## Installation Steps ##
+## Installing dotfiles ##
 
-`$ ansible-playbook install_dotfiles.yaml --ask-become-pass`
+`$ ansible-playbook roles/development/main.yml --ask-become-pass`
 
 ## Development
 
@@ -24,8 +24,6 @@ Run `ansible-lint` before committing.
     * QF Replace
     * tpope's vim-fugitive
     - Check https://github.com/sunaku/vim-modusline)
-    - Ycm replacement
-        - LSP
 
 3. [playbook] Substitute home directory in coc-settings.js file.
 [playbook] Install CoC dependencies (requires node?)
