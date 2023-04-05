@@ -427,5 +427,11 @@ syntax enable
 " To manually change: :AirlineTheme <tab-complete>
 let g:airline_theme='behelit'
 let g:tmuxline_theme = 'iceberg'
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
 
 colorscheme blackdust
