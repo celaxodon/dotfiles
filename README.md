@@ -10,6 +10,11 @@ Run `poetry init` for package installation
 
 `$ ansible-playbook roles/development/main.yml --ask-become-pass`
 
+
+### Installing only (n)vim-related dotfiles
+
+`$ ansible-playbook roles/development/main.yml --tags "vim"`
+
 ## Development
 
 Run `ansible-lint` before committing.
