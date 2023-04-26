@@ -144,6 +144,7 @@ alias lsa='source ~/Scripts/load_stage_admin_profile.sh'
 alias lsr='source ~/Scripts/load_stage_regular_profile.sh'
 alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
 alias lpr='source ~/Scripts/load_prod_regular_profile.sh'
+alias yat='~/Scripts/yield_at.sh'
 
 PYTHON3_VER=$(python3 -V | awk '{ print  tolower($1 $2) }' | sed 's/\.[0-9]$//')
 
