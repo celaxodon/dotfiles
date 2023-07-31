@@ -64,7 +64,7 @@
       tags:
         - vim
 
-    - name: "Copy nvim config file into place"
+    - name: "Copy neovim config file into place"
       ansible.builtin.template:
         src: templates/init.vim.j2
         dest: ~/.config/nvim/init.vim
