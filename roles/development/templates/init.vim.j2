@@ -122,7 +122,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'neovim/nvim-lspconfig'
 
 " Autocompletion
-" CoCInstall coc-json coc-tsserver
 " :help coc-nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -142,6 +141,10 @@ let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 """""""""""""""""""""
 """ CoC Configurations
 """""""""""""""""""""
+
+" TODO on new install:
+"   CocInstall coc-pyright`
+"   CocInstall coc-json coc-tsserver
 
 set hidden 
 set encoding=utf-8
