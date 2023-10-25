@@ -77,12 +77,16 @@
         src: files/tmux.conf
         dest: ~/.tmux/tmux.conf
         mode: '0644'
+      tags:
+        - tmux
 
     - name: "Copy tmux startup script into place"
       ansible.builtin.copy:
         src: files/tmux_startup.sh
         dest: ~/.tmux/startup.sh
         mode: '0755'
+      tags:
+        - tmux
 
     - name: "Copy global gitignore file"
       ansible.builtin.copy:
