@@ -143,8 +143,7 @@ let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 """""""""""""""""""""
 
 " TODO on new install:
-"   CocInstall coc-pyright`
-"   CocInstall coc-json coc-tsserver
+"   CocInstall coc-pyright coc-json coc-tsserver
 
 set hidden 
 set encoding=utf-8
@@ -347,7 +346,9 @@ set ignorecase
 :map <leader>T :w\|:call MultiTestRunner()<cr>
 
 " (Elixir) Formatting
+" TODO: Make this binding work with Rust too
 :noremap <leader>f :w\|:! mix format %<cr>
+autocmd FileType rust nnoremap<buffer> <Leader>f :w\|:RustFmt <cr>
 
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<cr>
