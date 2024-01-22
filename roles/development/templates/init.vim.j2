@@ -349,6 +349,7 @@ set ignorecase
 " TODO: Make this binding work with Rust too
 :noremap <leader>f :w\|:! mix format %<cr>
 autocmd FileType rust nnoremap<buffer> <Leader>f :w\|:RustFmt <cr>
+autocmd FileType python nnoremap<buffer> <Leader>f :w\|:!poetry run black %<cr>
 
 " create mapping for quick switch between invisibles and visibles. Enable with `\l`
 nmap <leader>l :set list!<cr>
