@@ -280,7 +280,7 @@ set shiftround
 """""""""""""""""""""""""""""""
 
 " Disable Coc completions for markdown files
-autocmd FileType markdown let b:coc_suggest_disable = 1
+autocmd BufNew,BufEnter *.md,*.txt execute "silent! CocDisable"
 
 " C-style indentation, according to the C indentation standard.
 au BufNewFile,BufRead *.c

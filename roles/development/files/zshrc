@@ -146,7 +146,9 @@ alias yat='~/Scripts/yield_at.sh'
 
 PYTHON3_VER=$(python3 -V | awk '{ print  tolower($1 $2) }' | sed 's/\.[0-9]$//')
 
-
+# Rust
+alias hx='flatpak run com.helix_editor.Helix'
+# TODO: remove this? Old and was for YCM. Current path seems to be ~/.cargo/bin/rustc
 export RUST_SRC_PATH='/usr/local/rust/rustc-1.27.0/src'
 # Enable ctrl-p ctrl-n for history
 export ERL_AFLAGS="-kernel shell_history enabled"
