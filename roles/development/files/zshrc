@@ -108,6 +108,18 @@ function detach_tm_clients()
     done
 }
 
+function back_up()
+{
+    if [[ "$1" == *.bak ]]; then
+        restored=${1%.*}
+        echo "$restored"
+        mv "$1" "$restored"
+    else
+        cp "$1" "$1".bak
+    fi
+}
+
+
 #----------#
 # Aliases: #
 #----------#
@@ -129,6 +141,7 @@ alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
 alias vim='nvim'
+alias bak=back_up
 
 # Python
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
