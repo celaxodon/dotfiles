@@ -130,10 +130,6 @@ Plug 'chriskempson/base16-vim' " Color schemes
 Plug 'altercation/vim-colors-solarized'  " Solarized color scheme
 Plug 'flazz/vim-colorschemes'   " A TON of colorschemes
 
-" Autocompletion in vim by providing bindings
-" to the autocompletion library 'Jedi' for Python.
-"Plugin 'davidhalter/jedi-vim'
-
 call plug#end()
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
@@ -379,7 +375,7 @@ function! SingleTestRunner()
         " %:p -- full path
         " %:t -- filename + suffix
         if match(suffix, "py") != -1
-            let cmd = ':!pytest %'
+            let cmd = ':!poetry run pytest %'
             exec cmd
         elseif match(suffix, "exs") != -1
             let cmd = ':!mix test %'
