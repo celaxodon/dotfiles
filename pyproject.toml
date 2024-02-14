@@ -5,9 +5,8 @@ description = ""
 authors = ["Graham Leva <celaxodon@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-ansible = "^5.6.0"
-ansible-lint = "^6.0.2"
+python = "^3.12"
+ansible = "^9.2.0"
 pynvim = "^0.4.3"
 
 [tool.poetry.dev-dependencies]
