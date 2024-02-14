@@ -105,6 +105,13 @@
         dest: ~/.ctags/elixir.ctags
         mode: '0644'
 
-    # FIXME
-    # - name: "Install nvim plugins"
-    #   ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
+    - name: "Install nvim plugins"
+      ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
+      tags:
+        - vim-plugins
+
+    # TODO - fixme - stalls out
+    # - name: "Install CoC plugins"
+    #   ansible.builtin.shell: 'nvim +CocInstall +coc-pyright +coc-json +coc-tsserver +coc-elixir +coc-rust-analyzer'
+    #   tags:
+    #     - vim-plugins
