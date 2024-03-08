@@ -33,6 +33,8 @@
         src: files/zshrc
         dest: ~/.zshrc
         mode: 0744
+      tags:
+        - zsh
 
     - name: "Get project's poetry venv location"
       ansible.builtin.shell: "poetry env list --full-path | grep 'Activated' | cut -d ' ' -f 1"
