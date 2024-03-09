@@ -107,12 +107,24 @@
         dest: ~/.ctags/elixir.ctags
         mode: '0644'
 
-    - name: "Install nvim plugins"
-      ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
-      tags:
-        - vim-plugins
+    - name: "Ensure alacritty config dir is present"
+      ansible.builtin.file:
+        path: ~/.config/alacritty
+        state: directory
 
-    # TODO - fixme - stalls out
+    - name: "Install Alacritty config file"
+      ansible.builtin.copy:
+        src: files/alacritty.toml
+        dest: ~/.config/alacritty/alacritty.toml
+        mode: '0644'
+
+    # FIXME - stalls out
+    # - name: "Install nvim plugins"
+    #   ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
+    #   tags:
+    #     - vim-plugins
+
+    # FIXME - stalls out
     # - name: "Install CoC plugins"
     #   ansible.builtin.shell: 'nvim +CocInstall +coc-pyright +coc-json +coc-tsserver +coc-elixir +coc-rust-analyzer'
     #   tags:
