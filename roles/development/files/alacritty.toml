@@ -1,0 +1,19 @@
+shell = "/bin/zsh"
+
+[scrolling]
+history = 20000
+
+[font]
+family = "monospace"
+style = "regular"
+
+[bell]
+animation = "Linear"
+# In milliseconds. 0 to disable
+duration = 10
+
+[cursor]
+style.shape = "Block"
+
+[mouse]
+hide_when_typing = true
