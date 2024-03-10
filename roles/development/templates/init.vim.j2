@@ -366,7 +366,7 @@ set pastetoggle=<F3>
 " Copied from Gary Bernhardt
 function! SingleTestRunner()
     " Are we in a test file?
-    let in_test_file = match(expand("%"), '\(test_.*\.py\|.*_test\.py\|.*_test\.exs\|test_.*\.exs\)$') != -1
+    let in_test_file = match(expand("%"), '\(test_.*\.py\|.*_test\.py\|.*_test\.exs\|test_.*\.exs\|.*./rs\)$') != -1
 
     if in_test_file
         let suffix = expand("%:e")
