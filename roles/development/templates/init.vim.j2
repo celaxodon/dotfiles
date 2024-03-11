@@ -341,7 +341,7 @@ set ignorecase
 :map <leader>t :w\|:call SingleTestRunner()<cr>
 :map <leader>T :w\|:call MultiTestRunner()<cr>
 
-" (Elixir) Formatting
+" Auto-formatting keybinds
 " TODO: Make this binding work with Rust too
 :noremap <leader>f :w\|:! mix format %<cr>
 autocmd FileType rust nnoremap<buffer> <Leader>f :w\|:RustFmt <cr>
@@ -381,7 +381,9 @@ function! SingleTestRunner()
             let cmd = ':!mix test %'
             exec cmd
         elseif match(suffix, "rs") != -1
-            let cmd = ':!cargo test %'
+            " Just run them all. May not be possible to run just one module's tests,
+            " and I haven't yet worked on a project where this took too much time.
+            let cmd = ':!cargo test'
             exec cmd
         elseif match(suffix, "java") != -1
             let cmd = ':!mvn clean % test'
