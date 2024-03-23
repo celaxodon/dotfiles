@@ -4,8 +4,15 @@ shell = "/bin/zsh"
 history = 20000
 
 [font]
-family = "monospace"
-style = "regular"
+size = 13.0
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "FiraCode Nerd Font Mono"
+style = "Bold"
 
 [bell]
 animation = "Linear"
