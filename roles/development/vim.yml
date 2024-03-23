@@ -1,0 +1,60 @@
+---
+- name: Install neovim
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Ensure neovim config directory structure exists
+      ansible.builtin.file:
+        path: ~/.config/nvim/lua/user/plugins
+        state: directory
+        mode: "0755"
+      tags:
+        - vim
+
+    - name: Ensure nvim config directory exists
+      ansible.builtin.file:
+        path: ~/.config/nvim
+        state: directory
+        mode: "0755"
+      tags:
+        - vim
+
+    # TODO: consider removing when adding init.lua
+    - name: Get this project's poetry venv location
+      ansible.builtin.shell: set -o pipefail; poetry env list --full-path | grep 'Activated' | cut -d ' ' -f 1
+      register: poetry_venv_location
+      tags:
+        - vim
+
+    - name: Print poetry venv location
+      ansible.builtin.debug:
+        msg: "{{ poetry_venv_location.stdout }}"
+
+    - name: Insert poetry venv location in nvim config file
+      ansible.builtin.set_fact:
+        python3_venv_loc: "{{ poetry_venv_location.stdout }}/"
+      tags:
+        - vim
+    - name: (legacy) Copy vim config files into place
+      ansible.builtin.copy:
+        src: roles/development/files/vimrc
+        dest: ~/.vim/vimrc
+        mode: "0644"
+      tags:
+        - vim
+
+    - name: Create neovim config directory
+      ansible.builtin.file:
+        path: ~/.config/nvim
+        state: directory
+        mode: "0755"
+      tags:
+        - vim
+
+    - name: Copy neovim config file into place
+      ansible.builtin.template:
+        src: roles/development/templates/init.vim.j2
+        dest: ~/.config/nvim/init.vim
+        mode: "0644"
+      tags:
+        - vim

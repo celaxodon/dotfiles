@@ -14,20 +14,6 @@
         state: latest
       become: yes
 
-    - name: "(legacy) Ensure vim config directory exists"
-      ansible.builtin.file:
-        path: ~/.vim
-        state: directory
-      tags:
-        - vim
-
-    - name: "Ensure nvim config directory exists"
-      ansible.builtin.file:
-        path: ~/.config/nvim
-        state: directory
-      tags:
-        - vim
-
     - name: "Copy zsh config files into place"
       ansible.builtin.copy:
         src: files/zshrc
@@ -35,44 +21,6 @@
         mode: 0744
       tags:
         - zsh
-
-    - name: "Get project's poetry venv location"
-      ansible.builtin.shell: "poetry env list --full-path | grep 'Activated' | cut -d ' ' -f 1"
-      register: poetry_venv_location
-      tags:
-        - vim
-
-    - debug:
-        msg: "{{ poetry_venv_location.stdout }}"
-
-    - name: "Insert poetry venv location in nvim config file"
-      set_fact:
-        python3_venv_loc: "{{ poetry_venv_location.stdout }}/"
-      tags:
-        - vim
-
-    - name: "(legacy) Copy vim config files into place"
-      ansible.builtin.copy:
-        src: files/vimrc
-        dest: ~/.vim/vimrc
-        mode: '0644'
-      tags:
-        - vim
-
-    - name: "Create neovim config directory"
-      ansible.builtin.file:
-        path: ~/.config/nvim
-        state: directory
-      tags:
-        - vim
-
-    - name: "Copy neovim config file into place"
-      ansible.builtin.template:
-        src: templates/init.vim.j2
-        dest: ~/.config/nvim/init.vim
-        mode: '0644'
-      tags:
-        - vim
 
     - name: "Copy tmux config files into place"
       ansible.builtin.copy:
@@ -107,16 +55,13 @@
         dest: ~/.ctags/elixir.ctags
         mode: '0644'
 
-    - name: "Ensure alacritty config dir is present"
-      ansible.builtin.file:
-        path: ~/.config/alacritty
-        state: directory
+  - name: Include (n)vim tasks
+    ansible.builtin.import_playbook: tasks/vim.yml
 
-    - name: "Install Alacritty config file"
-      ansible.builtin.copy:
-        src: files/alacritty.toml
-        dest: ~/.config/alacritty/alacritty.toml
-        mode: '0644'
+  - name: Include Alacritty tasks
+    ansible.builtin.import_playbook: tasks/alacritty.yml
+
+    # TODO: Install nerdfonts needed for alacritty config https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
 
     # FIXME - stalls out
     # - name: "Install nvim plugins"
