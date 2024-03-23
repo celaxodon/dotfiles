@@ -7,7 +7,6 @@
     - name: "Install vim, tmux, git, zsh"
       ansible.builtin.package:
         name:
-          - vim
           - git
           - tmux
           - zsh

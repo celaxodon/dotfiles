@@ -1,8 +1,20 @@
 ---
-- name: Install neovim
+- name: Install (neo)vim
   hosts: localhost
   connection: local
   tasks:
+    - name: Install vim
+      ansible.builtin.package:
+        name:
+          - vim
+        state: latest
+      become: yes
+
+    # TODO: Install neovim
+    # 1. Download v0.9.5 appimage (https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage)
+    # 2. install to ~/bin/neovim.appimage
+    # 3. ensure alias is created
+
     - name: Ensure neovim config directory structure exists
       ansible.builtin.file:
         path: ~/.config/nvim/lua/user/plugins
