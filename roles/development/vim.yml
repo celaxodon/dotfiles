@@ -8,7 +8,7 @@
         name:
           - vim
         state: latest
-      become: yes
+      become: true
 
     # TODO: Install neovim
     # 1. Download v0.9.5 appimage (https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage)

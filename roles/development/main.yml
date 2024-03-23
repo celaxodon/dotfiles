@@ -1,75 +1,71 @@
 ---
-  - name: "Install dotfiles"
-    hosts: localhost
-    connection: local
-    tasks:
-
-    - name: "Install vim, tmux, git, zsh"
+- name: Install dotfiles
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install tmux, git, zsh
       ansible.builtin.package:
         name:
           - git
           - tmux
           - zsh
         state: latest
-      become: yes
+      become: true
 
-    - name: "Copy zsh config files into place"
+    - name: Copy zsh config files into place
       ansible.builtin.copy:
         src: files/zshrc
         dest: ~/.zshrc
-        mode: 0744
+        mode: "0644"
       tags:
         - zsh
 
-    - name: "Copy tmux config files into place"
+    # TODO install oh-my-zsh
+
+    - name: Copy tmux config files into place
       ansible.builtin.copy:
         src: files/tmux.conf
         dest: ~/.tmux/tmux.conf
-        mode: '0644'
+        mode: "0644"
       tags:
         - tmux
 
-    - name: "Copy tmux startup script into place"
+    - name: Copy tmux startup script into place
       ansible.builtin.copy:
         src: files/tmux_startup.sh
         dest: ~/.tmux/startup.sh
-        mode: '0755'
+        mode: "0755"
       tags:
         - tmux
 
-    - name: "Copy global gitignore file"
+    - name: Copy global gitignore file
       ansible.builtin.copy:
         src: files/gitignore_global
         dest: ~/.gitignore_global
-        mode: '0644'
+        mode: "0644"
 
-    - name: "Ensure ~/.ctags directory is present"
+    - name: Ensure ~/.ctags directory is present
       ansible.builtin.file:
         path: ~/.ctags
         state: directory
+        mode: "0755"
 
-    - name: "Copy elixir ctags file into place"
+    - name: Copy elixir ctags file into place
       ansible.builtin.copy:
         src: files/elixir.ctags
         dest: ~/.ctags/elixir.ctags
-        mode: '0644'
+        mode: "0644"
 
-  - name: Include (n)vim tasks
-    ansible.builtin.import_playbook: tasks/vim.yml
+- name: Include (neo)vim tasks
+  ansible.builtin.import_playbook: vim.yml
 
-  - name: Include Alacritty tasks
-    ansible.builtin.import_playbook: tasks/alacritty.yml
+- name: Include Alacritty tasks
+  ansible.builtin.import_playbook: alacritty.yml
 
-    # TODO: Install nerdfonts needed for alacritty config https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
+  # TODO: Install nerdfonts needed for alacritty config https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
 
-    # FIXME - stalls out
-    # - name: "Install nvim plugins"
-    #   ansible.builtin.shell: 'nvim +PlugInstall +qall && nvim +PlugClean +qall && nvim +PlugUpdate +qall'
-    #   tags:
-    #     - vim-plugins
-
-    # FIXME - stalls out
-    # - name: "Install CoC plugins"
-    #   ansible.builtin.shell: 'nvim +CocInstall +coc-pyright +coc-json +coc-tsserver +coc-elixir +coc-rust-analyzer'
-    #   tags:
-    #     - vim-plugins
+  # FIXME - stalls out
+  # - name: "Install CoC plugins"
+  #   ansible.builtin.shell: 'nvim +CocInstall +coc-pyright +coc-json +coc-tsserver +coc-elixir +coc-rust-analyzer'
+  #   tags:
+  #     - vim-plugins
