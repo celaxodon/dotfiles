@@ -12,6 +12,15 @@
         state: latest
       become: true
 
+    - name: Install other utilities
+      ansible.builtin.package:
+        name:
+          - ripgrep
+          - fd-find
+          - fswatch
+        state: latest
+      become: true
+
     - name: Copy zsh config files into place
       ansible.builtin.copy:
         src: files/zshrc
