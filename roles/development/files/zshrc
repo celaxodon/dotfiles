@@ -161,10 +161,11 @@ PYTHON3_VER=$(python3 -V | awk '{ print  tolower($1 $2) }' | sed 's/\.[0-9]$//')
 
 # Rust
 alias hx='flatpak run com.helix_editor.Helix'
-# TODO: remove this? Old and was for YCM. Current path seems to be ~/.cargo/bin/rustc
-export RUST_SRC_PATH='/usr/local/rust/rustc-1.27.0/src'
 # Enable ctrl-p ctrl-n for history
+# Elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
+# For asd install <some elixir version> so it's built/compiled with docs. Important for LSP
+export KERL_BUILD_DOCS=yes
 
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin:~/bin:$PATH
