@@ -71,10 +71,4 @@
 - name: Include Alacritty tasks
   ansible.builtin.import_playbook: alacritty.yml
 
-  # TODO: Install nerdfonts needed for alacritty config https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
-
-  # FIXME - stalls out
-  # - name: "Install CoC plugins"
-  #   ansible.builtin.shell: 'nvim +CocInstall +coc-pyright +coc-json +coc-tsserver +coc-elixir +coc-rust-analyzer'
-  #   tags:
-  #     - vim-plugins
+# TODO: Install nerdfonts needed for alacritty config https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
