@@ -2,6 +2,8 @@
 - name: Install (neo)vim
   hosts: localhost
   connection: local
+  vars:
+    nvim_version: v0.9.5
   tasks:
     - name: Install vim
       ansible.builtin.package:
@@ -11,23 +13,47 @@
       become: true
 
     # TODO: Install neovim
-    # 1. Download v0.9.5 appimage (https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage)
     # 2. install to ~/bin/neovim.appimage
     # 3. ensure alias is created
 
-    - name: Ensure neovim config directory structure exists
-      ansible.builtin.file:
-        path: ~/.config/nvim/lua/user/plugins
-        state: directory
+    # TODO: Install/update rust
+    # TODO: Install rust-analyzer (see https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary)
+    # or maybe $ rustup component add rust-analyzer
+      # TODO: install rust src ($ rustup component add rust-src)
+
+    - name: Download neovim
+      ansible.builtin.get_url:
+        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version}}/nvim.appimage
+        dest: /tmp/nvim-{{ nvim_version}}.appimage
+        checksum: sha256:0c82e5702af7a11fbb916a11b4a82e98928abf8266c74b2030ea740340437bf9
+      tags:
+        - vim
+
+    - name: Copy nvim appimage to ~/bin
+      ansible.builtin.copy:
+        src: /tmp/nvim-{{ nvim_version }}.appimage
+        dest: ~/bin/nvim-{{ nvim_version }}.appimage
         mode: "0755"
       tags:
         - vim
 
-    - name: Ensure nvim config directory exists
+    - name: Create nvim symlink in ~/bin
       ansible.builtin.file:
-        path: ~/.config/nvim
+        src: ~/bin/nvim-{{ nvim_version }}.appimage
+        dest: ~/bin/nvim
+        state: link
+        force: true
+      tags:
+        - vim
+
+    - name: Ensure neovim config directory structure exists
+      ansible.builtin.file:
+        path: "{{ item }}"
         state: directory
         mode: "0755"
+      loop:
+        - ~/.config/nvim/lua/plugins
+        - ~/.config/nvim/lua/config
       tags:
         - vim
 

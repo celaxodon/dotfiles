@@ -31,10 +31,18 @@
 
     # TODO install oh-my-zsh
 
-    - name: Copy tmux config files into place
+    - name: Copy main tmux config file into place
       ansible.builtin.copy:
         src: files/tmux.conf
         dest: ~/.tmux/tmux.conf
+        mode: "0644"
+      tags:
+        - tmux
+
+    - name: Copy tmux status line config into place
+      ansible.builtin.copy:
+        src: files/tmux_status_bar.conf
+        dest: ~/.tmux/tmux_status_bar.conf
         mode: "0644"
       tags:
         - tmux
