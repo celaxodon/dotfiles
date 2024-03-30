@@ -9,6 +9,7 @@
           - git
           - tmux
           - zsh
+          - lua5.4
         state: latest
       become: true
 
