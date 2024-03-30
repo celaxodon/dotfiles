@@ -140,7 +140,7 @@ alias gsl='git stash list'
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
-alias vim='nvim'
+# alias vim='nvim'
 alias bak=back_up
 
 # Python
