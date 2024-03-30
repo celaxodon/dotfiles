@@ -12,24 +12,21 @@
         state: latest
       become: true
 
-    # TODO: Install neovim
-    # 2. install to ~/bin/neovim.appimage
-    # 3. ensure alias is created
-
     # TODO: Install/update rust
     # TODO: Install rust-analyzer (see https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary)
     # or maybe $ rustup component add rust-analyzer
-      # TODO: install rust src ($ rustup component add rust-src)
+    # TODO: install rust src ($ rustup component add rust-src)
 
     - name: Download neovim
       ansible.builtin.get_url:
-        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version}}/nvim.appimage
-        dest: /tmp/nvim-{{ nvim_version}}.appimage
+        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim.appimage
+        dest: /tmp/nvim-{{ nvim_version }}.appimage
         checksum: sha256:0c82e5702af7a11fbb916a11b4a82e98928abf8266c74b2030ea740340437bf9
+        mode: "0755"
       tags:
         - vim
 
-    - name: Copy nvim appimage to ~/bin
+    - name: Move nvim appimage to ~/bin
       ansible.builtin.copy:
         src: /tmp/nvim-{{ nvim_version }}.appimage
         dest: ~/bin/nvim-{{ nvim_version }}.appimage
@@ -45,6 +42,11 @@
         force: true
       tags:
         - vim
+
+    - name: Clean up downloaded file
+      ansible.builtin.file:
+        path: /tmp/nvim-{{ nvim_version }}.appimage
+        state: absent
 
     - name: Ensure neovim config directory structure exists
       ansible.builtin.file:
