@@ -9,7 +9,9 @@
           - git
           - tmux
           - zsh
-          - lua5.4
+          - lua5.4    # TODO: Move this out to an asdf playbook
+          # TODO: Install liblua5.4-dev for header files
+          # TODO: Install luarocks
         state: latest
       become: true
 
