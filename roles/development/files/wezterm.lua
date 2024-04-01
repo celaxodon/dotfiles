@@ -34,4 +34,6 @@ if package.config:sub(1, 1) == "\\" then
 	config.default_prog = { "ubuntu2204.exe" }
 end
 
+config.font_size = 13.0
+
 return config
