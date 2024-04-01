@@ -9,7 +9,7 @@
           - git
           - tmux
           - zsh
-          - lua5.4    # TODO: Move this out to an asdf playbook
+          # - lua5.4    # TODO: Move this out to an asdf playbook
           # TODO: Install liblua5.4-dev for header files
           # TODO: Install luarocks
         state: latest
@@ -79,7 +79,7 @@
 - name: Include (neo)vim tasks
   ansible.builtin.import_playbook: vim.yml
 
-- name: Include Alacritty tasks
-  ansible.builtin.import_playbook: alacritty.yml
+# - name: Include Alacritty tasks
+#   ansible.builtin.import_playbook: alacritty.yml
 
 # TODO: Install nerdfonts needed for alacritty config https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
