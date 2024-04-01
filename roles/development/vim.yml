@@ -17,6 +17,7 @@
     # or maybe $ rustup component add rust-analyzer
     # TODO: install rust src ($ rustup component add rust-src)
 
+    # TODO: Only download if not present in ~/bin
     - name: Download neovim
       ansible.builtin.get_url:
         url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim.appimage
@@ -59,19 +60,18 @@
       tags:
         - vim
 
-    # - name: (legacy) Copy vim config files into place
-    #   ansible.builtin.copy:
-    #     src: roles/development/files/vimrc
-    #     dest: ~/.vim/vimrc
-    #     mode: "0644"
-    #   tags:
-    #     - vim
-
-    # FIXME: Update to init.lua
     - name: Copy neovim config file into place
-      ansible.builtin.template:
-        src: roles/development/templates/init.vim.j2
-        dest: ~/.config/nvim/init.vim
+      ansible.builtin.copy:
+        src: files/init.lua
+        dest: ~/.config/nvim/init.lua
         mode: "0644"
+      tags:
+        - vim
+
+    # TODO: Install lazyvim config files into place
+    - name: Copy lazyvim config files into place
+      ansible.builtin.copy:
+        src: files/nvim_lua/
+        dest: ~/.config/nvim/lua/
       tags:
         - vim
