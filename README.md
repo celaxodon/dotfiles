@@ -11,7 +11,9 @@ Run `poetry init` for package installation
 `$ ansible-playbook roles/development/main.yml --ask-become-pass`
 
 
-### Installing only (n)vim-related dotfiles
+### Installing Only Some Dotfiles
+
+Use tags (zsh, vim, tmux), like so:
 
 `$ ansible-playbook roles/development/main.yml --tags "vim"`
 
