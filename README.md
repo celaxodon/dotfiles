@@ -4,7 +4,8 @@
 
 Install [poetry](https://python-poetry.org/docs/).
 
-Run `poetry init` for package installation
+Run `poetry install` for package installation.
+NOTE: May require running `poetry env use $(which python3)` with asdf-installed versions of Python.
 
 ## Installing dotfiles ##
 
