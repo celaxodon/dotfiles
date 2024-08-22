@@ -12,10 +12,29 @@
         state: latest
       become: true
 
-    # TODO: install Node/npm for lazyvim
     # $ curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
-    # $ sudo -E bash nodesource_setup.sh
-    # $ sudo apt-get install -y nodejs
+    - name: Download NodeJS 22 (LazyVim dependency)
+      ansible.builtin.get_url:
+        url: https://deb.nodesource.com/setup_22.x
+        dest: /tmp/nodesource_setup.sh
+      tags:
+        - vim
+
+    # FIXME: hangs? `$ sudo -E bash nodesource_setup.sh`
+    - name: Load NodeJS repositories from install script
+      ansible.builtin.shell: bash /tmp/nodesource_setup.sh
+      become: true
+      tags:
+        - vim
+
+    - name: Install NodeJS
+      ansible.builtin.package:
+        name:
+          - nodejs
+        state: latest
+      become: true
+      tags:
+        - vim
 
     # TODO: Install/update rust
     # TODO: Install rust-analyzer (see https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary)
