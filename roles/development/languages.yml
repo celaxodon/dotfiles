@@ -2,8 +2,10 @@
 - name: Install programming languages
   hosts: localhost
   connection: local
+  vars:
+    luarocks_version: 3.11.1
+    lua_version: 5.4
   tasks:
-    # $ curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
     - name: Download NodeJS 22 (LazyVim dependency)
       ansible.builtin.get_url:
         url: https://deb.nodesource.com/setup_22.x
@@ -48,6 +50,56 @@
       tags:
         - rust
 
+    - name: Install Lua
+      ansible.builtin.package:
+        name:
+          - lua{{ lua_version }}
+          - liblua{{ lua_version }}-dev    # Required for LuaRocks
+        state: latest
+      become: true
+      tags:
+        - lua
+
+    - name: Download LuaRocks source
+      ansible.builtin.get_url:
+        url: https://luarocks.org/releases/luarocks-{{ luarocks_version }}.tar.gz
+        dest: /tmp/luarocks-{{ luarocks_version }}.tar.gz
+      tags:
+        - lua
+
+    - name: Create /tmp/luarocks directory to extract tarball into
+      ansible.builtin.file:
+        path: /tmp/luarocks-{{ luarocks_version }}
+        state: directory
+        mode: "0755"
+      tags:
+        - lua
+
+    - name: Extract LuaRocks tarball to /tmp/luarocks
+      ansible.builtin.unarchive:
+        src: /tmp/luarocks-{{ luarocks_version }}.tar.gz
+        dest: /tmp/
+        remote_src: yes
+      tags:
+        - lua
+
+    - name: Build LuaRocks
+      ansible.builtin.shell:
+        cmd: ./configure && make && sudo make install
+        chdir: /tmp/luarocks-{{ luarocks_version }}
+      become: true
+      tags:
+        - lua
+
+    - name: Install LuaRocks
+      ansible.builtin.shell:
+        cmd: luarocks install luasocket
+        chdir: /tmp/luarocks-{{ luarocks_version }}
+      become: true
+      tags:
+        - lua
+
     # - lua5.4    # TODO: Move this out to an asdf playbook
-    # TODO: Install liblua5.4-dev for header files
-    # TODO: Install luarocks
+
+    # TODO: Install NerdFonts - https://www.nerdfonts.com/
+

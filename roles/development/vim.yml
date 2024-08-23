@@ -12,35 +12,6 @@
         state: latest
       become: true
 
-    # $ curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
-    - name: Download NodeJS 22 (LazyVim dependency)
-      ansible.builtin.get_url:
-        url: https://deb.nodesource.com/setup_22.x
-        dest: /tmp/nodesource_setup.sh
-      tags:
-        - vim
-
-    - name: Load NodeJS repositories from install script
-      ansible.builtin.shell: bash /tmp/nodesource_setup.sh
-      become: true
-      tags:
-        - vim
-
-    - name: Install NodeJS
-      ansible.builtin.package:
-        name:
-          - nodejs
-        state: latest
-      become: true
-      tags:
-        - vim
-
-    # TODO: Install/update rust
-    # TODO: Install rust-analyzer (see https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary)
-    # or maybe $ rustup component add rust-analyzer
-    # TODO: install rust src ($ rustup component add rust-src)
-
-    # TODO: Only download if not present in ~/bin
     - name: Download neovim
       ansible.builtin.get_url:
         url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim.appimage

@@ -30,13 +30,13 @@
       tags:
         - zsh
 
-    # - name: Download oh-my-zsh installer
-    #   ansible.builtin.url:
-    #     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    #     dest: /tmp/install-oh-my-zsh.sh
-    #     mode: "0755"
-    #   tags:
-    #     - zsh
+    - name: Download oh-my-zsh installer
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /tmp/install-oh-my-zsh.sh
+        mode: "0755"
+      tags:
+        - zsh
 
     - name: Install oh-my-zsh
       ansible.builtin.shell: bash /tmp/install-oh-my-zsh.sh
