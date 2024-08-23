@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   vars:
-    nvim_version: v0.9.5
+    nvim_version: v0.10.5
   tasks:
     - name: Install vim
       ansible.builtin.package:
@@ -20,7 +20,6 @@
       tags:
         - vim
 
-    # FIXME: hangs? `$ sudo -E bash nodesource_setup.sh`
     - name: Load NodeJS repositories from install script
       ansible.builtin.shell: bash /tmp/nodesource_setup.sh
       become: true
@@ -46,7 +45,7 @@
       ansible.builtin.get_url:
         url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim.appimage
         dest: /tmp/nvim-{{ nvim_version }}.appimage
-        checksum: sha256:0c82e5702af7a11fbb916a11b4a82e98928abf8266c74b2030ea740340437bf9
+        checksum: sha256:c4762d54cadfd9fa4497c7969197802c9cf9e0d926c39e561f0bd170e36c8aa0
         mode: "0755"
       tags:
         - vim

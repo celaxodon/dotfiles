@@ -9,9 +9,6 @@
           - git
           - tmux
           - zsh
-          # - lua5.4    # TODO: Move this out to an asdf playbook
-          # TODO: Install liblua5.4-dev for header files
-          # TODO: Install luarocks
         state: latest
       become: true
 
@@ -33,6 +30,18 @@
       tags:
         - zsh
 
+    # - name: Download oh-my-zsh installer
+    #   ansible.builtin.url:
+    #     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    #     dest: /tmp/install-oh-my-zsh.sh
+    #     mode: "0755"
+    #   tags:
+    #     - zsh
+
+    - name: Install oh-my-zsh
+      ansible.builtin.shell: bash /tmp/install-oh-my-zsh.sh
+      tags:
+        - zsh
 
     - name: Ensure tmux config folder is present
       ansible.builtin.file:
@@ -78,16 +87,16 @@
         state: directory
         mode: "0755"
 
-    # TODO: install oh-my-zsh
     # TODO: Install asdf -- standalone play
-    # TODO: Install rustup
-    # $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
     - name: Copy elixir ctags file into place
       ansible.builtin.copy:
         src: files/elixir.ctags
         dest: ~/.ctags/elixir.ctags
         mode: "0644"
+
+- name: Install programming languages
+  ansible.builtin.import_playbook: languages.yml
 
 - name: Include (neo)vim tasks
   ansible.builtin.import_playbook: vim.yml
