@@ -1,0 +1,53 @@
+---
+- name: Install programming languages
+  hosts: localhost
+  connection: local
+  tasks:
+    # $ curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+    - name: Download NodeJS 22 (LazyVim dependency)
+      ansible.builtin.get_url:
+        url: https://deb.nodesource.com/setup_22.x
+        dest: /tmp/nodesource_setup.sh
+      tags:
+        - vim
+
+    - name: Load NodeJS repositories from install script
+      ansible.builtin.shell: bash /tmp/nodesource_setup.sh
+      become: true
+      tags:
+        - vim
+
+    - name: Install NodeJS
+      ansible.builtin.package:
+        name:
+          - nodejs
+        state: latest
+      become: true
+      tags:
+        - vim
+
+    - name: Download rustup.sh
+      ansible.builtin.get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/rustup.sh
+      tags:
+        - rust
+
+    - name: Execute rustup.sh script
+      ansible.builtin.shell: bash /tmp/rustup.sh -y
+      tags:
+        - rust
+
+    - name: Install rust-analyzer
+      ansible.builtin.shell: rustup component add rust-analyzer
+      tags:
+        - rust
+
+    - name: Install rust source
+      ansible.builtin.shell: rustup component add rust-src
+      tags:
+        - rust
+
+    # - lua5.4    # TODO: Move this out to an asdf playbook
+    # TODO: Install liblua5.4-dev for header files
+    # TODO: Install luarocks
