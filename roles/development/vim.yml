@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   vars:
-    nvim_version: v0.10.5
+    nvim_version: v0.10.1
   tasks:
     - name: Install vim
       ansible.builtin.package:
