@@ -62,7 +62,6 @@
       tags:
         - vim
 
-    # TODO: Install lazyvim config files into place
     - name: Copy lazyvim config files into place
       ansible.builtin.copy:
         src: files/nvim_lua/

@@ -11,13 +11,13 @@
         url: https://deb.nodesource.com/setup_22.x
         dest: /tmp/nodesource_setup.sh
       tags:
-        - vim
+        - javascript
 
     - name: Load NodeJS repositories from install script
       ansible.builtin.shell: bash /tmp/nodesource_setup.sh
       become: true
       tags:
-        - vim
+        - javascript
 
     - name: Install NodeJS
       ansible.builtin.package:
@@ -26,7 +26,7 @@
         state: latest
       become: true
       tags:
-        - vim
+        - javascript
 
     - name: Download rustup.sh
       ansible.builtin.get_url:
@@ -99,7 +99,4 @@
       tags:
         - lua
 
-    # - lua5.4    # TODO: Move this out to an asdf playbook
-
     # TODO: Install NerdFonts - https://www.nerdfonts.com/
-
