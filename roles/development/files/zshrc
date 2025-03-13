@@ -184,3 +184,5 @@ export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/lo
 
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
