@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   vars:
-    nvim_version: v0.10.1
+    nvim_version: v0.10.4
   tasks:
     - name: Install vim
       ansible.builtin.package:
@@ -14,9 +14,9 @@
 
     - name: Download neovim
       ansible.builtin.get_url:
-        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim.appimage
+        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim-linux-x86_64.appimage
         dest: /tmp/nvim-{{ nvim_version }}.appimage
-        checksum: sha256:c4762d54cadfd9fa4497c7969197802c9cf9e0d926c39e561f0bd170e36c8aa0
+        checksum: sha256:d1b1488ef6a970dc3a2826b788d31d81b2f308ad42ef70ed62d35d0bf6189336
         mode: "0755"
       tags:
         - vim
