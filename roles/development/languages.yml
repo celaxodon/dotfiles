@@ -13,6 +13,7 @@
       tags:
         - javascript
 
+    # Sometimes this hangs
     - name: Load NodeJS repositories from install script
       ansible.builtin.shell: bash /tmp/nodesource_setup.sh
       become: true
@@ -99,4 +100,18 @@
       tags:
         - lua
 
+    - name: Ensure ~/.ctags directory is present
+      ansible.builtin.file:
+        path: ~/.ctags
+        state: directory
+        mode: "0755"
+
+    - name: Copy elixir ctags file into place
+      ansible.builtin.copy:
+        src: files/elixir.ctags
+        dest: ~/.ctags/elixir.ctags
+        mode: "0644"
+
     # TODO: Install NerdFonts - https://www.nerdfonts.com/
+    # TODO: Install asdf -- standalone play
+    # TODO: Install elixir-ls
