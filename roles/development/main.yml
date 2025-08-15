@@ -80,6 +80,9 @@
       stat:
         path: ~/.oh-my-zsh
       register: oh_my_zsh_exists
+      tags:
+        - zsh
+        - utils
 
     - name: Download oh-my-zsh installer
       ansible.builtin.get_url:
