@@ -139,7 +139,8 @@ alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
 # alias vim='nvim'
 alias bak=back_up
-alias kctx='kubectl config get-contexts'
+alias kcgtx='kubectl config get-contexts'
+alias kcutx='kubectl config use-context'
 
 # Python
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
