@@ -64,7 +64,7 @@ unsetopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/gleva/.zshrc'
+zstyle :compinstall filename '/Users/gleva/.zshrc'
 
 # Initialize completion
 autoload -Uz compinit
@@ -139,7 +139,9 @@ alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
 # alias vim='nvim'
 alias bak=back_up
-alias kctx='kubectl config get-contexts'
+alias kcgtx='kubectl config get-contexts'
+alias kcutx='kubectl config use-context'
+alias kctx='kubectl config current-context'
 
 # Python
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
@@ -162,6 +164,7 @@ export KERL_BUILD_DOCS=yes
 # Scripts
 alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
 alias yat='~/Scripts/yield_at.sh'
+alias cclogs='~/Scripts/cc_logs.sh'
 
 if [[ -e ~/Scripts/load_nv_vars.sh ]]; then
     source ~/Scripts/load_nv_vars.sh
@@ -185,4 +188,13 @@ export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/lo
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
 
+
+# MacOS settings
 eval "$(/opt/homebrew/bin/brew shellenv)"
+alias nvim="$HOME/bin/nvim-macos-arm64/bin/nvim"
+export PATH=~/bin:$PATH
+export DOCKER_CLI_PLATFORM=linux/amd64
+export LDFLAGS="-L/usr/local/opt/wxwidgets/lib"
+export CPPFLAGS="-I/usr/local/opt/wxwidgets/include"
+export PKG_CONFIG_PATH="/usr/local/opt/wxwidgets/lib/pkgconfig" 
+eval "$(zellij setup --generate-auto-start zsh)"
