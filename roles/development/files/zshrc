@@ -139,9 +139,12 @@ alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
 # alias vim='nvim'
 alias bak=back_up
+
+# Kubernetes
 alias kcgtx='kubectl config get-contexts'
 alias kcutx='kubectl config use-context'
-alias kctx='kubectl config current-context'
+alias kcctx='kubectl config current-context'
+export KUBECTL_SILENCE_AUTO_GENERATED_TOKEN_WARNING=true
 
 # Python
 alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
@@ -174,7 +177,7 @@ fi
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin:~/bin:$PATH
 
-export SHELL=/usr/bin/zsh
+export SHELL=/bin/zsh
 export EDITOR=nvim
 
 #----------------------#
@@ -194,6 +197,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 alias nvim="$HOME/bin/nvim-macos-arm64/bin/nvim"
 export PATH=~/bin:$PATH
 export DOCKER_CLI_PLATFORM=linux/amd64
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 export LDFLAGS="-L/usr/local/opt/wxwidgets/lib"
 export CPPFLAGS="-I/usr/local/opt/wxwidgets/include"
 export PKG_CONFIG_PATH="/usr/local/opt/wxwidgets/lib/pkgconfig" 
