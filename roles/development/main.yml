@@ -22,6 +22,7 @@
           - fswatch
           - curl
           - bat
+          - fzf
         state: latest
       become: true
       tags:

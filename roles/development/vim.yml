@@ -74,3 +74,5 @@
         dest: ~/.config/nvim/lua/
       tags:
         - vim
+
+    # TODO: Run TSUpdate {lang} to install nvim-treesitter parsers
