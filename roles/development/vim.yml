@@ -3,7 +3,7 @@
   hosts: localhost
   connection: local
   vars:
-    nvim_version: v0.11.0
+    nvim_version: v0.11.5
   tasks:
     - name: Install vim
       ansible.builtin.package:
@@ -12,18 +12,17 @@
         state: latest
       become: true
 
-    - name: Install neovim dependencies
-      ansible.builtin.package:
-        name:
-          - tree-sitter-cli
-        state: latest
-      become: true
+    - name: Install tree-sitter-cli dependency
+      ansible.builtin.shell: cargo install --locked tree-sitter-cli
+      # become: true
+      tags:
+        - vim
 
     - name: Download neovim
       ansible.builtin.get_url:
         url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim-linux-x86_64.appimage
         dest: /tmp/nvim-{{ nvim_version }}.appimage
-        checksum: sha256:ca44cd43fe8d55418414496e8ec7bac83f611705ece167f4ccb93cbf46fec6c0
+        checksum: sha256:7a4adf657f0b775ee4f4de6c94353b4a0548a3c6b31049a20538e05d4eea411a
         mode: "0755"
       tags:
         - vim
