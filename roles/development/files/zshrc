@@ -172,6 +172,8 @@ fi
 export PATH=~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin:~/bin:$PATH
 export PATH=$PATH:~/.local/opt/lilypond/current/bin
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 export SHELL=/usr/bin/zsh
 export EDITOR=nvim
 
