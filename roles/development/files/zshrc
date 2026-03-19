@@ -139,6 +139,8 @@ alias tm='~/.tmux/startup.sh'
 alias tmdc=detach_tm_clients
 # alias vim='nvim'
 alias bak=back_up
+
+# Kubernetes
 alias kcgtx='kubectl config get-contexts'
 alias kcutx='kubectl config use-context'
 alias kcctx='kubectl config current-context'
@@ -162,6 +164,7 @@ export KERL_BUILD_DOCS=yes
 
 # Scripts
 alias yat='~/Scripts/yield_at.sh'
+alias syat='~/Scripts/svc_yieldling_at.sh'
 
 if [[ -e ~/Scripts/load_nv_vars.sh ]]; then
     source ~/Scripts/load_nv_vars.sh
