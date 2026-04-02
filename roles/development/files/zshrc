@@ -112,7 +112,7 @@ function back_up()
         echo "$restored"
         mv "$1" "$restored"
     else
-        cp "$1" "$1".bak
+        cp -r "$1" "$1".bak
     fi
 }
 
@@ -144,10 +144,8 @@ alias bak=back_up
 alias kcgtx='kubectl config get-contexts'
 alias kcutx='kubectl config use-context'
 alias kcctx='kubectl config current-context'
-export KUBECTL_SILENCE_AUTO_GENERATED_TOKEN_WARNING=true
 
 # Python
-alias pygrade='pip3 freeze --local | grep -v '\^e' | cut -d = -f 1 | pip3 install -U'
 alias sobin=sobin_fn
 alias deac="deactivate"
 
@@ -165,9 +163,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 export KERL_BUILD_DOCS=yes
 
 # Scripts
-alias lpa='source ~/Scripts/load_prod_admin_profile.sh'
 alias yat='~/Scripts/yield_at.sh'
-alias cclogs='~/Scripts/cc_logs.sh'
+alias syat='~/Scripts/svc_yieldling_at.sh'
 
 if [[ -e ~/Scripts/load_nv_vars.sh ]]; then
     source ~/Scripts/load_nv_vars.sh
@@ -176,6 +173,9 @@ fi
 # Shell Variables
 # export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin
 export PATH=~/.cargo/bin:~/.asdf/bin:~/.asdf/shims:~/.local/bin:~/bin:$PATH
+export PATH=$PATH:~/.local/opt/lilypond/current/bin
+
+export XDG_CONFIG_HOME=$HOME/.config
 
 export SHELL=/bin/zsh
 export EDITOR=nvim

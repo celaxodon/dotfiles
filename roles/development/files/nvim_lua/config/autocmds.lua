@@ -6,14 +6,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Disable nvm-cmp and nvim-ts-autotag plugins for markdown and text files",
 	pattern = { "markdown", "text" },
 	callback = function()
-		require("cmp").setup({ enabled = false })
+		-- require("blink-cmp").setup({ enabled = false })
 		require("nvim-ts-autotag").setup({ enabled = false })
-		require("nvim-treesitter.configs").setup({
-			enabled = false,
-			autotag = {
-				enable = false,
-			},
-		})
+		-- require("nvim-treesitter.configs").setup({
+		-- 	ensure_installed = "maintained", -- or a list of languages you want to ensure are installed
+		-- 	sync_install = false,
+		-- 	auto_install = true,
+		-- 	ignore_install = {}, -- list of parsers to ignore installing
+		-- 	highlight = {
+		-- 		enable = true,
+		-- 	},
+		-- 	autotag = {
+		-- 		enable = false, -- disable autotag for markdown and text files
+		-- 	},
+		-- 	modules = {}, -- required
+		-- })
 	end,
 })
 

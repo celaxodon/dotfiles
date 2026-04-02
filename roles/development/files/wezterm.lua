@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+config.use_ime = true
 config.scrollback_lines = 4000
 config.window_padding = {
 	left = 2,

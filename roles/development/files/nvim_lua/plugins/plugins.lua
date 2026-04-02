@@ -7,38 +7,38 @@ return {
 	{ "tpope/vim-abolish" },
 	{ "ntpeters/vim-better-whitespace" },
 	{ "rhysd/conflict-marker.vim" },
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = function(_, opts)
-			table.insert(opts.ensure_installed, {
-				"elixir",
-				"erlang",
-				"heex",
-				"javascript",
-				"html",
-				"markdown",
-				"python",
-				"rust",
-			})
-		end,
-		-- build = ":TSUpdate",
-		-- config = function()
-		-- 	local configs = require("nvim-treesitter.configs")
-		--
-		-- 	configs.setup({
-		-- 		ensure_installed = {
-		-- 			"c",
-		-- 			"lua",
-		-- 			"vim",
-		-- 			"vimdoc",
-		-- 			"query",
-		-- 		},
-		-- 		sync_install = false,
-		-- 		highlight = { enable = true },
-		-- 		indent = { enable = true },
-		-- 	})
-		-- end,
-	},
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- 	opts = function(_, opts)
+	-- 		table.insert(opts.ensure_installed, {
+	-- 			"elixir",
+	-- 			"erlang",
+	-- 			"heex",
+	-- 			"javascript",
+	-- 			"html",
+	-- 			"markdown",
+	-- 			"python",
+	-- 			"rust",
+	-- 		})
+	-- 	end,
+	-- 	-- build = ":TSUpdate",
+	-- 	-- config = function()
+	-- 	-- 	local configs = require("nvim-treesitter.configs")
+
+	-- 	-- 	configs.setup({
+	-- 	-- 		ensure_installed = {
+	-- 	-- 			"c",
+	-- 	-- 			"lua",
+	-- 	-- 			"vim",
+	-- 	-- 			"vimdoc",
+	-- 	-- 			"query",
+	-- 	-- 		},
+	-- 	-- 		sync_install = false,
+	-- 	-- 		highlight = { enable = true },
+	-- 	-- 		indent = { enable = true },
+	-- 	-- 	})
+	-- 	-- end,
+	-- },
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = { "hrsh7th/cmp-emoji" },
