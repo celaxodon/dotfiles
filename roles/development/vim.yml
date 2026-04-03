@@ -3,7 +3,24 @@
   hosts: localhost
   connection: local
   vars:
-    nvim_version: v0.11.5
+    nvim_version: v0.12.0
+    # Linux AppImage: pick arm64 vs x86_64 from ansible_architecture
+    nvim_linux_appimage_arch: "{{ 'arm64' if ansible_architecture in ['aarch64', 'arm64'] else 'x86_64' }}"
+    nvim_linux_appimage_checksum: >-
+      {{
+        'sha256:51799635c6008c77bd8dc3fe8732f0f72f98a49a42205da1ee0fd63d2d98ecc7'
+        if ansible_architecture in ['aarch64', 'arm64'] else
+        'sha256:7876b67462af08abdc884818b398b3e82907d6a4c89edfe7c6b1ff168eb7c4d6'
+      }}
+    # macOS tarball (Apple Silicon vs Intel)
+    nvim_macos_arch: "{{ 'arm64' if ansible_architecture in ['aarch64', 'arm64'] else 'x86_64' }}"
+    nvim_macos_tarball_checksum: >-
+      {{
+        'sha256:cf0137d6961785c34926f879b7a5b5fa0371ab0d6e2959e390e2f00b46165ce9'
+        if ansible_architecture in ['aarch64', 'arm64'] else
+        'sha256:309b3252a04bf8e4043389d3ea9bbb94e17becea2cde74f11f948b4775bbe3d4'
+      }}
+    nvim_macos_tmp_tarball: "/tmp/nvim-{{ nvim_version }}-macos-{{ nvim_macos_arch }}.tar.gz"
   tasks:
     - name: Install vim
       ansible.builtin.package:
@@ -18,36 +35,92 @@
       tags:
         - vim
 
-    - name: Download neovim
-      ansible.builtin.get_url:
-        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim-linux-x86_64.appimage
-        dest: /tmp/nvim-{{ nvim_version }}.appimage
-        checksum: sha256:7a4adf657f0b775ee4f4de6c94353b4a0548a3c6b31049a20538e05d4eea411a
+    - name: Ensure ~/bin exists
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/bin"
+        state: directory
         mode: "0755"
       tags:
         - vim
 
-    - name: Move nvim appimage to ~/bin
+    - name: Download neovim (Linux AppImage)
+      ansible.builtin.get_url:
+        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim-linux-{{ nvim_linux_appimage_arch }}.appimage
+        dest: /tmp/nvim-{{ nvim_version }}.appimage
+        checksum: "{{ nvim_linux_appimage_checksum }}"
+        mode: "0755"
+      when: ansible_system == "Linux"
+      tags:
+        - vim
+
+    - name: Install neovim AppImage to ~/bin
       ansible.builtin.copy:
         src: /tmp/nvim-{{ nvim_version }}.appimage
-        dest: ~/bin/nvim-{{ nvim_version }}.appimage
+        dest: "{{ ansible_env.HOME }}/bin/nvim-{{ nvim_version }}.appimage"
         mode: "0755"
+      when: ansible_system == "Linux"
       tags:
         - vim
 
-    - name: Create nvim symlink in ~/bin
+    - name: Symlink nvim to AppImage (Linux)
       ansible.builtin.file:
-        src: ~/bin/nvim-{{ nvim_version }}.appimage
-        dest: ~/bin/nvim
+        src: "{{ ansible_env.HOME }}/bin/nvim-{{ nvim_version }}.appimage"
+        dest: "{{ ansible_env.HOME }}/bin/nvim"
         state: link
         force: true
+      when: ansible_system == "Linux"
       tags:
         - vim
 
-    - name: Clean up downloaded file
+    - name: Remove Linux AppImage download from /tmp
       ansible.builtin.file:
         path: /tmp/nvim-{{ nvim_version }}.appimage
         state: absent
+      when: ansible_system == "Linux"
+      tags:
+        - vim
+
+    - name: Download neovim (macOS tarball)
+      ansible.builtin.get_url:
+        url: https://github.com/neovim/neovim/releases/download/{{ nvim_version }}/nvim-macos-{{ nvim_macos_arch }}.tar.gz
+        dest: "{{ nvim_macos_tmp_tarball }}"
+        checksum: "{{ nvim_macos_tarball_checksum }}"
+        mode: "0644"
+      when: ansible_system == "Darwin"
+      tags:
+        - vim
+
+    # Use tar explicitly: Ansible's unarchive on Darwin can pick unzip for some .tar.gz paths.
+    # /usr/bin/tar on macOS (BSD tar) handles gzip-compressed tarballs; GNU tar is not required.
+    - name: Unpack neovim into ~/bin (macOS)
+      ansible.builtin.command:
+        argv:
+          - tar
+          - -xzf
+          - "{{ nvim_macos_tmp_tarball }}"
+          - -C
+          - "{{ ansible_env.HOME }}/bin"
+      when: ansible_system == "Darwin"
+      tags:
+        - vim
+
+    - name: Symlink nvim to unpacked binary (macOS)
+      ansible.builtin.file:
+        src: "{{ ansible_env.HOME }}/bin/nvim-macos-{{ nvim_macos_arch }}/bin/nvim"
+        dest: "{{ ansible_env.HOME }}/bin/nvim"
+        state: link
+        force: true
+      when: ansible_system == "Darwin"
+      tags:
+        - vim
+
+    - name: Remove macOS tarball from /tmp
+      ansible.builtin.file:
+        path: "{{ nvim_macos_tmp_tarball }}"
+        state: absent
+      when: ansible_system == "Darwin"
+      tags:
+        - vim
 
     - name: Ensure neovim config directory structure exists
       ansible.builtin.file:
