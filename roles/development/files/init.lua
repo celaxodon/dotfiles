@@ -4,6 +4,7 @@ vim.g.maplocalleader = "\\"
 vim.opt.mouse = "v"
 -- CVE-2007-2438
 vim.opt.modelines = 0
+vim.opt.clipboard = "unnamedplus"
 
 -- require("lazy").setup({import = 'user.plugins'})
 require("config.lazy")
