@@ -190,3 +190,9 @@ export MANPATH=/usr/man:/usr/X11/man:/usr/local/man:/usr/local/share/man:/opt/lo
 
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/asdf.bash
+
+_zsh_snip="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/macos.zsh"
+if [[ "$OSTYPE" == darwin* ]] && [[ -f "$_zsh_snip" ]]; then
+	source "$_zsh_snip"
+fi
+unset _zsh_snip
