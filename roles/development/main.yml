@@ -23,7 +23,7 @@
           - curl
           - bat
           - fzf
-        state: latest
+          - p7zip-full
       become: true
       tags:
         - utils

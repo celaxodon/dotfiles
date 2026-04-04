@@ -1,0 +1,55 @@
+---
+- name: Install language learning tools and utilities
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Add Flathub remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    - name: Install GoldenDict-ng
+      community.general.flatpak:
+        name: io.github.xiaoyifang.goldendict_ng
+        remote: flathub
+        state: present
+
+    # TODO: Install dictionaries
+
+    - name: Install Anki
+      community.general.flatpak:
+        name: net.ankiweb.Anki
+        remote: flathub
+        state: present
+
+    - name: Download Sarasa Gothic TTF fonts
+      ansible.builtin.get_url:
+        url: https://github.com/be5invis/Sarasa-Gothic/releases/download/v1.0.37/SarasaGothic-TTF-1.0.37.7z
+        dest: /tmp/SarasaGothic-TTF.7z
+        mode: "0644"
+
+    - name: Create user fonts directory
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic"
+        state: directory
+        mode: "0755"
+
+    - name: Extract Sarasa Gothic fonts
+      ansible.builtin.command:
+        cmd: 7z e /tmp/SarasaGothic-TTF.7z -o{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic -y
+        creates: "{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic/Sarasa-Regular.ttf"
+
+    - name: Install Japanese keyboard support
+      ansible.builtin.package:
+        name:
+          - mozc-utils-gui
+          - ibus-mozc
+          - fonts-noto-cjk
+        state: latest
+      become: true
+
+    - name: Refresh font cache
+      ansible.builtin.command:
+        cmd: fc-cache -f "{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic"
+      changed_when: false
