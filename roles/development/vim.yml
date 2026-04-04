@@ -31,16 +31,15 @@
         state: latest
       become: true
 
-    - name: Install libclang for tree-sitter-cli dependency
+    - name: Install tree-sitter-cli build dependencies
       ansible.builtin.package:
         name:
-          - libclang
+          - clang
         state: latest
       become: true
 
     - name: Install tree-sitter-cli dependency
       ansible.builtin.shell: cargo install --locked tree-sitter-cli
-      # become: true
 
     - name: Ensure ~/bin exists
       ansible.builtin.file:
