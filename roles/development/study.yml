@@ -32,28 +32,11 @@
         remote: flathub
         state: present
 
-    - name: Check if Sarasa Gothic fonts are already installed
-      ansible.builtin.stat:
-        path: "{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic/Sarasa-Regular.ttf"
-      register: sarasa_font
-
-    - name: Download Sarasa Gothic TTF fonts
-      ansible.builtin.get_url:
-        url: https://github.com/be5invis/Sarasa-Gothic/releases/download/v1.0.37/SarasaGothic-TTF-1.0.37.7z
-        dest: /tmp/SarasaGothic-TTF.7z
-        mode: "0644"
-      when: not sarasa_font.stat.exists
-
     - name: Create user fonts directory
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic"
+        path: "{{ ansible_env.HOME }}/.local/share/fonts"
         state: directory
         mode: "0755"
-
-    - name: Extract Sarasa Gothic fonts
-      ansible.builtin.command:
-        cmd: 7z e /tmp/SarasaGothic-TTF.7z -o{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic -y
-      when: not sarasa_font.stat.exists
 
     - name: Install Japanese keyboard support
       ansible.builtin.package:
@@ -70,7 +53,7 @@
         state: directory
         mode: "0755"
 
-    - name: Set Sarasa Gothic as default Japanese font
+    - name: Set Noto Sans JP as default Japanese font
       ansible.builtin.copy:
         dest: "{{ ansible_env.HOME }}/.config/fontconfig/fonts.conf"
         mode: "0644"
@@ -83,12 +66,12 @@
                 <string>ja</string>
               </test>
               <edit name="family" mode="prepend">
-                <string>Sarasa Gothic J</string>
+                <string>Noto Sans CJK JP</string>
               </edit>
             </match>
           </fontconfig>
 
     - name: Refresh font cache
       ansible.builtin.command:
-        cmd: fc-cache -f "{{ ansible_env.HOME }}/.local/share/fonts/SarasaGothic"
+        cmd: fc-cache -f "{{ ansible_env.HOME }}/.local/share/fonts"
       changed_when: false

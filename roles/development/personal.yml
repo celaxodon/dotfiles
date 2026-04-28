@@ -1,0 +1,23 @@
+---
+- name: Install personal machine software
+  hosts: localhost
+  connection: local
+  tags:
+    - linux
+  tasks:
+    - name: Add Flathub remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    - name: Install personal flatpaks
+      community.general.flatpak:
+        name: "{{ item }}"
+        remote: flathub
+        state: present
+      loop:
+        - io.github.xiaoyifang.goldendict_ng
+        - me.proton.Mail.Locale
+        - org.rncbc.qpwgraph
+        - org.chromium.Chromium

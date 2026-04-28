@@ -29,6 +29,11 @@ Run `ansible-lint` before committing.
 #. Install and deploy elixir-ls in ~/bin/elixir-ls (?)
 #. Install rust language server (?)
 #. Install lazygit
+#. Enumerate and add install plays for flatpaks
+#. Goldendict-ng dictionaries for Japanese
 
 Post-install:
-#. Install perforce
+#. Install perforce (work)
+#. Install Transcribe! (license key: see bitwarden)
+#. Container tooling (docker/podman depending on system)
+

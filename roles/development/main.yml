@@ -3,18 +3,19 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Install tmux, git, zsh
+    - name: Install basic dev tooling
       ansible.builtin.package:
         name:
           - git
           - tmux
           - zsh
+          - firefox
         state: latest
       become: true
       tags:
         - utils
 
-    - name: Install other utilities
+    - name: Install CLI utils
       ansible.builtin.package:
         name:
           - ripgrep
