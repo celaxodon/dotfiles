@@ -25,6 +25,7 @@
           - bat
           - fzf
           - p7zip-full
+          - qpdf
       become: true
       tags:
         - utils
