@@ -41,6 +41,14 @@ return {
 		-- end,
 	},
 	{
+		"saghen/blink.cmp",
+		opts = {
+			enabled = function()
+				return not vim.tbl_contains({ "markdown", "text" }, vim.bo.filetype)
+			end,
+		},
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		dependencies = { "hrsh7th/cmp-emoji" },
 		---@param opts cmp.ConfigSchema
