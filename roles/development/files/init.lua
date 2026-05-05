@@ -1,7 +1,7 @@
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
--- Paste with middle mouse button
-vim.opt.mouse = "v"
+vim.opt.mouse = ""
+vim.opt.clipboard = "unnamedplus"
 -- CVE-2007-2438
 vim.opt.modelines = 0
 vim.opt.clipboard = "unnamedplus"
