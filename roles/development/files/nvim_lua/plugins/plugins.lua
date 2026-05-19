@@ -9,6 +9,13 @@ return {
 	{ "rhysd/conflict-marker.vim" },
 	{
 		"nvim-treesitter/nvim-treesitter",
+		init = function(plugin)
+			-- Mirror LazyVim's own init: add the plugin to rtp early and load
+			-- query_predicates, then apply our 0.12 directive shim on top.
+			require("lazy.core.loader").add_to_rtp(plugin)
+			require("nvim-treesitter.query_predicates")
+			require("config.treesitter_compat")
+		end,
 		opts = function(_, opts)
 			opts.ensure_installed = opts.ensure_installed or {}
 			vim.list_extend(opts.ensure_installed, {
